@@ -1,22 +1,14 @@
 import { View, Text, StyleSheet } from "react-native";
 import * as React from "react";
-// import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
+import Tabs from "./Tabs";
 
 const RootNavigator = () => {
   return (
-    <View style={styles.container}>
-      <Text>what's poppin</Text>
-    </View>
+    <NavigationContainer>
+      <Tabs />
+    </NavigationContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
 
 export default RootNavigator;
