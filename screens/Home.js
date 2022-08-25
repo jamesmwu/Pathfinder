@@ -20,7 +20,7 @@ const Home = () => {
             <View style={styles.slidersAndTitlesOnRight}>
               <Text style={styles.rightSideTitles}>Energy</Text>
               <Text style={styles.rightSideTitles}>Mood</Text>
-              <Text style={styles.rightSideTitles}>Danceablility</Text>
+              <Text style={styles.rightSideTitles}>Rhythm</Text>
             </View>
 
             <SafeAreaView style={styles.recommendButtonContainer}>
