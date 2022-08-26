@@ -1,7 +1,8 @@
 import React from 'react';
 import { View, Text, Picker, StyleSheet, TouchableOpacity, SafeAreaView } from "react-native";
 import SelectList from 'react-native-dropdown-select-list';
-
+import Slider from '@react-native-community/slider';
+import {StatusBar} from 'expo-status-bar';
 
 const Home = () => {
   
@@ -11,17 +12,57 @@ const Home = () => {
     {key:'2', value:'Rock'},
     {key:'3', value:'Kpop'},
     {key:'4', value:'Classical'},
-    {key:'5', value:'Pop'},
-    
+    {key:'5', value:'Pop'}
   ];
+
+  const [range, setRange] = React.useState('50%');
+  const [sliding, setSliding] = React.useState('Inactive');
 
 
   return (
 
     <View style={styles.container}>
-        
       
       
+      <Text style={{ fontSize:20, fontWeight: 'bold'}}>{range}</Text>
+      <Text style={{ fontSize:20, fontWeight: 'bold'}}>{sliding}</Text>
+
+      <Slider
+        style ={{width: 250, height:40}}
+        minimumValue={0}
+        maximumValue={1}
+        minimumTrackTintColor='tomato'
+        minimumTrackTineColor='#000'
+        value={0.5}
+        onValueChange={value => setRange(parseInt(value*100) + '%')}
+        onSlidingStart={() => setSliding('Sliding')}
+        onSlidingComplete={() => setSliding('Inactive')}
+      />
+      <Slider
+        style ={{width: 250, height:40}}
+        minimumValue={0}
+        maximumValue={1}
+        minimumTrackTintColor='tomato'
+        minimumTrackTineColor='#000'
+        value={0.5}
+        onValueChange={value => setRange(parseInt(value*100) + '%')}
+        onSlidingStart={() => setSliding('Sliding')}
+        onSlidingComplete={() => setSliding('Inactive')}
+      />
+      <Slider
+        style ={{width: 250, height:40}}
+        minimumValue={0}
+        maximumValue={1}
+        minimumTrackTintColor='tomato'
+        minimumTrackTineColor='#000'
+        value={0.5}
+        onValueChange={value => setRange(parseInt(value*100) + '%')}
+        onSlidingStart={() => setSliding('Sliding')}
+        onSlidingComplete={() => setSliding('Inactive')}
+      />
+      
+      
+
       <View style={styles.titleContainer}>
         <Text style={{fontSize: 35, fontWeight: 'bold'}}>Pathfinder</Text>
       </View>
@@ -47,7 +88,8 @@ const Home = () => {
           <Slider value={this.state.value}onValueChange={(value) => this.setState({ value })}/>
             <Text>Value: {this.state.value}</Text>
         </View>; */}
-      
+
+      <StatusBar style= "auto" />
       </View>
       
 
