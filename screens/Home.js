@@ -6,11 +6,11 @@ const Home = () => {
   
   const [selected, setSeelcted] = React.useState("");
   const data = [
-    {key:'1', value:'Hi'},
-    {key:'2', value:'H'},
-    {key:'3', value:'i'},
-    {key:'4', value:'Bye'},
-    {key:'5', value:'Bai'},
+    {key:'1', value:'Hip Hop'},
+    {key:'2', value:'Rock'},
+    {key:'3', value:'Kpop'},
+    {key:'4', value:'Classical'},
+    {key:'5', value:'Pop'},
   ];
 
 
@@ -18,19 +18,28 @@ const Home = () => {
 
     <View style={styles.container}>
         
-      <View style={{paddingHorizontal: 28, paddingVertical:50, flex:1}}>
-        <SelectList data={data} setSelected={setSeelcted} />
-      </View>
+      
       
       <View style={styles.titleContainer}>
         <Text style={{fontSize: 35, fontWeight: 'bold'}}>Pathfinder</Text>
       </View>
       
-      <View style={styles.dropdownsAndTitlesOnLeft}>
-        <Text style={styles.leftSideTitles}>Genre</Text>
-        <Text style={styles.leftSideTitles}>Artist</Text>
-        <Text style={styles.leftSideTitles}>Date</Text>
+      <View style={styles.dropdownsAndTitles}>
+        
+        <View style={styles.titles}>
+          <Text style={styles.leftSideTitles}>Genre</Text>
+          <Text style={styles.leftSideTitles}>Artist</Text>
+          <Text style={styles.leftSideTitles}>Date</Text>
+        </View>
+
+        <View style={styles.dropdowns}>
+          <SelectList data={data} setSelected={setSeelcted} />
+          <SelectList data={data} setSelected={setSeelcted} />
+          <SelectList data={data} setSelected={setSeelcted} />
+        </View>
+      
       </View>
+      
 
       <View style={styles.slidersAndTitlesOnRight}>
         <Text style={styles.rightSideTitles}>Energy</Text>
@@ -76,12 +85,25 @@ const styles = StyleSheet.create({
   },
 
 
-  dropdownsAndTitlesOnLeft:{
+  dropdownsAndTitles:{
     flex: 3,
     alignItems: 'flex-start',
     justifyContent: 'space-evenly',
+    flexDirection: 'row',
 
   },
+
+  titles:{
+    flex: 1,
+    justifyContent: 'space-evenly',
+  },
+
+  dropdowns:{
+    flex: 1,
+    justifyContent: 'space-evenly',
+    
+  },
+
 
   leftSideTitles:{
     flexDirection: 'flex-start',
