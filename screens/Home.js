@@ -1,39 +1,54 @@
+import React from 'react';
 import { View, Text, Picker, StyleSheet, TouchableOpacity, SafeAreaView } from "react-native";
+import SelectList from 'react-native-dropdown-select-list';
 
 const Home = () => {
+  
+  const [selected, setSeelcted] = React.useState("");
+  const data = [
+    {key:'1', value:'Hi'},
+    {key:'2', value:'H'},
+    {key:'3', value:'i'},
+    {key:'4', value:'Bye'},
+    {key:'5', value:'Bai'},
+  ];
+
+
   return (
-    
+
+    <View style={styles.container}>
+        
+      <View style={{paddingHorizontal: 28, paddingVertical:50, flex:1}}>
+        <SelectList data={data} setSelected={setSeelcted} />
+      </View>
       
-        <View style={styles.container}>
-            
-            
-            <View style={styles.titleContainer}>
-              <Text style={{fontSize: 35, fontWeight: 'bold'}}>Pathfinder</Text>
-            </View>
-            
-            <View style={styles.dropdownsAndTitlesOnLeft}>
-              <Text style={styles.leftSideTitles}>Genre</Text>
-              <Text style={styles.leftSideTitles}>Artist</Text>
-              <Text style={styles.leftSideTitles}>Date</Text>
-            </View>
+      <View style={styles.titleContainer}>
+        <Text style={{fontSize: 35, fontWeight: 'bold'}}>Pathfinder</Text>
+      </View>
+      
+      <View style={styles.dropdownsAndTitlesOnLeft}>
+        <Text style={styles.leftSideTitles}>Genre</Text>
+        <Text style={styles.leftSideTitles}>Artist</Text>
+        <Text style={styles.leftSideTitles}>Date</Text>
+      </View>
 
-            <View style={styles.slidersAndTitlesOnRight}>
-              <Text style={styles.rightSideTitles}>Energy</Text>
-              <Text style={styles.rightSideTitles}>Mood</Text>
-              <Text style={styles.rightSideTitles}>Rhythm</Text>
-            </View>
+      <View style={styles.slidersAndTitlesOnRight}>
+        <Text style={styles.rightSideTitles}>Energy</Text>
+        <Text style={styles.rightSideTitles}>Mood</Text>
+        <Text style={styles.rightSideTitles}>Rhythm</Text>
+      </View>
 
-            <SafeAreaView style={styles.recommendButtonContainer}>
-              <TouchableOpacity style={styles.recommendButton} onPress={()=>
-                  console.log("Hi")
-                  }>
-                  <Text style={{ fontSize: 20}}>RECOMMEND</Text>
-              </TouchableOpacity>
-            </SafeAreaView>
+      <SafeAreaView style={styles.recommendButtonContainer}>
+        <TouchableOpacity style={styles.recommendButton} onPress={()=>
+            console.log("Hi")
+            }>
+            <Text style={{ fontSize: 20}}>RECOMMEND</Text>
+        </TouchableOpacity>
+      </SafeAreaView>
 
 
 
-        </View>
+    </View>
     
     
   );
