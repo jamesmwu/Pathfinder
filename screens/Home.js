@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, Picker, StyleSheet, TouchableOpacity, SafeAreaView } from "react-native";
 import SelectList from 'react-native-dropdown-select-list';
 
+
 const Home = () => {
   
   const [selected, setSeelcted] = React.useState("");
@@ -11,6 +12,7 @@ const Home = () => {
     {key:'3', value:'Kpop'},
     {key:'4', value:'Classical'},
     {key:'5', value:'Pop'},
+    
   ];
 
 
@@ -30,6 +32,9 @@ const Home = () => {
           <Text style={styles.leftSideTitles}>Genre</Text>
           <Text style={styles.leftSideTitles}>Artist</Text>
           <Text style={styles.leftSideTitles}>Date</Text>
+          <Text style={styles.leftSideTitles}>Energy</Text>
+          <Text style={styles.leftSideTitles}>Mood</Text>
+          <Text style={styles.leftSideTitles}>Rhythm</Text>
         </View>
 
         <View style={styles.dropdowns}>
@@ -37,15 +42,23 @@ const Home = () => {
           <SelectList data={data} setSelected={setSeelcted} />
           <SelectList data={data} setSelected={setSeelcted} />
         </View>
+
+        {/* <View style={{ flex: 1, alignItems: 'stretch', justifyContent: 'center' }}>
+          <Slider value={this.state.value}onValueChange={(value) => this.setState({ value })}/>
+            <Text>Value: {this.state.value}</Text>
+        </View>; */}
       
       </View>
       
 
-      <View style={styles.slidersAndTitlesOnRight}>
-        <Text style={styles.rightSideTitles}>Energy</Text>
+      {/* <View style={styles.slidersAndTitlesOnRight}> */}
+        {/* <Text style={styles.leftSideTitles}>Energy</Text>
+        <Text style={styles.leftSideTitles}>Mood</Text>
+        <Text style={styles.leftSideTitles}>Rhythm</Text> */}
+        {/* <Text style={styles.rightSideTitles}>Energy</Text>
         <Text style={styles.rightSideTitles}>Mood</Text>
-        <Text style={styles.rightSideTitles}>Rhythm</Text>
-      </View>
+        <Text style={styles.rightSideTitles}>Rhythm</Text> */}
+      {/* </View> */}
 
       <SafeAreaView style={styles.recommendButtonContainer}>
         <TouchableOpacity style={styles.recommendButton} onPress={()=>
@@ -87,19 +100,22 @@ const styles = StyleSheet.create({
 
   dropdownsAndTitles:{
     flex: 3,
-    alignItems: 'flex-start',
+    // alignItems: 'center',
     justifyContent: 'space-evenly',
     flexDirection: 'row',
+    // backgroundColor: '#ddd',
 
   },
 
   titles:{
     flex: 1,
+    backgroundColor: '#ddd',
     justifyContent: 'space-evenly',
   },
 
   dropdowns:{
     flex: 1,
+    // position: 'fixed', // <-- doesn't work
     justifyContent: 'space-evenly',
     
   },
