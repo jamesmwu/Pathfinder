@@ -201,7 +201,7 @@ const styles = StyleSheet.create({
     paddingLeft: 25,
     fontSize: 30,
     // fontWeight: 'bold'
-    fontFamily: 'OpenSans',
+    // fontFamily: 'OpenSans', // <-- to be implemented (fonts)
   },
 
   recommendButtonContainer:{
