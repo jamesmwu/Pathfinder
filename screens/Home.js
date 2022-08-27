@@ -52,19 +52,19 @@ const Home = () => {
       <Text style={{ fontSize:20, fontWeight: 'bold'}}>{sliding}</Text> */}
 
       
-      <View style={styles.titleContainer}>
+      <View style={styles.appNameContainer}>
         <Text style={{fontSize: 35, fontWeight: 'bold'}}>Pathfinder</Text>
       </View>
       
       <View style={styles.dropdownsAndTitlesAndSliders}>
         
-        <View style={styles.titles}>
-          <Text style={styles.leftSideTitles}>Genre</Text>
-          <Text style={styles.leftSideTitles}>Artist</Text>
-          <Text style={styles.leftSideTitles}>Date</Text>
-          <Text style={styles.leftSideTitles}>Energy</Text>
-          <Text style={styles.leftSideTitles}>Mood</Text>
-          <Text style={styles.leftSideTitles}>Rhythm</Text>
+        <View style={styles.titlesContainer}>
+          <Text style={styles.titles}>Genre</Text>
+          <Text style={styles.titles}>Artist</Text>
+          <Text style={styles.titles}>Date</Text>
+          <Text style={styles.titles}>Energy</Text>
+          <Text style={styles.titles}>Mood</Text>
+          <Text style={styles.titles}>Rhythm</Text>
         </View>
 
         <View style={styles.dropdownsAndSliders}>
@@ -160,7 +160,7 @@ const styles = StyleSheet.create({
     // justifyContent: "center",
   },
 
-  titleContainer:{
+  appNameContainer:{
     flex: 1,
     // backgroundColor: "#7cb48f",
     alignItems: "flex-start",
@@ -181,7 +181,7 @@ const styles = StyleSheet.create({
 
   },
 
-  titles:{
+  titlesContainer:{
     flex: 1,
     // backgroundColor: '#ddd',
     justifyContent: 'space-evenly',
@@ -196,11 +196,12 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
 
-  leftSideTitles:{
+  titles:{
     flexDirection: 'flex-start',
     paddingLeft: 25,
     fontSize: 30,
     // fontWeight: 'bold'
+    fontFamily: 'OpenSans',
   },
 
   recommendButtonContainer:{
