@@ -7,12 +7,36 @@ import {StatusBar} from 'expo-status-bar';
 const Home = () => {
   
   const [selected, setSeelcted] = React.useState("");
-  const data = [
+  // COULD import the genres from dataset somehow but typing them out is also possible
+  const genres = [
     {key:'1', value:'Hip Hop'},
     {key:'2', value:'Rock'},
     {key:'3', value:'Kpop'},
     {key:'4', value:'Classical'},
     {key:'5', value:'Pop'}
+  ];
+
+  // not sure how but we probably gotta import artists from a data list
+  const artists = [
+    {key:'1', value:'Michael'},
+    {key:'2', value:'Jason'},
+    {key:'3', value:'James'},
+  ];
+
+  const dates = [
+    {key:'1', value:'January'},
+    {key:'2', value:'February'},
+    {key:'3', value:'March'},
+    {key:'4', value:'April'},
+    {key:'5', value:'May'},
+    {key:'6', value:'June'},
+    {key:'7', value:'July'},
+    {key:'8', value:'August'},
+    {key:'9', value:'September'},
+    {key:'10', value:'October'},
+    {key:'11', value:'November'},
+    {key:'12', value:'December'},
+
   ];
 
   const [range, setRange] = React.useState('50%');
@@ -23,51 +47,16 @@ const Home = () => {
 
     <View style={styles.container}>
       
-      
-      <Text style={{ fontSize:20, fontWeight: 'bold'}}>{range}</Text>
-      <Text style={{ fontSize:20, fontWeight: 'bold'}}>{sliding}</Text>
+      {/* comment out when ont using (only used for sliders and testing but visually it doesn't need to be seen) */}
+      {/* <Text style={{ fontSize:20, fontWeight: 'bold'}}>{range}</Text>
+      <Text style={{ fontSize:20, fontWeight: 'bold'}}>{sliding}</Text> */}
 
-      <Slider
-        style ={{width: 250, height:40}}
-        minimumValue={0}
-        maximumValue={1}
-        minimumTrackTintColor='tomato'
-        minimumTrackTineColor='#000'
-        value={0.5}
-        onValueChange={value => setRange(parseInt(value*100) + '%')}
-        onSlidingStart={() => setSliding('Sliding')}
-        onSlidingComplete={() => setSliding('Inactive')}
-      />
-      <Slider
-        style ={{width: 250, height:40}}
-        minimumValue={0}
-        maximumValue={1}
-        minimumTrackTintColor='tomato'
-        minimumTrackTineColor='#000'
-        value={0.5}
-        onValueChange={value => setRange(parseInt(value*100) + '%')}
-        onSlidingStart={() => setSliding('Sliding')}
-        onSlidingComplete={() => setSliding('Inactive')}
-      />
-      <Slider
-        style ={{width: 250, height:40}}
-        minimumValue={0}
-        maximumValue={1}
-        minimumTrackTintColor='tomato'
-        minimumTrackTineColor='#000'
-        value={0.5}
-        onValueChange={value => setRange(parseInt(value*100) + '%')}
-        onSlidingStart={() => setSliding('Sliding')}
-        onSlidingComplete={() => setSliding('Inactive')}
-      />
       
-      
-
       <View style={styles.titleContainer}>
         <Text style={{fontSize: 35, fontWeight: 'bold'}}>Pathfinder</Text>
       </View>
       
-      <View style={styles.dropdownsAndTitles}>
+      <View style={styles.dropdownsAndTitlesAndSliders}>
         
         <View style={styles.titles}>
           <Text style={styles.leftSideTitles}>Genre</Text>
@@ -78,11 +67,48 @@ const Home = () => {
           <Text style={styles.leftSideTitles}>Rhythm</Text>
         </View>
 
-        <View style={styles.dropdowns}>
-          <SelectList data={data} setSelected={setSeelcted} />
-          <SelectList data={data} setSelected={setSeelcted} />
-          <SelectList data={data} setSelected={setSeelcted} />
+        <View style={styles.dropdownsAndSliders}>
+          {/* below are the dropdowns */}
+          <SelectList data={genres} setSelected={setSeelcted} />
+          <SelectList data={artists} setSelected={setSeelcted} />
+          <SelectList data={dates} setSelected={setSeelcted} />
+
+          {/* below are the sliders */}
+          <Slider
+            style ={{width: 190, height:40}}
+            minimumValue={0}
+            maximumValue={1}
+            minimumTrackTintColor='tomato'
+            minimumTrackTineColor='#000'
+            value={0.5}
+            onValueChange={value => setRange(parseInt(value*100) + '%')}
+            onSlidingStart={() => setSliding('Sliding')}
+            onSlidingComplete={() => setSliding('Inactive')}
+          />
+          <Slider
+            style ={{width: 190, height:40}}
+            minimumValue={0}
+            maximumValue={1}
+            minimumTrackTintColor='tomato'
+            minimumTrackTineColor='#000'
+            value={0.5}
+            onValueChange={value => setRange(parseInt(value*100) + '%')}
+            onSlidingStart={() => setSliding('Sliding')}
+            onSlidingComplete={() => setSliding('Inactive')}
+          />
+          <Slider
+            style ={{width: 190, height:40}}
+            minimumValue={0}
+            maximumValue={1}
+            minimumTrackTintColor='tomato'
+            minimumTrackTineColor='#000'
+            value={0.5}
+            onValueChange={value => setRange(parseInt(value*100) + '%')}
+            onSlidingStart={() => setSliding('Sliding')}
+            onSlidingComplete={() => setSliding('Inactive')}
+          />
         </View>
+
 
         {/* <View style={{ flex: 1, alignItems: 'stretch', justifyContent: 'center' }}>
           <Slider value={this.state.value}onValueChange={(value) => this.setState({ value })}/>
@@ -119,6 +145,11 @@ const Home = () => {
 };
 
 
+// NOTE: ALL THE COLORS USED HERE ARE SOLELY FOR VISUALIZING THE CONTAINERS 
+// at least for now they are
+// I haven't made any actual color choice decisions besides mayb the recommend button color and the slider colors
+// but even then they are still all subject to change
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -136,11 +167,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     flexDirection: 'flex-start',
     padding: 10,
+    // marginRight: 180, // <-- just makes the container smaller by cutting off the space on the right
     
   },
 
 
-  dropdownsAndTitles:{
+  dropdownsAndTitlesAndSliders:{
     flex: 3,
     // alignItems: 'center',
     justifyContent: 'space-evenly',
@@ -151,17 +183,18 @@ const styles = StyleSheet.create({
 
   titles:{
     flex: 1,
-    backgroundColor: '#ddd',
+    // backgroundColor: '#ddd',
     justifyContent: 'space-evenly',
+    // alignItems: 'center',
   },
 
-  dropdowns:{
+  dropdownsAndSliders:{
     flex: 1,
     // position: 'fixed', // <-- doesn't work
     justifyContent: 'space-evenly',
-    
+    // backgroundColor: '#ddd',
+    marginRight: 10,
   },
-
 
   leftSideTitles:{
     flexDirection: 'flex-start',
@@ -169,22 +202,6 @@ const styles = StyleSheet.create({
     fontSize: 30,
     // fontWeight: 'bold'
   },
-
-
-  slidersAndTitlesOnRight:{
-    flex: 3,
-    alignItems: 'flex-end',
-    justifyContent: 'space-evenly',
-
-  },
-
-  rightSideTitles:{
-    alignItems: 'flex-end',
-    paddingRight: 25,
-    fontSize: 30,
-    // fontWeight: 'bold'
-  },
-
 
   recommendButtonContainer:{
     // backgroundColor: "#ddd",
