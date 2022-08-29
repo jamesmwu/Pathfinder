@@ -130,7 +130,7 @@ const Home = () => {
 
       <SafeAreaView style={styles.recommendButtonContainer}>
         <TouchableOpacity style={styles.recommendButton} onPress={()=>
-            console.log("Hi")
+            console.log("recommend button pressed")
             }>
             <Text style={{ fontSize: 20}}>RECOMMEND</Text>
         </TouchableOpacity>
