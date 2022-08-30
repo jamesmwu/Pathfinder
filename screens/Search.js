@@ -1,8 +1,15 @@
-import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView, Flatlist, StatusBar} from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView, Flatlist, ScrollView, StatusBar} from "react-native";
 import React from 'react';
 // import { SearchBar } from "react-native-elements";
 // import {Colors} from ;
 // Users/19099/Documents/GitHub/Pathfinder/Colors.js;
+
+const [tracks, setTracks] = useState([
+  { song: 'Song 1', key: '1'},
+  { song: 'Song 2', key: '2'},
+
+]);
+ 
 
 const Search = () => {
 
@@ -14,9 +21,17 @@ const Search = () => {
         
       </View>
 
-      <View style={styles.recommendedSongsContainer}>
-        <Text>Something here for now</Text>
-      </View>
+      <SafeAreaView style={styles.recommendedSongsContainer}>
+        <ScrollView style={styles.scrollView}>
+          
+          {/* {tracks.map(item => (
+            
+
+          ))} */}
+        
+        
+        </ScrollView>
+      </SafeAreaView>
 
       {/* this is the 'random' button */}
       <SafeAreaView style={styles.randomButtonContainer}>
