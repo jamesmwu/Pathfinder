@@ -78,8 +78,9 @@ const Home = () => {
             style ={{width: 190, height:40}}
             minimumValue={0}
             maximumValue={1}
-            minimumTrackTintColor='tomato'
+            minimumTrackTintColor='#40dced'
             minimumTrackTineColor='#000'
+            maximumTrackTintColor='#35f0ca'
             value={0.5}
             onValueChange={value => setRange(parseInt(value*100) + '%')}
             onSlidingStart={() => setSliding('Sliding')}
@@ -89,8 +90,9 @@ const Home = () => {
             style ={{width: 190, height:40}}
             minimumValue={0}
             maximumValue={1}
-            minimumTrackTintColor='tomato'
+            minimumTrackTintColor='#40dced'
             minimumTrackTineColor='#000'
+            maximumTrackTintColor='#35f0ca'
             value={0.5}
             onValueChange={value => setRange(parseInt(value*100) + '%')}
             onSlidingStart={() => setSliding('Sliding')}
@@ -100,8 +102,9 @@ const Home = () => {
             style ={{width: 190, height:40}}
             minimumValue={0}
             maximumValue={1}
-            minimumTrackTintColor='tomato'
+            minimumTrackTintColor='#40dced'
             minimumTrackTineColor='#000'
+            maximumTrackTintColor='#35f0ca'
             value={0.5}
             onValueChange={value => setRange(parseInt(value*100) + '%')}
             onSlidingStart={() => setSliding('Sliding')}

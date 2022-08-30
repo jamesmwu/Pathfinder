@@ -1,9 +1,11 @@
-import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView } from "react-native";
-import { SearchBar } from "react-native-elements";
+import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView, Flatlist, StatusBar} from "react-native";
+import React from 'react';
+// import { SearchBar } from "react-native-elements";
 // import {Colors} from ;
 // Users/19099/Documents/GitHub/Pathfinder/Colors.js;
 
 const Search = () => {
+
   return (
     <View style={styles.container}>
       {/* <Text>This the search screen</Text> */}
@@ -21,7 +23,7 @@ const Search = () => {
         <TouchableOpacity style={styles.randomButton} onPress={()=>
             console.log("random button pressed")
             }>
-            <Text style={{ fontSize: 20}}>Random</Text>
+            <Text style={{ fontSize: 20}}>RANDOM</Text>
         </TouchableOpacity>
       </SafeAreaView>
     </View>
@@ -34,7 +36,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
-    paddingTop: 50,
+    paddingTop: 20,
     paddingBottom: 180,
   },
 
@@ -44,7 +46,7 @@ const styles = StyleSheet.create({
 
   recommendedSongsContainer: {
     flex: 3,
-    backgroundColor: "#ddd",
+    backgroundColor: "#f9c2ff",
     alignItems: 'center',
     justifyContent: 'center',
 
