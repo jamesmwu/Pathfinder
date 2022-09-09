@@ -15,6 +15,15 @@ const DATA = [
     id: '58694a0f-3da1-471f-bd96-145571e29d72',
     title: 'Third Item',
   },
+  {
+    id: '58694a0f-3da1-471f-bd96-145571e29d73',
+    title: 'Fourth Item',
+  },
+  {
+    id: '58694a0f-3da1-471f-bd96-145571e29d74',
+    title: 'Fifth Item',
+  },
+  
 ];
 
 const Item = ({ title }) => (
@@ -44,8 +53,8 @@ const Search = () => {
       </SafeAreaView> */}
 
       {/* MICHAEL'S NOTE: idk how to use ScrollView cuz even with it commented out the FlatList scrolls ¯\_(ツ)_/¯ */}
-      <SafeAreaView style={styles.container}>
-        <FlatList style={styles.flatListContainer}
+      <SafeAreaView style={styles.flatListContainer}>
+        <FlatList
           data={DATA}
           renderItem={renderItem}
           keyExtractor={item => item.id}
@@ -68,7 +77,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    alignItems: "center",
+    // alignItems: "center",
     justifyContent: "center",
     paddingTop: 20,
     paddingBottom: 180,
@@ -78,13 +87,13 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 
-  recommendedSongsContainer: {
-    flex: 3,
-    backgroundColor: "#f9c2ff",
-    alignItems: 'center',
-    justifyContent: 'center',
+  // recommendedSongsContainer: {
+  //   flex: 3,
+  //   backgroundColor: "#f9c2ff",
+  //   alignItems: 'center',
+  //   justifyContent: 'center',
 
-  },
+  // },
 
 
   randomButtonContainer: {
@@ -92,7 +101,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 20,
+    // padding: 20,
   },
 
   randomButton:{
@@ -105,6 +114,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 8,
+  },
+
+  flatListContainer: {
+    // backgroundColor: "#4287f5",
+    // justify content doesn't work here
+    // justifyContent: 'center',
+    flex: 4,
+    borderWidth: 2,
+    marginHorizontal: 10,
   },
 
   item: {
