@@ -45,7 +45,7 @@ const Search = () => {
 
       {/* MICHAEL'S NOTE: idk how to use ScrollView cuz even with it commented out the FlatList scrolls ¯\_(ツ)_/¯ */}
       <SafeAreaView style={styles.container}>
-        <FlatList
+        <FlatList style={styles.recommendedSongsContainer}
           data={DATA}
           renderItem={renderItem}
           keyExtractor={item => item.id}
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
 
 
   randomButtonContainer: {
-    // backgroundColor: "#ddd",
+    backgroundColor: "#ddd",
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
