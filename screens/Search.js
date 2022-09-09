@@ -45,7 +45,7 @@ const Search = () => {
 
       {/* MICHAEL'S NOTE: idk how to use ScrollView cuz even with it commented out the FlatList scrolls ¯\_(ツ)_/¯ */}
       <SafeAreaView style={styles.container}>
-        <FlatList style={styles.recommendedSongsContainer}
+        <FlatList style={styles.flatListContainer}
           data={DATA}
           renderItem={renderItem}
           keyExtractor={item => item.id}
