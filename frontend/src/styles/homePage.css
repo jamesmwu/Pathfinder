@@ -1,0 +1,38 @@
+.home-page {
+    display: grid;
+    grid-template-columns: 1fr 4fr 1fr; /* Divide the screen into three columns: sidebars and main content */
+    height: 100vh; /* Set the height of the home page to fill the viewport */
+  }
+  
+  .sidebar-left,
+  .sidebar-right {
+    background-color: #f1f1f1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 18px;
+  }
+  
+  .sidebar-left {
+    grid-column: 1 / 2; /* Place the sidebar on the left */
+  }
+  
+  .sidebar-right {
+    grid-column: 3 / 4; /* Place the sidebar on the right */
+  }
+  
+  .main-content {
+    grid-column: 2 / 3; /* Place the main content in the center column */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Additional styling for the main content if needed */
+  .main-content h1 {
+    margin-bottom: 20px;
+  }
+  

@@ -1,42 +1,44 @@
 import React, { useState } from 'react';
 import '../styles/modal.css';
 
-export default function Modal({ isOpen, majors }) {
-  const [selectedMajor, setSelectedMajor] = useState('');
-  const [showModal, setShowModal] = useState(isOpen);
+export default function Modal({ isOpen, majors, onClose, onSubmit }) {
+  const [selectedMajors, setSelectedMajors] = useState([]);
 
   const handleMajorChange = (event) => {
-    setSelectedMajor(event.target.value);
+    const { value } = event.target;
+    if (selectedMajors.includes(value)) {
+      setSelectedMajors(selectedMajors.filter((major) => major !== value));
+    } else {
+      setSelectedMajors([...selectedMajors, value]);
+    }
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // Do something with the selected major
-    console.log('Selected major:', selectedMajor);
-    setShowModal(false);
-  };
-
-  if (!showModal) {
+  if (!isOpen) {
     return null;
   }
 
   return (
     <div className="modal">
       <div className="modal-content">
-        <h2>Select a Major</h2>
-        <form onSubmit={handleSubmit}>
-          <select value={selectedMajor} onChange={handleMajorChange}>
-            <option value="">-- Select a major --</option>
-            {majors.map((major) => (
-              <option key={major} value={major}>
+        <h2>Select Majors</h2>
+        <form onSubmit={() => { onSubmit(selectedMajors); }}>
+          {majors.map((major) => (
+            <div key={major}>
+              <label>
+                <input
+                  type="checkbox"
+                  value={major}
+                  checked={selectedMajors.includes(major)}
+                  onChange={handleMajorChange}
+                />
                 {major}
-              </option>
-            ))}
-          </select>
+              </label>
+            </div>
+          ))}
           <button type="submit">Submit</button>
         </form>
-        <button onClick={() => { setShowModal(false); }}>Close</button>
+        <button onClick={onClose}>Close</button>
       </div>
     </div>
   );
-};
+}
