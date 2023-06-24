@@ -1,14 +1,14 @@
 import './index.css';
 import { Routes, Route } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
-import RootPage from './pages/RootPage';
+import HomePage from './pages/HomePage';
 
 function App() {
   return (
     <div className="App">
       <Routes>
         <Route path="/" element={<LoginPage />} />
-        <Route path="/root" element={<RootPage />} />
+        <Route path="/root" element={<HomePage />} />
       </Routes>
     </div>
   );
