@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import Modal from "../components/Modal";
+import Mentor from "../components/Mentor";
 import '../styles/homePage.css';
 
 export default function HomePage() {
@@ -23,20 +24,26 @@ export default function HomePage() {
     return (
         <div className="home-page">
             <div className="sidebar-left">
-                <h2>My Interests</h2>
-                <ul>
-                    {selectedMajors.map((major) => (
-                        <li key={major}>{major}</li>
-                    ))}
-                </ul>
+                <div>
+                    <h2>My Interests</h2>
+                    <ul>
+                        {selectedMajors.map((major) => (
+                            <li key={major}>{major}</li>
+                        ))}
+                    </ul>
+                </div>
+
+                <button onClick={openModal}>Open Modal</button>
             </div>
             <div className="main-content">
                 <h1>Home Page</h1>
+                <Mentor name="Deez Nuts" />
                 <Modal isOpen={isOpen} majors={['Computer Science', 'Premed']} onClose={closeModal} onSubmit={handleModalSubmit} />
-                <NavLink to="/">Go to Login Page</NavLink>
-                <button onClick={openModal}>Open Modal</button>
             </div>
-            <div className="sidebar-right">MY CHATS</div>
+            <div className="sidebar-right">
+                <h2>My Chats</h2>
+                <NavLink to="/">Go to Login Page</NavLink>
+            </div>
         </div>
     );
 }

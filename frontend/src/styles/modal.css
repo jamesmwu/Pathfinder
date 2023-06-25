@@ -8,11 +8,10 @@
     align-items: center;
     justify-content: center;
     backdrop-filter: blur(4px);
-    background-color: rgba(0, 0, 0, 0.5);
   }
   
   .modal-content {
-    background-color: #fff;
+    background-color: var(--color-espresso);
     padding: 20px;
     border-radius: 4px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -24,6 +23,7 @@
   
   .modal-content h2 {
     margin-top: 0;
+    color: var(--color-cream);
   }
   
   .modal-content form {
@@ -36,23 +36,28 @@
     margin-top: 10px;
     width: 100%;
     padding: 10px;
-    border: 1px solid #ccc;
     border-radius: 4px;
+    color: var(--color-cream);
   }
   
+  .modal-content label {
+    color: white
+  }
+
   .modal-content button[type="submit"] {
     margin-top: 20px;
-    background-color: #4caf50;
-    color: #fff;
+    background-color: var(--color-caramel);
+    color: var(--color-cream);
     border: none;
     cursor: pointer;
   }
   
   .modal-content button:hover {
-    background-color: #45a049;
+    background-color: #a4673b; /* Slightly darker shade of caramel */
   }
   
   .modal-content select {
     width: 100%;
+    color: var(--color-cream);
   }
   
