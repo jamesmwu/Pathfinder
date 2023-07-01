@@ -7,8 +7,6 @@ const INITIAL_STATE = {
   error: false,
 };
 
-// BEGIN PART 11
-
 export const AuthContext = createContext(INITIAL_STATE);
 export const AuthContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AuthReducer, INITIAL_STATE);
@@ -17,6 +15,10 @@ export const AuthContextProvider = ({ children }) => {
     localStorage.setItem("user", JSON.stringify(state.user));
   }, [state.user]);
 
+  const logout = () => {
+    dispatch({ type: "LOGOUT" });
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -24,6 +26,7 @@ export const AuthContextProvider = ({ children }) => {
         isFetching: state.isFetching,
         error: state.error,
         dispatch,
+        logout,
       }}
     >
       {children}
@@ -31,6 +34,3 @@ export const AuthContextProvider = ({ children }) => {
   );
 };
 
-
-
-// END PART 11
