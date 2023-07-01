@@ -42,7 +42,7 @@ export default function HomePage() {
             </div>
             <div className="sidebar-right">
                 <h2>My Chats</h2>
-                <NavLink to="/">Go to Login Page</NavLink>
+                <NavLink to="/">Log Out kekw</NavLink>
             </div>
         </div>
     );

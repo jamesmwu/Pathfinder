@@ -1,0 +1,10 @@
+//USERS TEST
+
+POST http://localhost:8800/api/auth/register
+Content-Type: application/json
+
+{
+	"username": "jw",
+    "email": "j@w.com",
+    "password": "password"
+}
