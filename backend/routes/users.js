@@ -4,8 +4,13 @@ const Chat = require('../models/Chat')
 const bcrypt = require("bcrypt");
 const router = express.Router();
 
+const MENTOR = 1
+const MENTEE = 2
+const MENTOR_AND_MENTEE = 3
+const TAGS = ["Computer Science",  "Pre-Med", "Engineering", "Chemistry", "Psychology", "UC Berkeley", "UCLA", "Caltech"];
+
 // UPDATE USER
-router.put("/:id", async (req, res) => {
+router.put("/update-user/:id", async (req, res) => {
   if (req.body.userId == req.params.id) {
     if (req.body.password) {
       try {
@@ -24,6 +29,39 @@ router.put("/:id", async (req, res) => {
       console.log(err);
     }
   } else {
+    return res.status(403).json("No permissions");
+  }
+});
+
+
+
+router.get('/all-tags', async (req, res) => {
+    try{
+        res.status(200).json(TAGS);
+    } catch (err) {
+        console.log(err);
+    }
+});
+
+
+//update tags, add tags array in request body
+router.put("/update-tags/:id", async (req, res) => { 
+  if (req.body.userId == req.params.id) {
+    try {
+      const user = await User.findById(req.body.userId)
+      for(let i = 0; i< req.body.tags.length; i++){
+        if(user.tags.indexOf(req.body.tags[i])==-1){
+          user.tags.push(req.body.tags[i])
+        }
+      }
+      await user.save()
+      res.status(200).json("tags has been updated");
+    } catch (err) {
+      console.log(err);
+    }
+  } else {
+    console.log(req.body.userId);
+    console.log(req.params.id);
     return res.status(403).json("No permissions");
   }
 });
@@ -65,7 +103,7 @@ router.get("/connections/:userId", async (req, res) => {
   }
 });
 
-// FOLLOW USER
+// add connection between people, creates a chat
 router.put("/:id/add-connection", async (req, res) => {
   if (req.body.userId !== req.params.id) {
     
@@ -90,6 +128,7 @@ router.put("/:id/add-connection", async (req, res) => {
   }
 });
 
+// remove connection between people, deletes chat
 router.put("/:id/remove-connection", async (req, res) => {
     if (req.body.userId !== req.params.id) {
       try {
@@ -113,6 +152,20 @@ router.put("/:id/remove-connection", async (req, res) => {
     }
   });
 
+
+  router.get("/all-mentors", async (req, res) => {
+    try {
+      var mentors = await User.find({$or:[{userType: MENTOR}, {userType:MENTOR_AND_MENTEE}]})
+      var resplist = []
+      for(let i = 0; i< mentors.length; i++){
+        const { password, updatedAt, ...other } = mentors[i]._doc;
+        resplist.push(other)
+      }
+      res.status(200).json(resplist);
+    } catch (err) {
+      console.log(err);
+    }
+  });
 
 
 // DELETE USER

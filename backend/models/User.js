@@ -33,15 +33,23 @@ const UserSchema = new mongoose.Schema(
     description: {
       type: String,
       max: 50,
+      default: ""
     },
     city: {
       type: String,
       max: 50,
     },
-    userType: { //1 is mentor, 2 is mentee, 3 is both?
+    userType: { //1 is mentor, 2 is mentee, 3 is both
       type: Number,
       enum: [1, 2, 3],
+      default: 1,
+      required: true
     },
+    tags: {
+      type: Array,
+      default: [],
+      required: true
+    }
   },
   { timestamps: true }
 );

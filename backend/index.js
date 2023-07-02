@@ -12,6 +12,7 @@ const cors = require('cors');
 
 const authRoute = require("./routes/auth");
 const userRoute = require("./routes/users");
+const chatRoute = require("./routes/chat")
 
 var Image = require('./models/Image.js');
 
@@ -36,6 +37,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
+app.use("/api/chats", chatRoute)
 
 //socket stuff
 const server = http.createServer(app);
@@ -110,3 +112,4 @@ app.listen(8800, () => {
   console.log("Node server is running!");
 });
 */
+
