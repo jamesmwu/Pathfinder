@@ -18,7 +18,6 @@ function App() {
           path="/register"
           element={user ? <Navigate to="/" /> : <RegisterPage />}
         />
-        <Route path="/home" element={user ? <HomePage /> : <Navigate to="/login" />} />
         {/* <Route
           path="/friends"
           element={user ? <Friends /> : <Register />}

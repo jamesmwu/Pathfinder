@@ -33,45 +33,50 @@ export default function Register() {
         <div className="login">
             <div className="loginWrapper">
                 <div className="loginLeft">
-                    <h3 className="loginLogo">Bistro</h3>
-                    <span className="loginDesc">Find Dining is Fine Dining.</span>
+                    <h3 className="loginLogo">Pathfinder</h3>
+                    <span className="loginDesc">Your career questions, answered.</span>
                 </div>
                 <div className="loginRight">
-                    <form className="loginBox" onSubmit={handleSubmit}>
-                        <input
-                            placeholder="Username"
-                            required
-                            ref={username}
-                            className="loginInput"
-                        />
-                        <input
-                            placeholder="Email"
-                            required
-                            ref={email}
-                            type="email"
-                            className="loginInput"
-                        />
-                        <input
-                            placeholder="Password"
-                            required
-                            ref={password}
-                            type="password"
-                            className="loginInput"
-                            minLength="6"
-                        />
-                        <input
-                            placeholder="Confirm Password"
-                            required
-                            ref={passwordAgain}
-                            type="password"
-                            className="loginInput"
-                        />
-                        <button className="loginButton" type="submit">
-                            Sign Up
-                        </button>
-                        <Link to="/login" style={{ textDecoration: "none" }}>
-                            <button className="loginRegisterButton">Log into Account</button>
-                        </Link>
+                    <form className="registerBox" onSubmit={handleSubmit}>
+                        <div className="registerInputWrapper">
+                            <input
+                                placeholder="Username"
+                                required
+                                ref={username}
+                                className="loginInput"
+                            />
+                            <input
+                                placeholder="Email"
+                                required
+                                ref={email}
+                                type="email"
+                                className="loginInput"
+                            />
+                            <input
+                                placeholder="Password"
+                                required
+                                ref={password}
+                                type="password"
+                                className="loginInput"
+                                minLength="6"
+                            />
+                            <input
+                                placeholder="Confirm Password"
+                                required
+                                ref={passwordAgain}
+                                type="password"
+                                className="loginInput"
+                            />
+                        </div>
+                        <div className="registerButtonWrapper">
+                            <button className="loginButton" type="submit">
+                                Sign up
+                            </button>
+                            <Link to="/login" style={{ textDecoration: "none", marginTop: "15px" }}>
+                                <button className="loginRegisterButton">Log in with an Existing Account</button>
+                            </Link>
+                        </div>
+
                     </form>
                 </div>
             </div>

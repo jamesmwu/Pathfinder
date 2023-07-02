@@ -20,7 +20,7 @@ export default function Login() {
         )
             .then((loginStatus) => {
                 if (loginStatus === "LOGIN_SUCCESS") {
-                    navigate("/home");
+                    navigate("/");
                 }
             })
             .catch((error) => {
@@ -32,33 +32,41 @@ export default function Login() {
         <div className="login">
             <div className="loginWrapper">
                 <div className="loginLeft">
-                    <h3 className="loginLogo">Bistro</h3>
-                    <span className="loginDesc">Find Dining is Fine Dining.</span>
+                    <h3 className="loginLogo">Pathfinder</h3>
+                    <span className="loginDesc">Your career questions, answered.</span>
                 </div>
                 <div className="loginRight" onSubmit={handleClick}>
                     <form className="loginBox">
-                        <input
-                            placeholder="Email"
-                            type="email"
-                            required
-                            className="loginInput"
-                            ref={email}
-                        />
-                        <input
-                            placeholder="Password"
-                            type="password"
-                            required
-                            minLength="6"
-                            className="loginInput"
-                            ref={password}
-                        />
-                        <button className="loginButton">
-                            {isFetching ? "Loading..." : "Log In"}
-                        </button>
-                        <span className="loginForgot">Forgot Password?</span>
-                        <button className="loginRegisterButton" onClick={createNewAccountClick}>
-                            Create a New Account
-                        </button>
+                        <div className="inputWrapper">
+                            <input
+                                placeholder="Email"
+                                type="email"
+                                required
+                                className="loginInput"
+                                ref={email}
+                            />
+                            <input
+                                placeholder="Password"
+                                type="password"
+                                required
+                                minLength="6"
+                                className="loginInput"
+                                ref={password}
+                                style={{ marginTop: "30px" }}
+                            />
+                        </div>
+
+                        <div className="loginButtonWrapper">
+                            <button className="loginButton">
+                                {isFetching ? "Loading..." : "Log In"}
+                            </button>
+                            {/* <span className="loginForgot">Forgot Password?</span> */}
+                            <button className="loginRegisterButton" style={{ marginTop: "15px" }}
+                                onClick={createNewAccountClick}>
+                                Create a new account
+                            </button>
+                        </div>
+
                     </form>
                 </div>
             </div>

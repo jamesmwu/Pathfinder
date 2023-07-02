@@ -1,78 +1,52 @@
+.home-page {
+	display: grid;
+	grid-template-columns: 1fr 2fr 1fr;
+	background-color: var(--color-cream);
+	height: 100vh; /* Set the height of the home page to fill the viewport */
+}
 
-  .home-page {
-    display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
-    background-color: var(--color-cream);
-    height: 100vh; /* Set the height of the home page to fill the viewport */
-  }
-  
-  .sidebar-left {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    background-color: var(--color-hazelnut);
-    color: var(--color-cream);
-    padding: 20px;
-  }
-  
-  .sidebar-left h2 {
-    margin-bottom: 10px;
-    font-size: 1.5rem;
-  }
-  
-  .sidebar-left ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .sidebar-left li {
-    margin-bottom: 5px;
-  }
-  
-  .main-content {
-    background-color: var(--color-cream);
-    padding: 20px;
-  }
-  
-  .main-content h1 {
-    margin-bottom: 20px;
-    color: var(--color-espresso);
-  }
-  
-  .sidebar-right {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    background-color: var(--color-caramel);
-    color: var(--color-cream);
-    padding: 20px;
-  }
-  
-  .sidebar-right h2 {
-    margin-bottom: 10px;
-    font-size: 1.5rem;
-  }
-  
-  /* Additional styling for links and buttons */
-  a {
-    /* color: #00ffe5; */
-    text-decoration: none;
-  }
-  
-  a:hover {
-    text-decoration: underline;
-  }
-  
-  button {
-    background-color: var(--color-dark-roast);
-    color: var(--color-cream);
-    border: none;
-    padding: 8px 12px;
-    font-size: 1rem;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: var(--color-espresso);
-  }
-  
+.sidebar-left {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	background-color: var(--color-blue);
+	color: white;
+	padding: 20px;
+}
+
+.sidebar-left h2 {
+	margin-bottom: 10px;
+	font-size: 1.5rem;
+}
+
+.sidebar-left ul {
+	list-style-type: none;
+	padding: 0;
+}
+
+.sidebar-left li {
+	margin-bottom: 5px;
+}
+
+.main-content {
+	background-color: var(--color-cream);
+	padding: 20px;
+}
+
+.main-content h1 {
+	margin-bottom: 20px;
+}
+
+.sidebar-right {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	background-color: var(--color-green);
+	color: white;
+	padding: 20px;
+}
+
+.sidebar-right h2 {
+	margin-bottom: 10px;
+	font-size: 1.5rem;
+}
