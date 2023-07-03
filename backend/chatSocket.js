@@ -14,18 +14,22 @@ module.exports = function(io) {
                 }
             } catch (err){
                 console.log("Initialize Room error");
-                console.log(err)
+                console.log(err);
             }
         });
 
         socket.on("private message", async ({ content, to }) => {
-            socket.to(to).emit("private message", {
-              content,
-              from: socket.id,
-            });
-            const chat = await Chat.findById(to)
-            await chat.updateOne({ $push: { messages: {body:content, date:Date.now, sender:user._id}}});
-            chat.save()
+            try{
+                const chat = await Chat.findById(to);
+                socket.to(to).emit("private message", content, chat._id.toString());
+                console.log(content);
+                console.log(to);
+                await chat.updateOne({ $push: { messages: {body:content, date:Date.now(), sender:user._id.toString()}}});
+                chat.save();
+            } catch (err){
+                console.log("Private Message Error");
+                console.log(err)
+            }
         });
 
         socket.on('msg_from_client', function(from,msg){
