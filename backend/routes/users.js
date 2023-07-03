@@ -49,11 +49,7 @@ router.put("/update-tags/:id", async (req, res) => {
   if (req.body.userId == req.params.id) {
     try {
       const user = await User.findById(req.body.userId)
-      for(let i = 0; i< req.body.tags.length; i++){
-        if(user.tags.indexOf(req.body.tags[i])==-1){
-          user.tags.push(req.body.tags[i])
-        }
-      }
+      user.tags = req.body.tags;
       await user.save()
       res.status(200).json("tags has been updated");
     } catch (err) {
