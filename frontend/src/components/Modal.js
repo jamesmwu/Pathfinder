@@ -35,7 +35,7 @@ export default function Modal({ isOpen, majors, onClose, onSubmit }) {
               </label>
             </div>
           ))}
-          <button type="submit">Submit</button>
+          <button type="submit">Confirm</button>
         </form>
         <button onClick={onClose}>Close</button>
       </div>

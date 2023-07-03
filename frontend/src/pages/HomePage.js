@@ -6,7 +6,7 @@ import Mentor from "../components/Mentor";
 import '../styles/homePage.css';
 
 export default function HomePage() {
-    const [isOpen, setIsOpen] = useState(true);
+    const [isOpen, setIsOpen] = useState(false);
     const [selectedMajors, setSelectedMajors] = useState([]);
 
     const openModal = () => {
@@ -31,7 +31,7 @@ export default function HomePage() {
     return (
         <div className="home-page">
             <div className="sidebar-left">
-                <div>
+                <div className="leftContainer">
                     <h2>My Interests</h2>
                     <ul>
                         {selectedMajors.map((major) => (
@@ -40,7 +40,7 @@ export default function HomePage() {
                     </ul>
                 </div>
 
-                <button onClick={openModal}>Open Modal</button>
+                <button onClick={openModal}>Select Interests</button>
             </div>
             <div className="main-content">
                 <h1>Home Page</h1>
