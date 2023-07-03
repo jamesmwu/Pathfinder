@@ -19,6 +19,7 @@
 	width: 100%;
 	max-height: 80vh;
 	overflow-y: auto;
+	background-color: white;
 }
 
 .modal-content form {
@@ -41,8 +42,8 @@
 
 .modal-content button[type='submit'] {
 	margin-top: 20px;
-	background-color: var(--color-cream);
-	color: black;
+	background-color: var(--color-green);
+	color: white;
 	border: none;
 	cursor: pointer;
 }
