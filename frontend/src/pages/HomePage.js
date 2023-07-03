@@ -10,6 +10,7 @@ export default function HomePage() {
     const [isOpen, setIsOpen] = useState(false);
     const [selectedMajors, setSelectedMajors] = useState([]);
     const [tags, setTags] = useState([]);
+    const [mentors, setMentors] = useState([]);
 
     const { user, logout } = useContext(AuthContext);
 
@@ -50,6 +51,16 @@ export default function HomePage() {
                 console.log(error);
             }
         };
+
+        const fetchMentors = async () => {
+            try {
+                const response = await axios.get('http://localhost:8800/api/users/all-mentors');
+                setMentors(response.data);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+
         const fetchUsers = async () => {
             try {
                 const response = await axios.get(`http://localhost:8800/api/users/?userId=${user._id}`);
@@ -58,8 +69,10 @@ export default function HomePage() {
                 console.log(error);
             }
         };
+
         fetchUsers();
         fetchTags();
+        fetchMentors();
     }, []);
 
     return (
@@ -74,11 +87,18 @@ export default function HomePage() {
                     </ul>
                 </div>
 
-                <button type="button" onClick={openModal}>Select Interests</button>
+                <button className="interests" type="button" onClick={openModal}>Select Interests</button>
             </div>
             <div className="main-content">
                 <h1>Home Page</h1>
-                <Mentor name="Deez Nuts" />
+                <div className="mentorContainer">
+                    {mentors.map((mentor) => (
+                        <div className="mentorInd">
+                            <Mentor key={mentor._id} name={mentor.username} />
+                        </div>
+                    ))}
+                </div>
+
                 <Modal
                     isOpen={isOpen}
                     majors={tags}
