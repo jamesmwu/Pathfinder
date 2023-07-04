@@ -73,10 +73,3 @@
 	flex-direction: column;
 	margin-bottom: 30px;
 }
-
-.chatContainer {
-	width: 100%;
-	display: flex;
-	flex-direction: column;
-	margin-top: 60px;
-}
