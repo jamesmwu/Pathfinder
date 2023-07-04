@@ -18,6 +18,15 @@ router.get("/all", async (req, res) => {
     }
   });
 
+  router.get("/single", async (req, res) => {
+    try {
+        const chat = await Chat.findById(req.query.chatId);
+        res.status(200).json(chat);
+    } catch (err) {
+      res.status(404).json(err);
+    }
+  });
+
 
 
 module.exports = router;

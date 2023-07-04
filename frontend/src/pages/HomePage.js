@@ -11,6 +11,8 @@ export default function HomePage() {
     const [selectedMajors, setSelectedMajors] = useState([]);
     const [tags, setTags] = useState([]);
     const [mentors, setMentors] = useState([]);
+    const [connections, setConnections] = useState([]);
+    const [chatId, setChatId] = useState("")
 
     const { user, logout } = useContext(AuthContext);
 
@@ -69,7 +71,6 @@ export default function HomePage() {
                 console.log(error);
             }
         };
-
         fetchUsers();
         fetchTags();
         fetchMentors();
