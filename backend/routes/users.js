@@ -4,8 +4,8 @@ const Chat = require('../models/Chat')
 const bcrypt = require("bcrypt");
 const router = express.Router();
 
-const MENTOR = 1
-const MENTEE = 2
+const MENTEE = 1
+const MENTOR = 2
 const MENTOR_AND_MENTEE = 3
 const TAGS = ["Computer Science",  "Pre-Med", "Engineering", "Chemistry", "Psychology", "UC Berkeley", "UCLA", "Caltech"];
 
