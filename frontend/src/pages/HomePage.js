@@ -11,6 +11,8 @@ export default function HomePage() {
     const [selectedMajors, setSelectedMajors] = useState([]);
     const [tags, setTags] = useState([]);
     const [mentors, setMentors] = useState([]);
+    const [connections, setConnections] = useState([]);
+    const [chatId, setChatId] = useState("")
 
     const { user, logout } = useContext(AuthContext);
 
@@ -70,6 +72,24 @@ export default function HomePage() {
             }
         };
 
+        const fetchConnections = async () => {
+            try {
+                const response = await axios.get(`http://localhost:8800/api/users/connections/?userId=${user._id}`);
+                setConnections(response.data);
+                console.log(connections)
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        const fetchChat = async (chatId) => {
+            try {
+                const response = await axios.get(`http://localhost:8800/api/chats/single/?chatId=${chatId}`);
+                setChatId(response.data);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        fetchConnections();
         fetchUsers();
         fetchTags();
         fetchMentors();
@@ -91,6 +111,13 @@ export default function HomePage() {
             </div>
             <div className="main-content">
                 <h1>Home Page</h1>
+                <div className="chatContainer">
+                    {mentors.map((mentor) => (
+                        <div className="mentorInd">
+                            <Mentor key={mentor._id} name={mentor.username} />
+                        </div>
+                    ))}
+                </div>
                 <div className="mentorContainer">
                     {mentors.map((mentor) => (
                         <div className="mentorInd">
