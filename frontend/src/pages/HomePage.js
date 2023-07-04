@@ -38,6 +38,20 @@ export default function HomePage() {
         }
     };
 
+    const handleConnect = async (mentorId) => {
+        try {
+            const userId = user._id;
+            const response = await axios.put(
+                `http://localhost:8800/api/users/${userId}/add-connection`,
+                { userId: mentorId }
+            );
+            console.log(response.data);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+
     const handleLogout = () => {
         logout(); // Call the logout function from the AuthContext
     };
@@ -73,7 +87,7 @@ export default function HomePage() {
         fetchUsers();
         fetchTags();
         fetchMentors();
-    }, []);
+    }, [user._id]);
 
     return (
         <div className="home-page">
@@ -93,8 +107,8 @@ export default function HomePage() {
                 <h1>Available Mentors</h1>
                 <div className="mentorContainer">
                     {mentors.map((mentor) => (
-                        <div className="mentorInd">
-                            <Mentor key={mentor._id} name={mentor.username} />
+                        <div className="mentorInd" key={mentor._id} >
+                            <Mentor mentorId={mentor._id} name={mentor.username} onConnect={handleConnect} />
                         </div>
                     ))}
                 </div>

@@ -1,5 +1,7 @@
 .mentor {
-	display: inline-block;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 	padding: 30px;
 	background-color: #f4f4f7;
 	border-radius: 20px;
@@ -7,6 +9,12 @@
 }
 
 .mentor-name {
+	flex-grow: 1; /* Occupy remaining space */
+	text-align: center; /* Center the text */
 	font-weight: bold;
 	color: #333333;
+}
+
+.connect-button {
+	margin-left: auto; /* Push the button to the right */
 }
