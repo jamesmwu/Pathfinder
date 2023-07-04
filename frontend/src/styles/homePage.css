@@ -55,9 +55,9 @@
 }
 
 .interests {
-	background-color: var(--color-green);
+	background-color: var(--color-cream);
 	font-weight: bold;
-	color: white;
+	color: black;
 }
 
 .mentorContainer {
@@ -72,4 +72,12 @@
 	display: flex;
 	flex-direction: column;
 	margin-bottom: 30px;
+}
+
+.logoutHome {
+	all: unset;
+	cursor: pointer;
+	width: fit-content;
+	display: flex;
+	align-self: flex-end;
 }

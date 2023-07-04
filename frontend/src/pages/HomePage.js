@@ -2,7 +2,10 @@ import React, { useState, useContext, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import Modal from "../components/Modal";
-import Mentor from "../components/Mentor";
+import MentorTab from "./MentorTab";
+import Navbar from "../components/Navbar";
+import ArticleTab from "./ArticleTab";
+import ChatTab from "./ChatTab";
 import axios from 'axios';
 import '../styles/homePage.css';
 
@@ -12,6 +15,7 @@ export default function HomePage() {
     const [tags, setTags] = useState([]);
     const [mentors, setMentors] = useState([]);
     const [connections, setConnections] = useState([]); //Array of objects that have chatId and userId
+    const [tab, setTab] = useState("Articles");
 
     const { user, logout } = useContext(AuthContext);
 
@@ -102,6 +106,12 @@ export default function HomePage() {
         fetchMentors();
     }, [user._id]);
 
+    let tabMap = {
+        "Articles": <ArticleTab />,
+        "Mentors": <MentorTab mentors={mentors} handleConnect={handleConnect} />,
+        "Chats": <ChatTab />
+    };
+
     return (
         <div className="home-page">
             <div className="sidebar-left">
@@ -117,14 +127,9 @@ export default function HomePage() {
                 <button className="interests" type="button" onClick={openModal}>Select Interests</button>
             </div>
             <div className="main-content">
-                <h1>Available Mentors</h1>
-                <div className="mentorContainer">
-                    {mentors.map((mentor) => (
-                        <div className="mentorInd" key={mentor._id} >
-                            <Mentor mentorId={mentor._id} name={mentor.username} onConnect={handleConnect} />
-                        </div>
-                    ))}
-                </div>
+                <Navbar tabs={Object.keys(tabMap)} setTab={setTab} activeTab={tab} />
+
+                {tabMap[tab]}
 
                 <Modal
                     isOpen={isOpen}
@@ -143,7 +148,7 @@ export default function HomePage() {
                     </ul>
                 </div>
 
-                <NavLink to="/" onClick={handleLogout}>
+                <NavLink to="/" onClick={handleLogout} className="logoutHome">
                     Log Out
                 </NavLink>
             </div>
