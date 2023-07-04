@@ -1,0 +1,24 @@
+.registerBox {
+	height: 430px;
+	padding: 40px 20px;
+	background-color: white;
+	border-radius: 10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.registerInputWrapper {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	height: 100%;
+	justify-content: space-between;
+}
+
+.registerButtonWrapper {
+	margin-top: 30px;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+}
