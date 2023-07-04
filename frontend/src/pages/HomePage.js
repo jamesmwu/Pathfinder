@@ -90,7 +90,7 @@ export default function HomePage() {
                 <button className="interests" type="button" onClick={openModal}>Select Interests</button>
             </div>
             <div className="main-content">
-                <h1>Home Page</h1>
+                <h1>Available Mentors</h1>
                 <div className="mentorContainer">
                     {mentors.map((mentor) => (
                         <div className="mentorInd">
