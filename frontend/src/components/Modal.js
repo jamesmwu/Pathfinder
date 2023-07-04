@@ -25,7 +25,7 @@ export default function Modal({ isOpen, majors, onClose, onSubmit }) {
   return (
     <div className="modal">
       <div className="modal-content">
-        <h2>Select Majors</h2>
+        <h2>Select Interests</h2>
         <form onSubmit={handleSubmit}>
           {majors.map((major) => (
             <div key={major}>

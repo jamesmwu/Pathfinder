@@ -11,6 +11,7 @@ export default function HomePage() {
     const [selectedMajors, setSelectedMajors] = useState([]);
     const [tags, setTags] = useState([]);
     const [mentors, setMentors] = useState([]);
+    const [connections, setConnections] = useState([]); //Array of objects that have chatId and userId
 
     const { user, logout } = useContext(AuthContext);
 
@@ -79,10 +80,22 @@ export default function HomePage() {
             try {
                 const response = await axios.get(`http://localhost:8800/api/users/?userId=${user._id}`);
                 setSelectedMajors(response.data.tags);
+                const mentors = response.data.connections;
+                const arr = [];
+
+                await Promise.all(
+                    mentors.map(async (mentor) => {
+                        const mentorResponse = await axios.get(`http://localhost:8800/api/users/?userId=${mentor.userId}`);
+                        arr.push(mentorResponse.data.username);
+                    })
+                );
+
+                setConnections(arr);
             } catch (error) {
                 console.log(error);
             }
         };
+
 
         fetchUsers();
         fetchTags();
@@ -121,7 +134,15 @@ export default function HomePage() {
                 />
             </div>
             <div className="sidebar-right">
-                <h2>My Chats</h2>
+                <div>
+                    <h2>My Chats</h2>
+                    <ul>
+                        {connections.map((connection) => (
+                            <li key={connection}>{connection}</li>
+                        ))}
+                    </ul>
+                </div>
+
                 <NavLink to="/" onClick={handleLogout}>
                     Log Out
                 </NavLink>
