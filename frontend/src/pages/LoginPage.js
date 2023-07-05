@@ -2,7 +2,7 @@ import { useContext, useRef, useCallback } from "react";
 import { useNavigate } from 'react-router-dom';
 import "../styles/loginPage.css";
 import { AuthContext } from "../context/AuthContext";
-import { loginCall } from "../loginCall";
+import { loginCall } from "../context/loginCall";
 
 export default function Login() {
     const email = useRef();

@@ -1,0 +1,22 @@
+.navbar {
+	display: flex;
+	margin-top: 10px;
+}
+
+.nav-item {
+	margin-right: 30px;
+}
+
+.active {
+	background-color: var(--color-cream-muted);
+	color: black;
+	border: solid 1px black;
+	border-radius: 20px;
+}
+
+.inactive {
+	background-color: transparent;
+	color: black;
+	border: solid 1px black;
+	border-radius: 20px;
+}
