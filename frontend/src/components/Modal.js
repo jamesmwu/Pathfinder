@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../styles/modal.css';
 
-export default function Modal({ isOpen, majors, onClose, onSubmit }) {
-  const [selectedMajors, setSelectedMajors] = useState([]);
+export default function Modal({ isOpen, majors, curSelectedMajors, onClose, onSubmit }) {
+  const [selectedMajors, setSelectedMajors] = useState(curSelectedMajors);
+
+  useEffect(() => {
+    setSelectedMajors(curSelectedMajors);
+  }, [curSelectedMajors]);
 
   const handleMajorChange = (event) => {
     const { value } = event.target;
@@ -25,7 +29,7 @@ export default function Modal({ isOpen, majors, onClose, onSubmit }) {
   return (
     <div className="modal">
       <div className="modal-content">
-        <h2>Select Interests</h2>
+        <h2>Select Majors</h2>
         <form onSubmit={handleSubmit}>
           {majors.map((major) => (
             <div key={major}>

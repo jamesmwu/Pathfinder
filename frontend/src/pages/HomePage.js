@@ -146,6 +146,7 @@ export default function HomePage() {
                 <Modal
                     isOpen={isOpen}
                     majors={tags}
+                    curSelectedMajors={selectedMajors}
                     onClose={closeModal}
                     onSubmit={handleModalSubmit}
                 />
