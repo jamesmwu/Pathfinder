@@ -16,6 +16,7 @@ export default function HomePage() {
     const [mentors, setMentors] = useState([]);
     const [connections, setConnections] = useState([]); //Array of objects that have chatId and userId
     const [tab, setTab] = useState("Articles");
+    const [currentSelectedMentor, setCurrentSelectedMentor] = useState("");
 
     const { user, logout } = useContext(AuthContext);
 
@@ -59,6 +60,15 @@ export default function HomePage() {
 
     const handleLogout = () => {
         logout(); // Call the logout function from the AuthContext
+    };
+
+    const handleChatSelect = (connection) => {
+        if (connection === currentSelectedMentor) {
+            setCurrentSelectedMentor("");
+        }
+        else {
+            setCurrentSelectedMentor(connection);
+        }
     };
 
     useEffect(() => {
@@ -109,7 +119,7 @@ export default function HomePage() {
     let tabMap = {
         "Articles": <ArticleTab />,
         "Mentors": <MentorTab mentors={mentors} handleConnect={handleConnect} />,
-        "Chats": <ChatTab />
+        "Chats": <ChatTab mentor={currentSelectedMentor} />
     };
 
     return (
@@ -128,8 +138,10 @@ export default function HomePage() {
             </div>
             <div className="main-content">
                 <Navbar tabs={Object.keys(tabMap)} setTab={setTab} activeTab={tab} />
+                <div className={`${tab === "Chats" ? "chat-tab-content" : "tab-content"}`}>
+                    {tabMap[tab]}
+                </div>
 
-                {tabMap[tab]}
 
                 <Modal
                     isOpen={isOpen}
@@ -143,7 +155,7 @@ export default function HomePage() {
                     <h2>My Chats</h2>
                     <ul>
                         {connections.map((connection) => (
-                            <li key={connection}>{connection}</li>
+                            <li key={connection} className="mentorList" onClick={() => { handleChatSelect(connection); }}>{connection}</li>
                         ))}
                     </ul>
                 </div>
