@@ -1,0 +1,61 @@
+.article {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	text-align: left;
+	flex-grow: 1;
+	justify-content: flex-start;
+	padding: 30px;
+	margin-top: 20px;
+	background-color: #f4f4f7;
+	border-radius: 20px;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.subArticles {
+	margin: 30px 0;
+	border-bottom: 1px solid var(--color-cream-muted);
+}
+
+.Collapsible {
+	border-top: 1px solid var(--color-cream-muted);
+	padding: 15px 10px;
+}
+
+.Collapsible__contentInner {
+	margin: 20px 0 40px;
+}
+
+/* .Collapsible__contentInner p {
+	margin-bottom: 10px;
+	font-size: 14px;
+	line-height: 20px;
+} */
+
+/* .Collapsible__contentInner p:last-child {
+	margin-bottom: 40px;
+} */
+
+.Collapsible__trigger {
+	display: flex;
+	font-weight: bold;
+	font-size: large;
+	justify-content: space-between;
+	align-items: center;
+	text-decoration: none;
+	position: relative;
+	color: var(--color-coral);
+}
+
+.Collapsible__trigger:after {
+	font-family: 'Material Icons';
+	font-size: 30px;
+	color: var(--color-gray);
+	content: 'expand_more';
+	display: block;
+	transition: transform 200ms;
+}
+
+.Collapsible__trigger.is-open:after {
+	transform: rotateZ(180deg);
+}
