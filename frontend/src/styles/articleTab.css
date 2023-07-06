@@ -45,6 +45,7 @@
 	text-decoration: none;
 	position: relative;
 	color: var(--color-coral);
+	cursor: pointer;
 }
 
 .Collapsible__trigger:after {
