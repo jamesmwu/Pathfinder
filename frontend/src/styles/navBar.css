@@ -1,6 +1,9 @@
 .navbar {
 	display: flex;
-	margin-top: 10px;
+	margin-top: 15px;
+	margin-left: 20px;
+	background-color: var(--color-cream);
+	padding-bottom: 20px;
 }
 
 .nav-item {

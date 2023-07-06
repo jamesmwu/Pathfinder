@@ -10,25 +10,6 @@ export default function ArticleTab() {
             <p>Interest description here. deez nuts deez nuts ligma balls lololol </p>
             <p>Interest description here. deez nuts deez nuts ligma balls lololol </p>
 
-            <p>Interest description here. deez nuts deez nuts ligma balls lololol </p>
-
-            <p>Interest description here. deez nuts deez nuts ligma balls lololol </p>
-
-            <p>Interest description here. deez nuts deez nuts ligma balls lololol </p>
-
-            <p>Interest description here. deez nuts deez nuts ligma balls lololol </p>
-
-            <p>Interest description here. deez nuts deez nuts ligma balls lololol </p>
-
-            <p>Interest description here. deez nuts deez nuts ligma balls lololol </p>
-
-            <p>Interest description here. deez nuts deez nuts ligma balls lololol </p>
-
-            <p>Interest description here. deez nuts deez nuts ligma balls lololol </p>
-
-            <p>Interest description here. deez nuts deez nuts ligma balls lololol </p>
-
-            <p>Interest description here. deez nuts deez nuts ligma balls lololol </p>
 
             <p>Interest description here. deez nuts deez nuts ligma balls lololol </p>
 
