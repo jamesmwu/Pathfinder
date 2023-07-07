@@ -7,7 +7,7 @@ module.exports = function(io) {
         var user = null;
         socket.on("initialize rooms", async ({ id }) => { //must be called first to initialize user!
             try{
-                console.log(id);
+                console.log(`initialize rooms for: ${id}`);
                 user = await User.findById(id);
                 for(let i = 0; i< user.connections.length; i++){
                     socket.join(user.connections[i].chatId);
@@ -19,12 +19,14 @@ module.exports = function(io) {
         });
 
         socket.on("private message", async ({ content, to }) => {
+            console.log(`private message received: ${content}`)
+
             try{
                 const chat = await Chat.findById(to);
-                socket.to(to).emit("private message", content, chat._id.toString());
-                console.log(content);
-                console.log(to);
-                await chat.updateOne({ $push: { messages: {body:content, date:Date.now(), sender:user._id.toString()}}});
+                const newMessage = {body:content, date:Date.now(), sender:user._id.toString()}
+                //socket.to(to).emit("private message", newMessage);
+                io.sockets.in(to).emit('private message', newMessage);
+                await chat.updateOne({ $push: { messages: newMessage}});
                 chat.save();
             } catch (err){
                 console.log("Private Message Error");

@@ -9,16 +9,26 @@ import ChatTab from "./ChatTab";
 import axios from 'axios';
 import '../styles/homePage.css';
 
+import socketIO from "socket.io-client";
+const socket = socketIO.connect("http://localhost:8800")
+
 export default function HomePage() {
+    const connectionTemplate = {mentor: {_id:""}, chat:{}};
     const [isOpen, setIsOpen] = useState(false);
     const [selectedMajors, setSelectedMajors] = useState([]);
     const [tags, setTags] = useState([]);
-    const [mentors, setMentors] = useState([]);
-    const [connections, setConnections] = useState([]); //Array of objects that have chatId and userId
+    const [allMentors, setMentors] = useState([]);
+    /*
+    const [connectedUsers, setConnectedUsers] = useState([]); //holds user json connections
+    const [connectedChats, setConnectedChats] = useState([]); //holds chat json connections
+    */
+    const [connections, setConnections] = useState([]) //contain an array of objects, each object contains two fields, one for a user json and chat json.
     const [tab, setTab] = useState("Articles");
-    const [currentSelectedMentor, setCurrentSelectedMentor] = useState("");
+    const [currentSelectedConnection, setCurrentSelectedConnection] = useState(connectionTemplate);
 
     const { user, logout } = useContext(AuthContext);
+
+
 
     const openModal = () => {
         setIsOpen(true);
@@ -63,15 +73,17 @@ export default function HomePage() {
     };
 
     const handleChatSelect = (connection) => {
-        if (connection === currentSelectedMentor) {
-            setCurrentSelectedMentor("");
+        if (connection.mentor._id === currentSelectedConnection.mentor._id) {
+            setCurrentSelectedConnection(connectionTemplate);
         }
         else {
-            setCurrentSelectedMentor(connection);
+            setCurrentSelectedConnection(connection);
         }
+        //console.log(currentSelectedConnection)
     };
 
     useEffect(() => {
+
         const fetchTags = async () => {
             try {
                 const response = await axios.get('http://localhost:8800/api/users/all-tags');
@@ -89,18 +101,34 @@ export default function HomePage() {
                 console.log(error);
             }
         };
+        /*
+        const fetchChats = async () => {
+            const response = await axios.get(`http://localhost:8800/api/users/?userId=${user._id}`);
+            const connections = response.data.connections;
+            const arr = [];
+            await Promise.all(
+                connections.map(async (connection) => {
+                    const mentorResponse = await axios.get(`http://localhost:8800/api/chats/single/?chatId=${connection.chatId}`);
+                    arr.push(mentorResponse.data);
+                })
+            );
+            setConnectedChats(arr)
+        }
+        */
 
-        const fetchUsers = async () => {
+        const fetchConnections = async () => {
             try {
                 const response = await axios.get(`http://localhost:8800/api/users/?userId=${user._id}`);
                 setSelectedMajors(response.data.tags);
-                const mentors = response.data.connections;
+                const connections = response.data.connections;
                 const arr = [];
 
                 await Promise.all(
-                    mentors.map(async (mentor) => {
-                        const mentorResponse = await axios.get(`http://localhost:8800/api/users/?userId=${mentor.userId}`);
-                        arr.push(mentorResponse.data.username);
+                    connections.map(async (connection) => {
+                        const mentorResponse = await axios.get(`http://localhost:8800/api/users/?userId=${connection.userId}`);
+                        const chatResponse = await axios.get(`http://localhost:8800/api/chats/single/?chatId=${connection.chatId}`);
+                        arr.push({ mentor: mentorResponse.data, chat: chatResponse.data});
+
                     })
                 );
 
@@ -110,18 +138,64 @@ export default function HomePage() {
             }
         };
 
-
-        fetchUsers();
+        fetchConnections();
         fetchTags();
         fetchMentors();
+        socket.emit("initialize rooms", {id:user._id})
+        
     }, [user._id]);
 
     let tabMap = {
         "Articles": <ArticleTab />,
-        "Mentors": <MentorTab mentors={mentors} handleConnect={handleConnect} />,
-        "Chats": <ChatTab mentor={currentSelectedMentor} />
+        "Mentors": <MentorTab mentors={allMentors} handleConnect={handleConnect} />,
+        "Chats": <ChatTab connection={currentSelectedConnection} user = {user} socket = {socket}/>
     };
 
+
+    /*
+    useEffect(()=>{
+        function addMessage(data) {
+            console.log(connections);
+            var updated = connections.map((connection)=> connection.mentor._id === data.sender ?{
+                ...connection,
+                chat: {...connection.chat, messages: [...connection.chat.messages, data]}
+            } : connection);
+            setConnections(updated)
+            console.log(connections);
+        }
+        socket.on("private message", addMessage);
+
+        return () => {
+            socket.off('private message', addMessage);
+          };
+    }, [])
+    */
+
+    useEffect(() => {
+        function addMessage(data) {
+            console.log(connections);
+          setConnections((prevConnections) => {
+            const updated = prevConnections.map((connection) =>
+              connection.mentor._id === data.sender
+                ? {
+                    ...connection,
+                    chat: {
+                      ...connection.chat,
+                      messages: [...connection.chat.messages, data],
+                    },
+                  }
+                : connection
+            );
+            return updated;
+          });
+        }
+      
+        socket.on("private message", addMessage);
+      
+        return () => {
+          socket.off("private message", addMessage);
+        };
+      }, []);
     return (
         <div className="home-page">
             <div className="sidebar-left">
@@ -156,7 +230,7 @@ export default function HomePage() {
                     <h2>My Chats</h2>
                     <ul>
                         {connections.map((connection) => (
-                            <li key={connection} className="mentorList" onClick={() => { handleChatSelect(connection); }}>{connection}</li>
+                            <li key={connection.mentor._id} className="mentorList" onClick={() => { handleChatSelect(connection); }}>{connection.mentor.username}</li>
                         ))}
                     </ul>
                 </div>
