@@ -1,12 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
-import ChatBody from './ChatBody'
-import ChatFooter from './ChatFooter'
+import ChatBody from './ChatBody';
+import ChatFooter from './ChatFooter';
 
 import "../styles/chatTab.css";
 
 export default function ChatTab({ connection, user, socket }) {
     const lastMessageRef = useRef(null);
-    
 
     /*
     useEffect(() => {
@@ -14,10 +13,10 @@ export default function ChatTab({ connection, user, socket }) {
     lastMessageRef.current?.scrollIntoView({behavior: 'smooth'});
     }, [messages]);
     */
-    
+
 
     if (connection === undefined || connection === null || connection.mentor._id === "") {
-        
+
         return (
             <div>
                 <h2>Select a mentor from the Chats tab to start talking!</h2>
@@ -26,8 +25,8 @@ export default function ChatTab({ connection, user, socket }) {
     }
     return (
         <div className="chat-tab">
-            <ChatBody messages={connection.chat.messages} user={user}/>
-            <ChatFooter socket={socket} chatId={connection.chat._id}/>
+            <ChatBody messages={connection.chat.messages} user={user} />
+            <ChatFooter socket={socket} chatId={connection.chat._id} />
         </div>
     );
 }

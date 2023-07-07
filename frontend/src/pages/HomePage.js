@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, useRef } from "react";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import Modal from "../components/Modal";
@@ -10,10 +10,10 @@ import axios from 'axios';
 import '../styles/homePage.css';
 
 import socketIO from "socket.io-client";
-const socket = socketIO.connect("http://localhost:8800")
+// const socket = socketIO.connect("http://localhost:8800");
 
 export default function HomePage() {
-    const connectionTemplate = {mentor: {_id:""}, chat:{}};
+    const connectionTemplate = { mentor: { _id: "" }, chat: {} };
     const [isOpen, setIsOpen] = useState(false);
     const [selectedMajors, setSelectedMajors] = useState([]);
     const [tags, setTags] = useState([]);
@@ -22,13 +22,17 @@ export default function HomePage() {
     const [connectedUsers, setConnectedUsers] = useState([]); //holds user json connections
     const [connectedChats, setConnectedChats] = useState([]); //holds chat json connections
     */
-    const [connections, setConnections] = useState([]) //contain an array of objects, each object contains two fields, one for a user json and chat json.
+    const [connections, setConnections] = useState([]); //contain an array of objects, each object contains two fields, one for a user json and chat json.
     const [tab, setTab] = useState("Articles");
     const [currentSelectedConnection, setCurrentSelectedConnection] = useState(connectionTemplate);
 
     const { user, logout } = useContext(AuthContext);
 
-
+    const socketRef = useRef();
+    useEffect(() => {
+        socketRef.current = socketIO.connect("http://localhost:8800");
+        return () => socketRef.current.disconnect();
+    }, []);
 
     const openModal = () => {
         setIsOpen(true);
@@ -66,6 +70,7 @@ export default function HomePage() {
             console.log(error);
         }
     };
+
 
 
     const handleLogout = () => {
@@ -127,8 +132,7 @@ export default function HomePage() {
                     connections.map(async (connection) => {
                         const mentorResponse = await axios.get(`http://localhost:8800/api/users/?userId=${connection.userId}`);
                         const chatResponse = await axios.get(`http://localhost:8800/api/chats/single/?chatId=${connection.chatId}`);
-                        arr.push({ mentor: mentorResponse.data, chat: chatResponse.data});
-
+                        arr.push({ mentor: mentorResponse.data, chat: chatResponse.data });
                     })
                 );
 
@@ -141,61 +145,57 @@ export default function HomePage() {
         fetchConnections();
         fetchTags();
         fetchMentors();
-        socket.emit("initialize rooms", {id:user._id})
-        
+        socketRef.current.emit("initialize rooms", { id: user._id });
+
     }, [user._id]);
+
+    // useEffect(() => {
+    //     console.log(connections);
+    // }, [connections]);
 
     let tabMap = {
         "Articles": <ArticleTab />,
         "Mentors": <MentorTab mentors={allMentors} handleConnect={handleConnect} />,
-        "Chats": <ChatTab connection={currentSelectedConnection} user = {user} socket = {socket}/>
+        "Chats": <ChatTab connection={currentSelectedConnection} user={user} socket={socketRef.current} />
     };
 
-
-    /*
-    useEffect(()=>{
-        function addMessage(data) {
-            console.log(connections);
-            var updated = connections.map((connection)=> connection.mentor._id === data.sender ?{
-                ...connection,
-                chat: {...connection.chat, messages: [...connection.chat.messages, data]}
-            } : connection);
-            setConnections(updated)
-            console.log(connections);
-        }
-        socket.on("private message", addMessage);
-
-        return () => {
-            socket.off('private message', addMessage);
-          };
-    }, [])
-    */
-
     useEffect(() => {
-        function addMessage(data) {
-            console.log(connections);
-          setConnections((prevConnections) => {
-            const updated = prevConnections.map((connection) =>
-              connection.mentor._id === data.sender
-                ? {
-                    ...connection,
-                    chat: {
-                      ...connection.chat,
-                      messages: [...connection.chat.messages, data],
-                    },
-                  }
-                : connection
-            );
-            return updated;
-          });
+        function addMessage(data, to) {
+            console.log(connections); //prints original array (without edits)
+            // let updated = connections.map((connection) => connection.mentor._id === data.sender ? {
+            //     ...connection,
+            //     chat: { ...connection.chat, messages: [...connection.chat.messages, data] }
+            // } : connection);
+            let arr = [];
+            for (let i = 0; i < connections.length; i++) {
+                //Push connection if the chat is the one that got updated
+                if (connections[i].chat._id === to) {
+                    let updated = { ...connections[i] };
+                    updated.chat.messages.push(data);
+                    arr.push(updated);
+                    // console.log(updated);
+                }
+                else {
+                    arr.push(connections[i]);
+                    // console.log(connections[i]);
+                }
+            }
+
+            setConnections(arr);
+            console.log(connections); //prints updated array
         }
-      
-        socket.on("private message", addMessage);
-      
+
+        socketRef.current.on("private message", addMessage);
+
         return () => {
-          socket.off("private message", addMessage);
+            socketRef.current.off('private message', addMessage);
         };
-      }, []);
+    }, [connections]);
+
+    // useEffect(() => {
+    //     console.log(connections);
+    // }, [connections]);
+
     return (
         <div className="home-page">
             <div className="sidebar-left">
@@ -212,7 +212,7 @@ export default function HomePage() {
             </div>
             <div className="main-content">
                 <Navbar tabs={Object.keys(tabMap)} setTab={setTab} activeTab={tab} />
-                <div className={`${tab === "Chats" ? "chat-tab-content" : "tab-content"}`}>
+                <div className="tab-content">
                     {tabMap[tab]}
                 </div>
 

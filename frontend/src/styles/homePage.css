@@ -41,14 +41,14 @@
 	margin-bottom: 20px;
 }
 
-.chat-tab-content {
+/* .chat-tab-content {
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-end;
 	flex-grow: 1;
 	padding: 20px;
 	overflow-y: auto;
-}
+} */
 
 .tab-content {
 	flex: 1 1 auto; /* Allow content to grow and shrink within the main content area */
