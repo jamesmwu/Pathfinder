@@ -40,11 +40,19 @@ app.use("/api/users", userRoute);
 app.use("/api/chats", chatRoute)
 
 //socket stuff
+
 const server = http.createServer(app);
 const { Server } = require("socket.io");
-const io = new Server(server);
+const io = new Server(server, {
+    cors: {
+        origin: "http://localhost:3000",
+        methods: ["GET", "POST"]
+
+    }
+});
 require('./chatSocket')(io);
 server.listen(8800, () => console.log(`socket listening on port 8800`));
+
 //end socket stuff
 
 

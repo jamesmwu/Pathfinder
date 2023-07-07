@@ -1,25 +1,33 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
+import ChatBody from './ChatBody'
+import ChatFooter from './ChatFooter'
+
 import "../styles/chatTab.css";
 
-export default function ChatTab({ mentor }) {
+export default function ChatTab({ connection, user, socket }) {
+    const lastMessageRef = useRef(null);
+    
 
-    if (mentor === undefined || mentor === null || mentor === "") {
+    /*
+    useEffect(() => {
+    //scroll to bottom every time messages change
+    lastMessageRef.current?.scrollIntoView({behavior: 'smooth'});
+    }, [messages]);
+    */
+    
+
+    if (connection === undefined || connection === null || connection.mentor._id === "") {
+        
         return (
             <div>
                 <h2>Select a mentor from the Chats tab to start talking!</h2>
             </div>
         );
     }
-
     return (
         <div className="chat-tab">
-            <div className="chat-content">
-                Chat with {mentor} here, gotta pass the text data :p
-            </div>
-            <div className="chat-bar">
-                <input type="text" placeholder="Type your message..." />
-                <button>Send</button>
-            </div>
+            <ChatBody messages={connection.chat.messages} user={user}/>
+            <ChatFooter socket={socket} chatId={connection.chat._id}/>
         </div>
     );
 }
