@@ -42,7 +42,7 @@ function MentorTab({ mentors, handleConnect }) {
     function MentorItem({ mentorId, name, about }) {
         let random = Math.floor(Math.random() * (2 - 1 + 1) + 1);
         if (random === 1) {
-            random = 0.4;
+            random = 0.25;
         } else {
             random = 0;
         }
