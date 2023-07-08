@@ -216,7 +216,7 @@ export default function HomePage() {
                     <h2>My Chats</h2>
                     <ul>
                         {connections.map((connection) => (
-                            <li key={connection.mentor._id} className={currentSelectedConnection.mentor._id === connection.mentor._id ? "mentorListCur" : "mentorList"} onClick={() => { handleChatSelect(connection); }}>{connection.mentor.username}</li>
+                            <li key={connection.mentor._id} className={currentSelectedConnection.mentor._id === connection.mentor._id && tab === "Chats" ? "mentorListCur" : "mentorList"} onClick={() => { handleChatSelect(connection); }}>{connection.mentor.username}</li>
                         ))}
                     </ul>
                 </div>
