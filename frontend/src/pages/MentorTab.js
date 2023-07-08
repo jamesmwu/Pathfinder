@@ -85,18 +85,6 @@ function MentorTab({ mentors, handleConnect }) {
                 className="my-masonry-grid"
                 columnClassName="my-masonry-grid_column"
             >
-                {/* <Tile index="0" />
-                <Tile index="1" />
-                <Tile index="2" />
-                <Tile index="3" />
-                <Tile index="4" />
-                <Tile index="5" />
-                <Tile index="6" />
-                <Tile index="7" />
-                <Tile index="8" />
-                <Tile index="9" />
-                <Tile index="10" />
-                <Tile index="11" /> */}
                 {allMentors.map((mentor) => (
                     <div key={mentor._id}>
                         <MentorItem mentorId={mentor._id} name={mentor.username} about={mentor.description} />
