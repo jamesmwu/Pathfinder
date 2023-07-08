@@ -1,4 +1,5 @@
 import React from 'react';
+import "../styles/chatBody.css";
 
 const ChatBody = ({ messages, user }) => {
     return (

@@ -1,7 +1,6 @@
 import React from "react";
 import ChatBody from './ChatBody';
 import ChatFooter from './ChatFooter';
-
 import "../styles/chatTab.css";
 
 export default function ChatTab({ connection, user, socket }) {
@@ -19,7 +18,7 @@ export default function ChatTab({ connection, user, socket }) {
 
         return (
             <div>
-                <h2>Select a mentor from the Chats tab to start talking!</h2>
+                <h2>Connect with a mentor to chat with them!</h2>
             </div>
         );
     }

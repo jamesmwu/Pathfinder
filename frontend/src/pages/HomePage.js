@@ -71,12 +71,8 @@ export default function HomePage() {
     };
 
     const handleChatSelect = (connection) => {
-        if (connection.mentor._id === currentSelectedConnection.mentor._id) {
-            setCurrentSelectedConnection(connectionTemplate);
-        }
-        else {
-            setCurrentSelectedConnection(connection);
-        }
+        setCurrentSelectedConnection(connection);
+        setTab("Chats");
     };
 
     useEffect(() => {
@@ -108,13 +104,15 @@ export default function HomePage() {
 
                 await Promise.all(
                     connections.map(async (connection) => {
-                        console.log(connection.userId);
                         const mentorResponse = await axios.get(`http://localhost:8800/api/users/?userId=${connection.userId}`);
                         const chatResponse = await axios.get(`http://localhost:8800/api/chats/single/?chatId=${connection.chatId}`);
                         arr.push({ mentor: mentorResponse.data, chat: chatResponse.data });
                     })
                 );
                 setConnections(arr);
+                if (arr.length > 0) {
+                    setCurrentSelectedConnection(arr[0]);
+                }
             } catch (error) {
                 console.log(error);
             }
@@ -126,10 +124,6 @@ export default function HomePage() {
         socketRef.current.emit("initialize rooms", { id: user._id });
 
     }, [user._id]);
-
-    // useEffect(() => {
-    //     console.log(connections);
-    // }, [connections]);
 
     let tabMap = {
         "Articles": <ArticleTab />,
@@ -192,17 +186,17 @@ export default function HomePage() {
                 />
             </div>
             <div className="sidebar-right">
-                <div>
+                <div className="chatContainer">
                     <h2>My Chats</h2>
                     <ul>
                         {connections.map((connection) => (
-                            <li key={connection.mentor._id} className="mentorList" onClick={() => { handleChatSelect(connection); }}>{connection.mentor.username}</li>
+                            <li key={connection.mentor._id} className={currentSelectedConnection.mentor._id === connection.mentor._id ? "mentorListCur" : "mentorList"} onClick={() => { handleChatSelect(connection); }}>{connection.mentor.username}</li>
                         ))}
                     </ul>
                 </div>
 
                 <NavLink to="/" onClick={handleLogout} className="logoutHome">
-                    Log Out User {user.username}
+                    Log Out {user.username}
                 </NavLink>
             </div>
         </div>

@@ -1,0 +1,32 @@
+.chat-content {
+	flex-grow: 1;
+	overflow-y: auto;
+}
+
+.message__chats {
+	margin: 8px 0;
+	display: flex;
+}
+
+.message__sender {
+	background-color: var(--color-green-light);
+	max-width: 300px;
+	border-radius: 20px;
+	padding: 7px 15px;
+	margin-right: 10px;
+	margin-left: auto;
+	align-self: flex-end;
+}
+
+.message__recipient {
+	background-color: var(--color-blue-light);
+	max-width: 300px;
+	border-radius: 20px;
+	padding: 7px 15px;
+	margin-left: 10px;
+}
+
+.message__sender p,
+.message__recipient p {
+	margin: 0;
+}

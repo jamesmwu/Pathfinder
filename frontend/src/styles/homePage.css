@@ -73,8 +73,9 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
+	align-items: flex-end;
 	text-align: right;
-	/* width: 180px; */
+	max-width: 140px;
 	padding: 40px 75px;
 	border-left: 1px solid black;
 }
@@ -103,8 +104,25 @@
 	width: fit-content;
 	display: flex;
 	align-self: flex-end;
+	word-wrap: break-word;
 }
 
 .mentorList {
 	cursor: pointer;
+	padding: 10px;
+}
+
+.mentorListCur {
+	width: fit-content;
+	cursor: pointer;
+	background-color: var(--color-cream-muted);
+	border: solid 1px black;
+	padding: 10px;
+	border-radius: 20px;
+}
+
+.chatContainer {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
 }
