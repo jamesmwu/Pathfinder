@@ -60,6 +60,32 @@ export default function HomePage() {
                 { userId: mentorId }
             );
             console.log(response.data);
+
+            const fetchConnections = async () => {
+                try {
+                    const response = await axios.get(`http://localhost:8800/api/users/?userId=${user._id}`);
+                    setSelectedMajors(response.data.tags);
+                    const connections = response.data.connections;
+                    const arr = [];
+
+                    await Promise.all(
+                        connections.map(async (connection) => {
+                            const mentorResponse = await axios.get(`http://localhost:8800/api/users/?userId=${connection.userId}`);
+                            const chatResponse = await axios.get(`http://localhost:8800/api/chats/single/?chatId=${connection.chatId}`);
+                            arr.push({ mentor: mentorResponse.data, chat: chatResponse.data });
+                        })
+                    );
+                    setConnections(arr);
+                    if (arr.length > 0) {
+                        setCurrentSelectedConnection(arr[0]);
+                    }
+                } catch (error) {
+                    console.log(error);
+                }
+            };
+
+            fetchConnections();
+
         } catch (error) {
             console.log(error);
         }
