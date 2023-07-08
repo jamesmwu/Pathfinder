@@ -197,7 +197,7 @@ export default function HomePage() {
                 <button className="interests" type="button" onClick={openModal}>Select Interests</button>
             </div>
             <div className="main-content">
-                <Navbar tabs={Object.keys(tabMap)} setTab={setTab} activeTab={tab} />
+                <Navbar tabs={Object.keys(tabMap)} setTab={setTab} activeTab={tab} currentSelectedConnection={currentSelectedConnection} />
                 <div className="tab-content">
                     {tabMap[tab]}
                 </div>
