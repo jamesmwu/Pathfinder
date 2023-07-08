@@ -68,3 +68,10 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+### Packages
+This package includes the following packages, with their respective licenses:
+
+- [react-collapsible](https://github.com/glennflanagan/react-collapsible/blob/HEAD/LICENSE.md) by Glenn Flanagan, licensed under the MIT license
+- [react-masonry-css](https://github.com/paulcollett/react-masonry-css/blob/master/LICENSE) by Paul Collett, licensed under the MIT license.

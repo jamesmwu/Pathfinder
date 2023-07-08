@@ -22,7 +22,7 @@ export default function Navbar({ tabs, setTab, activeTab, currentSelectedConnect
                     </div>
                 ))}
             </div>
-            {activeTab === "Chats" && <h2>{currentSelectedConnection.mentor.username}</h2>}
+            {activeTab === "Chats" && <h2>{currentSelectedConnection?.mentor?.username}</h2>}
         </div>
     );
 }
