@@ -108,12 +108,12 @@ export default function HomePage() {
 
                 await Promise.all(
                     connections.map(async (connection) => {
+                        console.log(connection.userId);
                         const mentorResponse = await axios.get(`http://localhost:8800/api/users/?userId=${connection.userId}`);
                         const chatResponse = await axios.get(`http://localhost:8800/api/chats/single/?chatId=${connection.chatId}`);
                         arr.push({ mentor: mentorResponse.data, chat: chatResponse.data });
                     })
                 );
-
                 setConnections(arr);
             } catch (error) {
                 console.log(error);
@@ -126,6 +126,10 @@ export default function HomePage() {
         socketRef.current.emit("initialize rooms", { id: user._id });
 
     }, [user._id]);
+
+    // useEffect(() => {
+    //     console.log(connections);
+    // }, [connections]);
 
     let tabMap = {
         "Articles": <ArticleTab />,
@@ -198,7 +202,7 @@ export default function HomePage() {
                 </div>
 
                 <NavLink to="/" onClick={handleLogout} className="logoutHome">
-                    Log Out
+                    Log Out User {user.username}
                 </NavLink>
             </div>
         </div>

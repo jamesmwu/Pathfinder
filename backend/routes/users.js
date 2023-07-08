@@ -1,13 +1,13 @@
 const express = require("express");
 const User = require("../models/User");
-const Chat = require('../models/Chat')
+const Chat = require('../models/Chat');
 const bcrypt = require("bcrypt");
 const router = express.Router();
 
-const MENTEE = 1
-const MENTOR = 2
-const MENTOR_AND_MENTEE = 3
-const TAGS = ["Computer Science",  "Pre-Med", "Engineering", "Chemistry", "Psychology", "UC Berkeley", "UCLA", "Caltech"];
+const MENTEE = 1;
+const MENTOR = 2;
+const MENTOR_AND_MENTEE = 3;
+const TAGS = ["Computer Science", "Pre-Med", "Engineering", "Chemistry", "Psychology", "UC Berkeley", "UCLA", "Caltech"];
 
 // UPDATE USER
 router.put("/update-user/:id", async (req, res) => {
@@ -36,21 +36,21 @@ router.put("/update-user/:id", async (req, res) => {
 
 
 router.get('/all-tags', async (req, res) => {
-    try{
-        res.status(200).json(TAGS);
-    } catch (err) {
-        console.log(err);
-    }
+  try {
+    res.status(200).json(TAGS);
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 
 //update tags, add tags array in request body
-router.put("/update-tags/:id", async (req, res) => { 
+router.put("/update-tags/:id", async (req, res) => {
   if (req.body.userId == req.params.id) {
     try {
-      const user = await User.findById(req.body.userId)
+      const user = await User.findById(req.body.userId);
       user.tags = req.body.tags;
-      await user.save()
+      await user.save();
       res.status(200).json("tags has been updated");
     } catch (err) {
       console.log(err);
@@ -89,7 +89,7 @@ router.get("/connections/", async (req, res) => {
         return User.findById(connection.userId);
       })
     );
-    console.log(friends)
+    console.log(friends);
     let connectionsList = [];
     friends.map((friend) => {
       const { _id, username, profilePicture } = friend;
@@ -98,7 +98,7 @@ router.get("/connections/", async (req, res) => {
     });
     res.status(200).json(connectionsList);
   } catch (err) {
-    res.status(400).json(err)
+    res.status(400).json(err);
     console.log(err);
   }
 });
@@ -106,16 +106,16 @@ router.get("/connections/", async (req, res) => {
 // add connection between people, creates a chat
 router.put("/:id/add-connection", async (req, res) => {
   if (req.body.userId !== req.params.id) {
-    
+
     try {
       const user = await User.findById(req.params.id);
       const currentUser = await User.findById(req.body.userId);
       // If not already connected
       if (!user.connections.some(e => e.userId == req.body.userId)) {
-        const chat = new Chat();
-        await user.updateOne({ $push: { connections: {userId:req.body.userId, chatId:chat._id} } }); // Update both users involved using $push syntax
-        await currentUser.updateOne({ $push: { connections: {userId:req.params.id, chatId:chat._id} } }); // Update both users involved
-        await chat.save()
+        const chat = await new Chat();
+        await user.updateOne({ $push: { connections: { userId: req.body.userId, chatId: chat._id } } }); // Update both users involved using $push syntax
+        await currentUser.updateOne({ $push: { connections: { userId: req.params.id, chatId: chat._id } } }); // Update both users involved
+        await chat.save();
         res.status(200).json("connected user");
       } else {
         res.status(403).json("Already connected");
@@ -130,42 +130,42 @@ router.put("/:id/add-connection", async (req, res) => {
 
 // remove connection between people, deletes chat
 router.put("/:id/remove-connection", async (req, res) => {
-    if (req.body.userId !== req.params.id) {
-      try {
-        const user = await User.findById(req.params.id);
-        const currentUser = await User.findById(req.body.userId);
-        // If not already connected
-        if (user.connections.includes(req.body.userId)) {
-          const chatId = user.connections.findOne({userId: req.body.userId}).chatId;
-          Chat.findByIdAndDelete(chatId)
-          await user.updateOne({ $pull: { connections: {userId:req.body.userId} } }); // Update both users involved using $push syntax
-          await currentUser.updateOne({ $pull: { connections: {userId:req.params.id} } }); // Update both users involved
-          res.status(200).json("removed user");
-        } else {
-          res.status(403).json("Already removed");
-        }
-      } catch (err) {
-        console.log(err);
-      }
-    } else {
-      res.status(403).json("Can't remove self");
-    }
-  });
-
-
-  router.get("/all-mentors", async (req, res) => {
+  if (req.body.userId !== req.params.id) {
     try {
-      var mentors = await User.find({$or:[{userType: MENTOR}, {userType:MENTOR_AND_MENTEE}]})
-      var resplist = []
-      for(let i = 0; i< mentors.length; i++){
-        const { password, updatedAt, ...other } = mentors[i]._doc;
-        resplist.push(other)
+      const user = await User.findById(req.params.id);
+      const currentUser = await User.findById(req.body.userId);
+      // If not already connected
+      if (user.connections.includes(req.body.userId)) {
+        const chatId = user.connections.findOne({ userId: req.body.userId }).chatId;
+        Chat.findByIdAndDelete(chatId);
+        await user.updateOne({ $pull: { connections: { userId: req.body.userId } } }); // Update both users involved using $push syntax
+        await currentUser.updateOne({ $pull: { connections: { userId: req.params.id } } }); // Update both users involved
+        res.status(200).json("removed user");
+      } else {
+        res.status(403).json("Already removed");
       }
-      res.status(200).json(resplist);
     } catch (err) {
       console.log(err);
     }
-  });
+  } else {
+    res.status(403).json("Can't remove self");
+  }
+});
+
+
+router.get("/all-mentors", async (req, res) => {
+  try {
+    var mentors = await User.find({ $or: [{ userType: MENTOR }, { userType: MENTOR_AND_MENTEE }] });
+    var resplist = [];
+    for (let i = 0; i < mentors.length; i++) {
+      const { password, updatedAt, ...other } = mentors[i]._doc;
+      resplist.push(other);
+    }
+    res.status(200).json(resplist);
+  } catch (err) {
+    console.log(err);
+  }
+});
 
 
 // DELETE USER
