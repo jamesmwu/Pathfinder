@@ -1,9 +1,18 @@
+.navContainer {
+	display: flex;
+	margin: 17px 20px 0;
+	padding-bottom: 15px;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.navContainer > h2 {
+	margin: 0;
+}
+
 .navbar {
 	display: flex;
-	margin-top: 15px;
-	margin-left: 20px;
 	background-color: var(--color-cream);
-	padding-bottom: 20px;
 }
 
 .nav-item {

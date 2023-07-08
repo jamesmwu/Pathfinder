@@ -128,7 +128,7 @@ export default function HomePage() {
     let tabMap = {
         "Articles": <ArticleTab />,
         "Mentors": <MentorTab mentors={allMentors} handleConnect={handleConnect} />,
-        "Chats": <ChatTab connection={currentSelectedConnection} user={user} socket={socketRef.current} />
+        "Chats": <ChatTab connection={currentSelectedConnection} user={user} socket={socketRef.current} currentSelectedConnection={currentSelectedConnection} />
     };
 
     useEffect(() => {
