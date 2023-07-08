@@ -13,7 +13,7 @@ export default function Navbar({ tabs, setTab, activeTab }) {
             {tabs.map((tab) => (
                 <div className="nav-item" key={tab}>
                     <button
-                        className={`nav-button ${tab === activeTab ? "active" : "inactive"}`}
+                        className={tab === activeTab ? "active" : "inactive"}
                         onClick={() => setTab(tab)}
                     >
                         {tab}

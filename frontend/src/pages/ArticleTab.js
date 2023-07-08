@@ -9,19 +9,11 @@ export default function ArticleTab() {
             <h1>Interest name here</h1>
             <p>Interest description here. deez nuts deez nuts ligma balls lololol </p>
             <p>Interest description here. deez nuts deez nuts ligma balls lololol </p>
-
-
             <p>Interest description here. deez nuts deez nuts ligma balls lololol </p>
-
             <p>Interest description here. deez nuts deez nuts ligma balls lololol </p>
-
             <p>Interest description here. deez nuts deez nuts ligma balls lololol </p>
-
-
             <p>Interest description here. deez nuts deez nuts ligma balls lololol </p>
-
             <p>Interest description here. deez nuts deez nuts ligma balls lololol </p>
-
 
             <div className="subArticles">
                 <Collapsible trigger="Subarticle name">

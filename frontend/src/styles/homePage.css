@@ -51,7 +51,7 @@
 } */
 
 .tab-content {
-	flex: 1 1 auto; /* Allow content to grow and shrink within the main content area */
+	flex: 1 1 auto;
 	overflow-y: auto;
 	padding: 10px 50px 50px;
 }
@@ -88,13 +88,6 @@
 	background-color: var(--color-green);
 	font-weight: bold;
 	color: white;
-}
-
-.mentorContainer {
-	width: 100%;
-	display: flex;
-	flex-direction: column;
-	margin-top: 60px;
 }
 
 .mentorInd {

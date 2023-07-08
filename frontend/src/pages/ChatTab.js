@@ -1,11 +1,11 @@
-import React, { useState, useRef, useEffect } from "react";
+import React from "react";
 import ChatBody from './ChatBody';
 import ChatFooter from './ChatFooter';
 
 import "../styles/chatTab.css";
 
 export default function ChatTab({ connection, user, socket }) {
-    const lastMessageRef = useRef(null);
+    // const lastMessageRef = useRef(null);
 
     /*
     useEffect(() => {

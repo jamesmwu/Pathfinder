@@ -8,9 +8,7 @@ import ArticleTab from "./ArticleTab";
 import ChatTab from "./ChatTab";
 import axios from 'axios';
 import '../styles/homePage.css';
-
 import socketIO from "socket.io-client";
-// const socket = socketIO.connect("http://localhost:8800");
 
 export default function HomePage() {
     const connectionTemplate = { mentor: { _id: "" }, chat: {} };
@@ -18,10 +16,6 @@ export default function HomePage() {
     const [selectedMajors, setSelectedMajors] = useState([]);
     const [tags, setTags] = useState([]);
     const [allMentors, setMentors] = useState([]);
-    /*
-    const [connectedUsers, setConnectedUsers] = useState([]); //holds user json connections
-    const [connectedChats, setConnectedChats] = useState([]); //holds chat json connections
-    */
     const [connections, setConnections] = useState([]); //contain an array of objects, each object contains two fields, one for a user json and chat json.
     const [tab, setTab] = useState("Articles");
     const [currentSelectedConnection, setCurrentSelectedConnection] = useState(connectionTemplate);
@@ -72,7 +66,6 @@ export default function HomePage() {
     };
 
 
-
     const handleLogout = () => {
         logout(); // Call the logout function from the AuthContext
     };
@@ -84,7 +77,6 @@ export default function HomePage() {
         else {
             setCurrentSelectedConnection(connection);
         }
-        //console.log(currentSelectedConnection)
     };
 
     useEffect(() => {
@@ -106,20 +98,6 @@ export default function HomePage() {
                 console.log(error);
             }
         };
-        /*
-        const fetchChats = async () => {
-            const response = await axios.get(`http://localhost:8800/api/users/?userId=${user._id}`);
-            const connections = response.data.connections;
-            const arr = [];
-            await Promise.all(
-                connections.map(async (connection) => {
-                    const mentorResponse = await axios.get(`http://localhost:8800/api/chats/single/?chatId=${connection.chatId}`);
-                    arr.push(mentorResponse.data);
-                })
-            );
-            setConnectedChats(arr)
-        }
-        */
 
         const fetchConnections = async () => {
             try {
@@ -149,10 +127,6 @@ export default function HomePage() {
 
     }, [user._id]);
 
-    // useEffect(() => {
-    //     console.log(connections);
-    // }, [connections]);
-
     let tabMap = {
         "Articles": <ArticleTab />,
         "Mentors": <MentorTab mentors={allMentors} handleConnect={handleConnect} />,
@@ -161,11 +135,6 @@ export default function HomePage() {
 
     useEffect(() => {
         function addMessage(data, to) {
-            console.log(connections); //prints original array (without edits)
-            // let updated = connections.map((connection) => connection.mentor._id === data.sender ? {
-            //     ...connection,
-            //     chat: { ...connection.chat, messages: [...connection.chat.messages, data] }
-            // } : connection);
             let arr = [];
             for (let i = 0; i < connections.length; i++) {
                 //Push connection if the chat is the one that got updated
@@ -173,16 +142,13 @@ export default function HomePage() {
                     let updated = { ...connections[i] };
                     updated.chat.messages.push(data);
                     arr.push(updated);
-                    // console.log(updated);
                 }
                 else {
                     arr.push(connections[i]);
-                    // console.log(connections[i]);
                 }
             }
 
             setConnections(arr);
-            console.log(connections); //prints updated array
         }
 
         socketRef.current.on("private message", addMessage);
@@ -191,10 +157,6 @@ export default function HomePage() {
             socketRef.current.off('private message', addMessage);
         };
     }, [connections]);
-
-    // useEffect(() => {
-    //     console.log(connections);
-    // }, [connections]);
 
     return (
         <div className="home-page">

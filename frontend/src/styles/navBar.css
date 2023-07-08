@@ -10,7 +10,7 @@
 	margin-right: 30px;
 }
 
-.active {
+.nav-item .active {
 	background-color: var(--color-cream-muted);
 	color: black;
 	border: solid 1px black;

@@ -1,0 +1,112 @@
+.my-masonry-grid {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	margin-left: 0;
+	width: auto;
+	max-width: 980px;
+	margin: auto;
+}
+.my-masonry-grid_column {
+	padding-left: 15px;
+	background-clip: padding-box;
+}
+
+.my-masonry-grid_column > div {
+	margin-bottom: 15px;
+}
+.item img {
+	max-width: 100%;
+	height: auto;
+}
+
+.alignleft {
+	float: left;
+	margin-inline-start: 0;
+	margin-inline-end: 10px;
+	border-bottom: 10px solid #eee0;
+}
+.card {
+	vertical-align: top;
+	background: #fff;
+	color: #013161;
+	padding: 5%;
+	font-family: sans-serif;
+	text-align: center;
+	font-size: 0.95em;
+	border-radius: 10px;
+	min-height: 40px;
+	transform: rotateY(90deg);
+}
+
+/* .cat-2 h2,
+.cat-2 strong {
+	color: #8bc34a;
+}
+.cat-3 h2,
+.cat-3 strong {
+	color: #513431;
+}
+.card.cat-2.tile_0 {
+	background: #23584e;
+	color: #fff;
+}
+.card.cat-2.tile_3 {
+	background: #6eab27;
+	color: #fff;
+}
+.cat-2.tile_3 h2,
+.cat-2.tile_3 strong,
+.cat-2.tile_0 h2,
+.cat-2.tile_0 strong {
+	color: #fff !important;
+}
+
+.card.cat-3.tile_0 {
+	background: #42485c;
+	color: #fff;
+}
+.card.cat-3.tile_3 {
+	background: #815e58;
+	color: #fff;
+}
+.cat-3.tile_3 h2,
+.cat-3.tile_3 strong,
+.cat-3.tile_0 h2,
+.cat-3.tile_0 strong {
+	color: #fff;
+}
+.cat-3 pre a {
+	color: #fff;
+	padding: 4px 13px;
+	background: #ac9591;
+	border-radius: 15px;
+	font-family: unset;
+	font-size: 12px;
+}
+.cat-3 pre a:hover {
+	background: #513431;
+} */
+
+ul {
+	list-style-type: none;
+	padding-inline-start: 0;
+	margin-block-start: 0;
+}
+li {
+	margin: 0;
+}
+
+@media screen and (max-width: 580px) {
+	.container {
+		display: table;
+		margin: 0 auto 100px auto;
+		width: 80%;
+	}
+	.item {
+		width: 90%;
+		max-width: 300px;
+		margin: auto;
+		padding: 0 0 15px;
+	}
+}
