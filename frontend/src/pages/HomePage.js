@@ -189,7 +189,7 @@ export default function HomePage() {
                     <h2>My Interests</h2>
                     <ul>
                         {selectedMajors.map((major) => (
-                            <li key={major}>{major}</li>
+                            <li key={major} className="majorList">{major}</li>
                         ))}
                     </ul>
                 </div>
@@ -213,7 +213,7 @@ export default function HomePage() {
             </div>
             <div className="sidebar-right">
                 <div className="chatContainer">
-                    <h2>My Chats</h2>
+                    <h2>Connections</h2>
                     <ul>
                         {connections.map((connection) => (
                             <li key={connection.mentor._id} className={currentSelectedConnection.mentor._id === connection.mentor._id && tab === "Chats" ? "mentorListCur" : "mentorList"} onClick={() => { handleChatSelect(connection); }}>{connection.mentor.username}</li>
