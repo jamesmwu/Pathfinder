@@ -8,6 +8,10 @@ export default function ChatTab({ connection, user, socket, scrollToBottom }) {
     const isScrolledToBottomRef = useRef(true);
 
     useEffect(() => {
+        socket.emit("read message", { roomId: connection.chat._id });
+    }, []);
+
+    useEffect(() => {
         // Scroll to the bottom when messages update
         if (chatContentRef.current !== null && isScrolledToBottomRef.current) {
             chatContentRef.current.scrollTop = chatContentRef.current.scrollHeight;

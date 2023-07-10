@@ -84,7 +84,7 @@ export default function HomePage() {
                     for (const connection of connections) {
                         const mentorResponse = await axios.get(`http://localhost:8800/api/users/?userId=${connection.userId}`);
                         const chatResponse = await axios.get(`http://localhost:8800/api/chats/single/?chatId=${connection.chatId}`);
-                        arr.push({ mentor: mentorResponse.data, chat: chatResponse.data });
+                        arr.push({ mentor: mentorResponse.data, chat: chatResponse.data, newMessage: connection.newMessage });
                     }
 
                     setConnections(arr);
@@ -142,16 +142,16 @@ export default function HomePage() {
                 const connections = response.data.connections;
                 const arr = [];
 
-                await Promise.all(
-                    connections.map(async (connection) => {
-                        console.log(connection.userId);
-                        const mentorResponse = await axios.get(`http://localhost:8800/api/users/?userId=${connection.userId}`);
-                        const chatResponse = await axios.get(`http://localhost:8800/api/chats/single/?chatId=${connection.chatId}`);
-                        arr.push({ mentor: mentorResponse.data, chat: chatResponse.data, newMessage: connection.newMessage });
-                    })
-                );
+                for (const connection of connections) {
+                    const mentorResponse = await axios.get(`http://localhost:8800/api/users/?userId=${connection.userId}`);
+                    const chatResponse = await axios.get(`http://localhost:8800/api/chats/single/?chatId=${connection.chatId}`);
+                    arr.push({ mentor: mentorResponse.data, chat: chatResponse.data, newMessage: connection.newMessage });
+                }
+
                 setConnections(arr);
-                console.log(connections);
+                if (arr.length > 0) {
+                    setCurrentSelectedConnection(arr[0]);
+                }
             } catch (error) {
                 console.log(error);
             }
