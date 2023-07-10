@@ -21,6 +21,17 @@ export default function HomePage() {
     const [currentSelectedConnection, setCurrentSelectedConnection] = useState(connectionTemplate);
 
     const { user, logout } = useContext(AuthContext);
+    const chatContentRef = useRef(null);
+
+    const scrollToBottom = () => {
+        if (chatContentRef.current) {
+            chatContentRef.current.scrollTop = chatContentRef.current.scrollHeight;
+        }
+    };
+
+    useEffect(() => {
+        scrollToBottom();
+    }, [connections]);
 
     const socketRef = useRef();
     useEffect(() => {
@@ -55,11 +66,40 @@ export default function HomePage() {
     const handleConnect = async (mentorId) => {
         try {
             const userId = user._id;
-            const response = await axios.put(
+            await axios.put(
                 `http://localhost:8800/api/users/${userId}/add-connection`,
                 { userId: mentorId }
-            );
-            console.log(response.data);
+            ).then((response) => {
+                socketRef.current.emit("initialize rooms", { id: user._id });
+                console.log(response.data);
+            });
+
+            const fetchConnections = async () => {
+                try {
+                    const response = await axios.get(`http://localhost:8800/api/users/?userId=${user._id}`);
+                    setSelectedMajors(response.data.tags);
+                    const connections = response.data.connections;
+                    const arr = [];
+
+                    for (const connection of connections) {
+                        const mentorResponse = await axios.get(`http://localhost:8800/api/users/?userId=${connection.userId}`);
+                        const chatResponse = await axios.get(`http://localhost:8800/api/chats/single/?chatId=${connection.chatId}`);
+                        arr.push({ mentor: mentorResponse.data, chat: chatResponse.data });
+                    }
+
+                    setConnections(arr);
+                    if (arr.length > 0) {
+                        setCurrentSelectedConnection(arr[0]);
+                    }
+                } catch (error) {
+                    console.log(error);
+                }
+            };
+
+
+            fetchConnections();
+
+
         } catch (error) {
             console.log(error);
         }
@@ -71,12 +111,8 @@ export default function HomePage() {
     };
 
     const handleChatSelect = (connection) => {
-        if (connection.mentor._id === currentSelectedConnection.mentor._id) {
-            setCurrentSelectedConnection(connectionTemplate);
-        }
-        else {
-            setCurrentSelectedConnection(connection);
-        }
+        setCurrentSelectedConnection(connection);
+        setTab("Chats");
     };
 
     useEffect(() => {
@@ -121,6 +157,7 @@ export default function HomePage() {
             }
         };
 
+
         fetchConnections();
         fetchTags();
         fetchMentors();
@@ -128,14 +165,17 @@ export default function HomePage() {
 
     }, [user._id]);
 
-    // useEffect(() => {
-    //     console.log(connections);
-    // }, [connections]);
-
     let tabMap = {
         "Articles": <ArticleTab />,
         "Mentors": <MentorTab mentors={allMentors} handleConnect={handleConnect} />,
-        "Chats": <ChatTab connection={currentSelectedConnection} user={user} socket={socketRef.current} />
+        "Chats": <ChatTab
+            connection={currentSelectedConnection}
+            user={user}
+            socket={socketRef.current}
+            currentSelectedConnection={currentSelectedConnection}
+            chatContentRef={chatContentRef}
+            scrollToBottom={scrollToBottom}
+        />
     };
 
     useEffect(() => {
@@ -153,7 +193,6 @@ export default function HomePage() {
                     arr.push(connections[i]);
                 }
             }
-
             setConnections(arr);
         }
 
@@ -171,7 +210,7 @@ export default function HomePage() {
                     <h2>My Interests</h2>
                     <ul>
                         {selectedMajors.map((major) => (
-                            <li key={major}>{major}</li>
+                            <li key={major} className="majorList">{major}</li>
                         ))}
                     </ul>
                 </div>
@@ -179,7 +218,7 @@ export default function HomePage() {
                 <button className="interests" type="button" onClick={openModal}>Select Interests</button>
             </div>
             <div className="main-content">
-                <Navbar tabs={Object.keys(tabMap)} setTab={setTab} activeTab={tab} />
+                <Navbar tabs={Object.keys(tabMap)} setTab={setTab} activeTab={tab} currentSelectedConnection={currentSelectedConnection} />
                 <div className="tab-content">
                     {tabMap[tab]}
                 </div>
@@ -194,17 +233,17 @@ export default function HomePage() {
                 />
             </div>
             <div className="sidebar-right">
-                <div>
-                    <h2>My Chats</h2>
+                <div className="chatContainer">
+                    <h2>Connections</h2>
                     <ul>
                         {connections.map((connection) => (
-                            <li key={connection.mentor._id} className="mentorList" onClick={() => { handleChatSelect(connection); }}>{connection.mentor.username}</li>
+                            <li key={connection.mentor._id} className={currentSelectedConnection.mentor._id === connection.mentor._id && tab === "Chats" ? "mentorListCur" : "mentorList"} onClick={() => { handleChatSelect(connection); }}>{connection.mentor.username}</li>
                         ))}
                     </ul>
                 </div>
 
                 <NavLink to="/" onClick={handleLogout} className="logoutHome">
-                    Log Out User {user.username}
+                    Log Out {user.username}
                 </NavLink>
             </div>
         </div>

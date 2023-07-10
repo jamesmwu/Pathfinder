@@ -1,7 +1,9 @@
-import { useRef } from "react";
+import { useRef, useContext } from "react";
 import "../styles/registerPage.css";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
+import { loginCall } from "../context/loginCall";
 
 export default function Register() {
     const username = useRef();
@@ -9,6 +11,8 @@ export default function Register() {
     const password = useRef();
     const passwordAgain = useRef();
     const navigate = useNavigate();
+
+    const { isFetching, dispatch } = useContext(AuthContext);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -22,7 +26,18 @@ export default function Register() {
             };
             try {
                 await axios.post("http://localhost:8800/api/auth/register", user);
-                navigate("/login");
+                loginCall(
+                    { email: email.current.value, password: password.current.value },
+                    dispatch
+                )
+                    .then((loginStatus) => {
+                        if (loginStatus === "LOGIN_SUCCESS") {
+                            navigate("/");
+                        }
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
             } catch (error) {
                 console.log(error);
             }
@@ -40,7 +55,7 @@ export default function Register() {
                     <form className="registerBox" onSubmit={handleSubmit}>
                         <div className="registerInputWrapper">
                             <input
-                                placeholder="Username"
+                                placeholder="Name"
                                 required
                                 ref={username}
                                 className="loginInput"
@@ -70,7 +85,7 @@ export default function Register() {
                         </div>
                         <div className="registerButtonWrapper">
                             <button className="loginButton" type="submit">
-                                Sign up
+                                {isFetching ? "Loading..." : "Sign Up"}
                             </button>
                             <Link to="/login" style={{ textDecoration: "none", marginTop: "15px" }}>
                                 <button className="loginRegisterButton">Log in with an Existing Account</button>

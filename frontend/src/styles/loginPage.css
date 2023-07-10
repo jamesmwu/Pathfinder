@@ -31,7 +31,7 @@
 .loginLogo {
 	font-size: 50px;
 	font-weight: 800;
-	color: var(--color-light-green);
+	color: var(--color-yellow);
 	margin-bottom: 10px;
 }
 
@@ -63,15 +63,22 @@
 }
 
 .loginButton {
+	transition: 0.25s;
 	height: 50px;
 	border-radius: 10px;
 	border: none;
-	background-color: var(--color-green);
+	background-color: var(--color-blue-green);
 	color: white;
 	font-size: 20px;
 	font-weight: 500;
 	cursor: pointer;
 	width: 100%;
+}
+
+.loginButton:hover,
+.loginButton:focus {
+	box-shadow: 0 0.5em 0.5em -0.4em var(--color-blue-green);
+	transform: translateY(-0.15em);
 }
 
 .loginForgot {
@@ -80,16 +87,23 @@
 }
 
 .loginRegisterButton {
+	transition: 0.25s;
 	width: 100%;
 	align-self: center;
 	height: 50px;
 	border-radius: 10px;
 	border: none;
-	background-color: var(--color-gray);
+	background-color: var(--color-red-accent);
 	color: white;
 	font-size: 20px;
 	font-weight: 500;
 	cursor: pointer;
+}
+
+.loginRegisterButton:hover,
+.loginRegisterButton:focus {
+	box-shadow: 0 0.5em 0.5em -0.4em var(--color-red-accent);
+	transform: translateY(-0.15em);
 }
 
 .loginButtonWrapper {

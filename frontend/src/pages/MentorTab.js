@@ -5,7 +5,7 @@ import Masonry from "react-masonry-css"; //DOCS: https://github.com/paulcollett/
 import '../styles/mentorTab.css';
 import Mentor from "../components/Mentor";
 
-function MentorTab({ mentors, handleConnect }) {
+function MentorTab({ handleConnect }) {
     const [isOpen, setIsOpen] = useState(false);
     const [allMentors, setMentors] = useState([]);
 
@@ -57,7 +57,7 @@ function MentorTab({ mentors, handleConnect }) {
                         transition={{
                             rotateY: {
                                 duration: duration,
-                                delay: random,
+                                // delay: random,
                                 ease: "easeInOut"
                             },
                             default: { ease: "easeInOut" }
