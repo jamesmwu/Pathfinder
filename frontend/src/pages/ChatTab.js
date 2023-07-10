@@ -26,7 +26,7 @@ export default function ChatTab({ connection, user, socket }) {
     return (
         <div className="chat-tab">
             <ChatBody messages={connection.chat.messages} user={user} />
-            <ChatFooter socket={socket} chatId={connection.chat._id} />
+            <ChatFooter socket={socket} chatId={connection.chat._id} recipientId={connection.mentor._id}/>
         </div>
     );
 }

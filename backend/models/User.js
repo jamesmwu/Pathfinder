@@ -29,7 +29,7 @@ const UserSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
-    connections:[{ userId: String, chatId:String}],
+    connections:[{ userId: String, chatId:String, newMessage: Boolean}],
     description: {
       type: String,
       max: 50,

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import "../styles/chatTab.css";
 
-const ChatFooter = ({ socket, chatId }) => {
+const ChatFooter = ({ socket, chatId, recipientId }) => {
   const [message, setMessage] = useState("");
 
   const handleSendMessage = (e) => {
@@ -9,7 +9,7 @@ const ChatFooter = ({ socket, chatId }) => {
     if (message.trim()) {
       // console.log(message);
       // console.log(chatId);
-      socket.emit("private message", { content: message, to: chatId });
+      socket.emit("private message", { content: message, roomId: chatId, recipientId: recipientId});
     }
     setMessage("");
   };
