@@ -29,4 +29,5 @@
 .message__sender p,
 .message__recipient p {
 	margin: 0;
+	word-wrap: break-word;
 }
