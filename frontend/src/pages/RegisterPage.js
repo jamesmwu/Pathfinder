@@ -12,7 +12,7 @@ export default function Register() {
     const passwordAgain = useRef();
     const navigate = useNavigate();
 
-    const { dispatch } = useContext(AuthContext);
+    const { isFetching, dispatch } = useContext(AuthContext);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -85,7 +85,7 @@ export default function Register() {
                         </div>
                         <div className="registerButtonWrapper">
                             <button className="loginButton" type="submit">
-                                Sign up
+                                {isFetching ? "Loading..." : "Sign Up"}
                             </button>
                             <Link to="/login" style={{ textDecoration: "none", marginTop: "15px" }}>
                                 <button className="loginRegisterButton">Log in with an Existing Account</button>
