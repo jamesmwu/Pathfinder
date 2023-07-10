@@ -11,6 +11,7 @@ const ChatBody = ({ messages, user, chatContentRef, scrollToBottom }) => {
         }
     }, [messages, scrollToBottom]);
 
+
     if (messages === undefined || messages === null || messages.length === 0) {
         return (
             <div className="chat-content" ref={chatContentRef}>

@@ -66,11 +66,13 @@ export default function HomePage() {
     const handleConnect = async (mentorId) => {
         try {
             const userId = user._id;
-            const response = await axios.put(
+            await axios.put(
                 `http://localhost:8800/api/users/${userId}/add-connection`,
                 { userId: mentorId }
-            );
-            console.log(response.data);
+            ).then((response) => {
+                socketRef.current.emit("initialize rooms", { id: user._id });
+                console.log(response.data);
+            });
 
             const fetchConnections = async () => {
                 try {
@@ -96,6 +98,7 @@ export default function HomePage() {
 
 
             fetchConnections();
+
 
         } catch (error) {
             console.log(error);
@@ -189,7 +192,6 @@ export default function HomePage() {
                     arr.push(connections[i]);
                 }
             }
-
             setConnections(arr);
         }
 

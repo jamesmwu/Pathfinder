@@ -114,6 +114,10 @@
 	padding: 10px;
 }
 
+.mentorList:hover {
+	text-decoration: underline;
+}
+
 .majorList {
 	cursor: pointer;
 	padding: 10px 0;
