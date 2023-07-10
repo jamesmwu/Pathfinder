@@ -33,10 +33,6 @@ export default function HomePage() {
         scrollToBottom();
     }, [connections]);
 
-    useEffect(() => {
-        console.log(connections);
-    }, [connections]);
-
     const socketRef = useRef();
     useEffect(() => {
         socketRef.current = socketIO.connect("http://localhost:8800");

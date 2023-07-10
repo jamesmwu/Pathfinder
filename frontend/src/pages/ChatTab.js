@@ -9,7 +9,7 @@ export default function ChatTab({ connection, user, socket, scrollToBottom }) {
 
     useEffect(() => {
         // Scroll to the bottom when messages update
-        if (isScrolledToBottomRef.current) {
+        if (chatContentRef.current !== null && isScrolledToBottomRef.current) {
             chatContentRef.current.scrollTop = chatContentRef.current.scrollHeight;
         }
     }, [connection.chat.messages]);
