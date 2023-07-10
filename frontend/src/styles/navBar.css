@@ -20,8 +20,8 @@
 }
 
 .nav-item .active {
-	background-color: var(--color-cream-muted);
-	color: black;
+	background-color: var(--color-blue);
+	color: white;
 	border: solid 1px black;
 	border-radius: 20px;
 }
@@ -31,4 +31,8 @@
 	color: black;
 	border: solid 1px black;
 	border-radius: 20px;
+}
+
+.inactive:hover {
+	background-color: var(--color-cream-muted);
 }

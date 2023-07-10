@@ -29,7 +29,7 @@ export default function Modal({ isOpen, majors, curSelectedMajors, onClose, onSu
   return (
     <div className="modal">
       <div className="modal-content">
-        <h2>Select Majors</h2>
+        <h1>Select Interests</h1>
         <form onSubmit={handleSubmit}>
           {majors.map((major) => (
             <div key={major}>
@@ -44,9 +44,9 @@ export default function Modal({ isOpen, majors, curSelectedMajors, onClose, onSu
               </label>
             </div>
           ))}
-          <button type="submit">Confirm</button>
         </form>
-        <button type='button' onClick={onClose}>Close</button>
+        <button type="submit">Confirm</button>
+        <button type='button' className="modalClose" onClick={onClose}>Close</button>
       </div>
     </div>
   );

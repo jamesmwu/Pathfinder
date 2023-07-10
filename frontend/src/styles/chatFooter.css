@@ -20,7 +20,7 @@
 .chat-bar button {
 	height: 40px;
 	padding: 0 15px;
-	background-color: var(--color-green);
+	background-color: var(--color-coral);
 	color: #fff;
 	border: none;
 	border-radius: 5px;
@@ -35,5 +35,5 @@
 	justify-content: space-between;
 }
 .sendBtn:hover {
-	background-color: rgb(129, 201, 129);
+	background-color: var(--color-coral-muted);
 }
