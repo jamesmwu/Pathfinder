@@ -1,10 +1,19 @@
-import React from 'react';
-import "../styles/chatBody.css";
+import React, { useEffect, useRef } from 'react';
+import '../styles/chatBody.css';
 
-const ChatBody = ({ messages, user }) => {
+const ChatBody = ({ messages, user, chatContentRef, scrollToBottom }) => {
+    const lastMessageRef = useRef(null);
+
+    useEffect(() => {
+        if (lastMessageRef.current) {
+            lastMessageRef.current.scrollIntoView({ behavior: 'smooth' });
+            scrollToBottom();
+        }
+    }, [messages, scrollToBottom]);
+
     return (
-        <div className="chat-content">
-            {messages.map((message) =>
+        <div className="chat-content" ref={chatContentRef}>
+            {messages.map((message, index) =>
                 message.sender === user._id ? (
                     <div key={message._id} className="message__chats">
                         <div className="message__sender">
@@ -19,6 +28,7 @@ const ChatBody = ({ messages, user }) => {
                     </div>
                 )
             )}
+            <div ref={lastMessageRef} />
         </div>
     );
 };

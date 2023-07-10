@@ -40,7 +40,7 @@ export default function Register() {
                     <form className="registerBox" onSubmit={handleSubmit}>
                         <div className="registerInputWrapper">
                             <input
-                                placeholder="Username"
+                                placeholder="Name"
                                 required
                                 ref={username}
                                 className="loginInput"

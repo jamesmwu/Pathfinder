@@ -21,6 +21,17 @@ export default function HomePage() {
     const [currentSelectedConnection, setCurrentSelectedConnection] = useState(connectionTemplate);
 
     const { user, logout } = useContext(AuthContext);
+    const chatContentRef = useRef(null);
+
+    const scrollToBottom = () => {
+        if (chatContentRef.current) {
+            chatContentRef.current.scrollTop = chatContentRef.current.scrollHeight;
+        }
+    };
+
+    useEffect(() => {
+        scrollToBottom();
+    }, [connections]);
 
     const socketRef = useRef();
     useEffect(() => {
@@ -154,7 +165,14 @@ export default function HomePage() {
     let tabMap = {
         "Articles": <ArticleTab />,
         "Mentors": <MentorTab mentors={allMentors} handleConnect={handleConnect} />,
-        "Chats": <ChatTab connection={currentSelectedConnection} user={user} socket={socketRef.current} currentSelectedConnection={currentSelectedConnection} />
+        "Chats": <ChatTab
+            connection={currentSelectedConnection}
+            user={user}
+            socket={socketRef.current}
+            currentSelectedConnection={currentSelectedConnection}
+            chatContentRef={chatContentRef}
+            scrollToBottom={scrollToBottom}
+        />
     };
 
     useEffect(() => {
