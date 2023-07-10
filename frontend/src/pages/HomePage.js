@@ -33,6 +33,10 @@ export default function HomePage() {
         scrollToBottom();
     }, [connections]);
 
+    useEffect(() => {
+        console.log(connections);
+    }, [connections]);
+
     const socketRef = useRef();
     useEffect(() => {
         socketRef.current = socketIO.connect("http://localhost:8800");
@@ -79,13 +83,12 @@ export default function HomePage() {
                     const connections = response.data.connections;
                     const arr = [];
 
-                    await Promise.all(
-                        connections.map(async (connection) => {
-                            const mentorResponse = await axios.get(`http://localhost:8800/api/users/?userId=${connection.userId}`);
-                            const chatResponse = await axios.get(`http://localhost:8800/api/chats/single/?chatId=${connection.chatId}`);
-                            arr.push({ mentor: mentorResponse.data, chat: chatResponse.data });
-                        })
-                    );
+                    for (const connection of connections) {
+                        const mentorResponse = await axios.get(`http://localhost:8800/api/users/?userId=${connection.userId}`);
+                        const chatResponse = await axios.get(`http://localhost:8800/api/chats/single/?chatId=${connection.chatId}`);
+                        arr.push({ mentor: mentorResponse.data, chat: chatResponse.data });
+                    }
+
                     setConnections(arr);
                     if (arr.length > 0) {
                         setCurrentSelectedConnection(arr[0]);
@@ -94,6 +97,7 @@ export default function HomePage() {
                     console.log(error);
                 }
             };
+
 
             fetchConnections();
 
@@ -139,13 +143,12 @@ export default function HomePage() {
                 const connections = response.data.connections;
                 const arr = [];
 
-                await Promise.all(
-                    connections.map(async (connection) => {
-                        const mentorResponse = await axios.get(`http://localhost:8800/api/users/?userId=${connection.userId}`);
-                        const chatResponse = await axios.get(`http://localhost:8800/api/chats/single/?chatId=${connection.chatId}`);
-                        arr.push({ mentor: mentorResponse.data, chat: chatResponse.data });
-                    })
-                );
+                for (const connection of connections) {
+                    const mentorResponse = await axios.get(`http://localhost:8800/api/users/?userId=${connection.userId}`);
+                    const chatResponse = await axios.get(`http://localhost:8800/api/chats/single/?chatId=${connection.chatId}`);
+                    arr.push({ mentor: mentorResponse.data, chat: chatResponse.data });
+                }
+
                 setConnections(arr);
                 if (arr.length > 0) {
                     setCurrentSelectedConnection(arr[0]);
@@ -154,6 +157,7 @@ export default function HomePage() {
                 console.log(error);
             }
         };
+
 
         fetchConnections();
         fetchTags();

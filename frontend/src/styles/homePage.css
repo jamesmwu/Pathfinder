@@ -98,6 +98,17 @@
 	word-wrap: break-word;
 }
 
+.prompts {
+	text-align: left;
+	margin-top: 40px;
+}
+.prompts li {
+	margin-bottom: 40px;
+}
+.prompts h3 {
+	text-align: center;
+}
+
 .mentorList {
 	cursor: pointer;
 	padding: 10px;

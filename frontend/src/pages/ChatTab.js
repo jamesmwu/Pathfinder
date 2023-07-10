@@ -14,11 +14,6 @@ export default function ChatTab({ connection, user, socket, scrollToBottom }) {
         }
     }, [connection.chat.messages]);
 
-    const handleScroll = () => {
-        const { scrollTop, clientHeight, scrollHeight } = chatContentRef.current;
-        isScrolledToBottomRef.current = scrollTop + clientHeight >= scrollHeight;
-    };
-
     if (connection === undefined || connection === null || connection.mentor._id === "") {
         return (
             <div>
