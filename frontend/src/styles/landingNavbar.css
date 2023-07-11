@@ -1,0 +1,52 @@
+.landingNav {
+	display: flex;
+	justify-content: flex-end;
+	padding: 40px 60px 0px;
+	background-color: var(--color-blue);
+}
+
+.landingNavButton {
+	background-color: transparent;
+	font-size: x-large;
+	font-weight: bold;
+	margin-left: 50px;
+	cursor: pointer;
+	position: relative;
+	color: white;
+}
+
+.landingNavButton::before {
+	content: '';
+	position: absolute;
+	bottom: -5px;
+	left: 0;
+	width: 0;
+	height: 2px;
+	background-color: var(--color-yellow);
+	transition: width 0.3s ease-in-out;
+}
+
+.landingNavButton:hover::before {
+	width: 100%;
+}
+
+.landingNavButton:hover {
+	color: var(--color-yellow);
+	transition: color 0.3s ease-in-out;
+}
+
+.landingNavButton:link {
+	text-decoration: none;
+}
+
+.landingNavButton:visited {
+	text-decoration: none;
+}
+
+.landingNavButton:hover {
+	text-decoration: none;
+}
+
+.landingNavButton:active {
+	text-decoration: none;
+}
