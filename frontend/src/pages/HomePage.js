@@ -35,7 +35,7 @@ export default function HomePage() {
 
     const socketRef = useRef();
     useEffect(() => {
-        socketRef.current = socketIO.connect("http://localhost:8800");
+        socketRef.current = socketIO.connect(`http://localhost:8800?userId=${user._id}`);
         return () => socketRef.current.disconnect();
     }, []);
 
@@ -84,7 +84,7 @@ export default function HomePage() {
                     for (const connection of connections) {
                         const mentorResponse = await axios.get(`http://localhost:8800/api/users/?userId=${connection.userId}`);
                         const chatResponse = await axios.get(`http://localhost:8800/api/chats/single/?chatId=${connection.chatId}`);
-                        arr.push({ mentor: mentorResponse.data, chat: chatResponse.data });
+                        arr.push({ mentor: mentorResponse.data, chat: chatResponse.data, newMessage: connection.newMessage });
                     }
 
                     setConnections(arr);
@@ -145,7 +145,7 @@ export default function HomePage() {
                 for (const connection of connections) {
                     const mentorResponse = await axios.get(`http://localhost:8800/api/users/?userId=${connection.userId}`);
                     const chatResponse = await axios.get(`http://localhost:8800/api/chats/single/?chatId=${connection.chatId}`);
-                    arr.push({ mentor: mentorResponse.data, chat: chatResponse.data });
+                    arr.push({ mentor: mentorResponse.data, chat: chatResponse.data, newMessage: connection.newMessage });
                 }
 
                 setConnections(arr);
@@ -161,7 +161,7 @@ export default function HomePage() {
         fetchConnections();
         fetchTags();
         fetchMentors();
-        socketRef.current.emit("initialize rooms", { id: user._id });
+        //socketRef.current.emit("initialize rooms", { id: user._id });
 
     }, [user._id]);
 
@@ -187,6 +187,7 @@ export default function HomePage() {
                     let updated = { ...connections[i] };
                     updated.chat.messages.push(data);
                     arr.push(updated);
+                    connections.newMessage = true;
                 }
                 else {
                     arr.push(connections[i]);
