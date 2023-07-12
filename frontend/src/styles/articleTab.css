@@ -12,6 +12,12 @@
 	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
+/* .article h3,
+.article h4 {
+	margin-bottom: 0;
+	padding-bottom: 0;
+} */
+
 .subArticles {
 	margin: 30px 0;
 	border-bottom: 1px solid var(--color-cream-muted);

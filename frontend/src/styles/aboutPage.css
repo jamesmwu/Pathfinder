@@ -17,3 +17,8 @@
 .aboutInfo h1 {
 	color: var(--color-yellow);
 }
+
+.aboutInfo p {
+	font-size: 20px;
+	line-height: 30px;
+}
