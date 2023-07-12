@@ -34,7 +34,7 @@ export default function ChatTab({ connection, user, socket, scrollToBottom }) {
                 user={user}
                 scrollToBottom={scrollToBottom}
             />
-            <ChatFooter socket={socket} chatId={connection.chat._id} />
+            <ChatFooter socket={socket} chatId={connection.chat._id} recipientId={connection.mentor._id} />
         </div>
     );
 }
