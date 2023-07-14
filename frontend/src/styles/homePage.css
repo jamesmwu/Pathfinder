@@ -146,6 +146,13 @@
 	margin-bottom: 10px;
 }
 
+.mentorListNewMsg {
+	cursor: pointer;
+	padding: 10px;
+	margin-bottom: 10px;
+	background-color: red;
+}
+
 .chatContainer {
 	display: flex;
 	flex-direction: column;

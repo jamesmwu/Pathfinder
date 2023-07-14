@@ -17,14 +17,14 @@ export default function Modal({ isOpen, majors, curSelectedMajors, onClose, onSu
     }
   };
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    onSubmit(selectedMajors);
+  };
+
   if (!isOpen) {
     return null;
   }
-
-  const handleSubmit = (event) => {
-    event.preventDefault(); // Prevent default form submission
-    onSubmit(selectedMajors);
-  };
 
   return (
     <div className="modal">
@@ -44,8 +44,8 @@ export default function Modal({ isOpen, majors, curSelectedMajors, onClose, onSu
               </label>
             </div>
           ))}
+          <button type="submit">Confirm</button>
         </form>
-        <button type="submit">Confirm</button>
         <button type='button' className="modalClose" onClick={onClose}>Close</button>
       </div>
     </div>

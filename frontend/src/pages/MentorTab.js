@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { motion } from "framer-motion";
-import Masonry from "react-masonry-css"; //DOCS: https://github.com/paulcollett/react-masonry-css, GOOD EXAMPLE: https://codesandbox.io/s/test-diverse-89ydun?resolutionWidth=963&resolutionHeight=675&file=/src/App.js:117-176
+import Masonry from "react-masonry-css";
 import '../styles/mentorTab.css';
 import Mentor from "../components/Mentor";
 
-function MentorTab({ handleConnect }) {
+function MentorTab({ selectedMajors, handleConnect }) {
     const [isOpen, setIsOpen] = useState(false);
     const [allMentors, setMentors] = useState([]);
 
@@ -18,26 +18,26 @@ function MentorTab({ handleConnect }) {
     useEffect(() => {
         const fetchMentors = async () => {
             try {
-                axios.get('http://localhost:8800/api/users/all-mentors').then((response) => {
-                    setMentors(response.data);
-                })
-                    .then(() => {
-                        setIsOpen(true);
-                    });
+                console.log(selectedMajors);
+                const response = await axios.get('http://localhost:8800/api/users/all-mentors', {
+                    data: { tags: selectedMajors }
+                });
+                setMentors(response.data);
+                console.log(response.data);
+                setIsOpen(true);
             } catch (error) {
                 console.log(error);
             }
         };
-        fetchMentors();
 
-    }, []);
+        fetchMentors();
+    }, [selectedMajors]);
 
     const duration = 0.5;
     const variants = {
         open: { rotateY: 0 },
         closed: { rotateY: 90 }
     };
-
 
     function MentorItem({ mentorId, name, about }) {
         let random = Math.floor(Math.random() * (2 - 1 + 1) + 1);
@@ -57,7 +57,6 @@ function MentorTab({ handleConnect }) {
                         transition={{
                             rotateY: {
                                 duration: duration,
-                                // delay: random,
                                 ease: "easeInOut"
                             },
                             default: { ease: "easeInOut" }
@@ -76,8 +75,6 @@ function MentorTab({ handleConnect }) {
         }
     }
 
-
-
     return (
         <div>
             <Masonry
@@ -90,7 +87,6 @@ function MentorTab({ handleConnect }) {
                         <MentorItem mentorId={mentor._id} name={mentor.username} about={mentor.description} />
                     </div>
                 ))}
-
             </Masonry>
         </div>
     );

@@ -57,6 +57,7 @@ export default function HomePage() {
                 userId: userId,
                 tags: majors
             });
+
             console.log(response);
         } catch (error) {
             console.log(error);
@@ -111,6 +112,7 @@ export default function HomePage() {
     };
 
     const handleChatSelect = (connection) => {
+        connection.newMessage = false;
         setCurrentSelectedConnection(connection);
         setTab("Chats");
     };
@@ -128,7 +130,7 @@ export default function HomePage() {
 
         const fetchMentors = async () => {
             try {
-                const response = await axios.get('http://localhost:8800/api/users/all-mentors');
+                const response = await axios.get('http://localhost:8800/api/users/all-mentors', { "tags": selectedMajors });
                 setMentors(response.data);
             } catch (error) {
                 console.log(error);
@@ -165,11 +167,27 @@ export default function HomePage() {
 
     }, [user._id]);
 
+    // useEffect(() => {
+    //     const fetchMentors = async () => {
+    //         try {
+    //             console.log(selectedMajors);
+    //             const response = await axios.get('http://localhost:8800/api/users/all-mentors', { "tags": selectedMajors });
+    //             console.log(response.data);
+    //             setMentors(response.data);
+    //         } catch (error) {
+    //             console.log(error);
+    //         }
+    //     };
+    //     fetchMentors();
+    // }, [selectedMajors]);
+
     let tabMap = {
         "Articles": <ArticleTab />,
-        "Mentors": <MentorTab mentors={allMentors} handleConnect={handleConnect} />,
+        "Mentors": <MentorTab selectedMajors={selectedMajors} handleConnect={handleConnect} />,
         "Chats": <ChatTab
             connection={currentSelectedConnection}
+            connectionsArray={connections}
+            setConnection={setConnections}
             user={user}
             socket={socketRef.current}
             currentSelectedConnection={currentSelectedConnection}
@@ -186,8 +204,16 @@ export default function HomePage() {
                 if (connections[i].chat._id === to) {
                     let updated = { ...connections[i] };
                     updated.chat.messages.push(data);
+
+                    if (tab === "Chats" && currentSelectedConnection.chat._id === to) {
+                        socketRef.current.emit("read message", { roomId: to });
+                        updated.newMessage = false;
+                    }
+                    else {
+                        updated.newMessage = true;
+                    }
+
                     arr.push(updated);
-                    connections.newMessage = true;
                 }
                 else {
                     arr.push(connections[i]);
@@ -237,7 +263,21 @@ export default function HomePage() {
                     <h2>Connections</h2>
                     <ul className="mentorUL">
                         {connections.map((connection) => (
-                            <li key={connection.mentor._id} className={currentSelectedConnection.mentor._id === connection.mentor._id && tab === "Chats" ? "mentorListCur" : "mentorList"} onClick={() => { handleChatSelect(connection); }}>{connection.mentor.username}</li>
+                            <li
+                                key={connection.mentor._id}
+                                className={
+                                    currentSelectedConnection.mentor._id === connection.mentor._id && tab === "Chats"
+                                        ? "mentorListCur"
+                                        : connection.newMessage
+                                            ? "mentorListNewMsg"
+                                            : "mentorList"
+                                }
+                                onClick={() => {
+                                    handleChatSelect(connection);
+                                }}
+                            >
+                                {connection.mentor.username}
+                            </li>
                         ))}
                     </ul>
                 </div>

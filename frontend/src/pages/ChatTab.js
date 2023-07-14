@@ -3,12 +3,32 @@ import ChatBody from './ChatBody';
 import ChatFooter from './ChatFooter';
 import "../styles/chatTab.css";
 
-export default function ChatTab({ connection, user, socket, scrollToBottom }) {
+//setConnection updates the connections array, not curSelectedConnection
+export default function ChatTab({ connection, connectionsArray, setConnection, user, socket, scrollToBottom }) {
     const chatContentRef = useRef(null);
     const isScrolledToBottomRef = useRef(true);
 
+    const handleUpdate = () => {
+        let arr = [];
+        for (let i = 0; i < connectionsArray.length; i++) {
+            //Push connection if the chat is the one that equals the current
+            if (connectionsArray[i].chat._id === connection.chat._id) {
+                let updated = { ...connectionsArray[i] };
+                updated.newMessage = false;
+                arr.push(updated);
+            }
+            else {
+                arr.push(connectionsArray[i]);
+            }
+        }
+        setConnection(arr);
+    };
+
     useEffect(() => {
         socket.emit("read message", { roomId: connection.chat._id });
+        console.log("HELLO");
+        connection.newMessage = false;  //Updates curSelectedConnection
+        handleUpdate(); //Updates connections array
     }, []);
 
     useEffect(() => {
