@@ -8,3 +8,12 @@ Content-Type: application/json
     "email": "j@w.com",
     "password": "password"
 }
+
+###
+
+GET http://localhost:8800/api/users/all-mentors
+Content-Type: application/json
+
+{
+    "tags": ["Chemistry"]
+}

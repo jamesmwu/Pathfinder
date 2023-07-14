@@ -26,7 +26,6 @@ export default function ChatTab({ connection, connectionsArray, setConnection, u
 
     useEffect(() => {
         socket.emit("read message", { roomId: connection.chat._id });
-        console.log("HELLO");
         connection.newMessage = false;  //Updates curSelectedConnection
         handleUpdate(); //Updates connections array
     }, []);

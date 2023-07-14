@@ -153,18 +153,21 @@ router.put("/:id/remove-connection", async (req, res) => {
 });
 
 
-router.get("/all-mentors", async (req, res) => {
+router.post("/all-mentors", async (req, res) => {
+  console.log(req.body.tags);
   try {
     var mentors = await User.find({ $or: [{ userType: MENTOR }, { userType: MENTOR_AND_MENTEE }] });
-    if(req.body.tags == null || req.body.tags.length ==0){
-      mentors = await User.find({ $or: [{ userType: MENTOR }, { userType: MENTOR_AND_MENTEE }] })
+    if (req.body.tags == null || req.body.tags.length == 0) {
+      mentors = await User.find({ $or: [{ userType: MENTOR }, { userType: MENTOR_AND_MENTEE }] });
     }
-    else{
+    else {
       console.log("finding by tag");
-      mentors = await User.find({ $and:[
-        {$or:[{ userType: MENTOR }, { userType: MENTOR_AND_MENTEE }]}, 
-        {tags: {$in: req.body.tags}}
-      ]})
+      mentors = await User.find({
+        $and: [
+          { $or: [{ userType: MENTOR }, { userType: MENTOR_AND_MENTEE }] },
+          { tags: { $in: req.body.tags } }
+        ]
+      });
 
     }
     var resplist = [];

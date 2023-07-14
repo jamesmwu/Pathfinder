@@ -15,7 +15,6 @@ export default function HomePage() {
     const [isOpen, setIsOpen] = useState(false);
     const [selectedMajors, setSelectedMajors] = useState([]);
     const [tags, setTags] = useState([]);
-    const [allMentors, setMentors] = useState([]);
     const [connections, setConnections] = useState([]); //contain an array of objects, each object contains two fields, one for a user json and chat json.
     const [tab, setTab] = useState("Articles");
     const [currentSelectedConnection, setCurrentSelectedConnection] = useState(connectionTemplate);
@@ -128,15 +127,6 @@ export default function HomePage() {
             }
         };
 
-        const fetchMentors = async () => {
-            try {
-                const response = await axios.get('http://localhost:8800/api/users/all-mentors', { "tags": selectedMajors });
-                setMentors(response.data);
-            } catch (error) {
-                console.log(error);
-            }
-        };
-
         const fetchConnections = async () => {
             try {
                 const response = await axios.get(`http://localhost:8800/api/users/?userId=${user._id}`);
@@ -162,24 +152,10 @@ export default function HomePage() {
 
         fetchConnections();
         fetchTags();
-        fetchMentors();
         //socketRef.current.emit("initialize rooms", { id: user._id });
 
     }, [user._id]);
 
-    // useEffect(() => {
-    //     const fetchMentors = async () => {
-    //         try {
-    //             console.log(selectedMajors);
-    //             const response = await axios.get('http://localhost:8800/api/users/all-mentors', { "tags": selectedMajors });
-    //             console.log(response.data);
-    //             setMentors(response.data);
-    //         } catch (error) {
-    //             console.log(error);
-    //         }
-    //     };
-    //     fetchMentors();
-    // }, [selectedMajors]);
 
     let tabMap = {
         "Articles": <ArticleTab />,
