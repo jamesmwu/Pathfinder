@@ -19,8 +19,15 @@ function MentorTab({ selectedMajors, handleConnect }) {
         const fetchMentors = async () => {
             try {
                 console.log(selectedMajors);
-                const response = await axios.get('http://localhost:8800/api/users/all-mentors', {
-                    data: { tags: selectedMajors }
+                // const response = await axios.get('http://localhost:8800/api/users/all-mentors', {
+                //     data: { tags: selectedMajors }
+                // });
+                const response = await axios.request({
+                    method: "GET",
+                    url: "http://localhost:8800/api/users/all-mentors",
+                    data: {
+                        tags: ["Chemistry"],
+                    },
                 });
                 setMentors(response.data);
                 console.log(response.data);
