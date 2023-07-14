@@ -13,6 +13,7 @@ const cors = require('cors');
 const authRoute = require("./routes/auth");
 const userRoute = require("./routes/users");
 const chatRoute = require("./routes/chat")
+const articleRoute = require("./routes/article")
 
 var Image = require('./models/Image.js');
 
@@ -37,7 +38,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
-app.use("/api/chats", chatRoute)
+app.use("/api/chats", chatRoute);
+app.use("/api/articles", articleRoute);
 
 //socket stuff
 

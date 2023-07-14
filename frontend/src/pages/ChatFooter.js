@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import "../styles/chatFooter.css";
 
-const ChatFooter = ({ socket, chatId }) => {
+
+const ChatFooter = ({ socket, chatId, recipientId }) => {
   const [message, setMessage] = useState("");
 
   const handleSendMessage = (e) => {
     e.preventDefault();
     if (message.trim()) {
-      socket.emit("private message", { content: message, to: chatId });
+      console.log(recipientId);
+      socket.emit("private message", { content: message, roomId: chatId, recipientId: recipientId });
     }
     setMessage("");
   };

@@ -156,6 +156,17 @@ router.put("/:id/remove-connection", async (req, res) => {
 router.get("/all-mentors", async (req, res) => {
   try {
     var mentors = await User.find({ $or: [{ userType: MENTOR }, { userType: MENTOR_AND_MENTEE }] });
+    if(req.body.tags == null || req.body.tags.length ==0){
+      mentors = await User.find({ $or: [{ userType: MENTOR }, { userType: MENTOR_AND_MENTEE }] })
+    }
+    else{
+      console.log("finding by tag");
+      mentors = await User.find({ $and:[
+        {$or:[{ userType: MENTOR }, { userType: MENTOR_AND_MENTEE }]}, 
+        {tags: {$in: req.body.tags}}
+      ]})
+
+    }
     var resplist = [];
     for (let i = 0; i < mentors.length; i++) {
       const { password, updatedAt, ...other } = mentors[i]._doc;
