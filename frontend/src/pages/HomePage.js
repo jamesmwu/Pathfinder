@@ -36,7 +36,7 @@ export default function HomePage() {
 
     const socketRef = useRef();
     useEffect(() => {
-        socketRef.current = socketIO.connect(`http://localhost:8800?userId=${user._id}`);
+        socketRef.current = socketIO.connect(`${BACKEND_URL}?userId=${user._id}`);
         return () => socketRef.current.disconnect();
     }, []);
 
