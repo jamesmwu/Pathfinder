@@ -10,7 +10,7 @@ import axios from 'axios';
 import '../styles/homePage.css';
 import socketIO from "socket.io-client";
 
-const BACKEND_URL = "https://pathfinder-4ntr.onrender.com/";
+const BACKEND_URL = "https://pathfinder-4ntr.onrender.com";
 
 export default function HomePage() {
     const connectionTemplate = { mentor: { _id: "" }, chat: {} };

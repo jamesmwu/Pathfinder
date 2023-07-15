@@ -5,7 +5,7 @@ import Masonry from "react-masonry-css";
 import '../styles/mentorTab.css';
 import Mentor from "../components/Mentor";
 
-const BACKEND_URL = "https://pathfinder-4ntr.onrender.com/";
+const BACKEND_URL = "https://pathfinder-4ntr.onrender.com";
 
 function MentorTab({ selectedMajors, handleConnect }) {
     const [isOpen, setIsOpen] = useState(false);

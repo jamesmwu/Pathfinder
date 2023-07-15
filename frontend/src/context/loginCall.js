@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BACKEND_URL = "https://pathfinder-4ntr.onrender.com/";
+const BACKEND_URL = "https://pathfinder-4ntr.onrender.com";
 
 export const loginCall = async (userCredentials, dispatch) => {
     dispatch({ type: "LOGIN_START" });

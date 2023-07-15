@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { loginCall } from "../context/loginCall";
 
-const BACKEND_URL = "https://pathfinder-4ntr.onrender.com/";
+const BACKEND_URL = "https://pathfinder-4ntr.onrender.com";
 
 export default function Register() {
     const username = useRef();
