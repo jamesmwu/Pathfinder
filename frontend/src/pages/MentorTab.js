@@ -5,6 +5,8 @@ import Masonry from "react-masonry-css";
 import '../styles/mentorTab.css';
 import Mentor from "../components/Mentor";
 
+const BACKEND_URL = "https://pathfinder-4ntr.onrender.com/";
+
 function MentorTab({ selectedMajors, handleConnect }) {
     const [isOpen, setIsOpen] = useState(false);
     const [allMentors, setMentors] = useState([]);
@@ -19,7 +21,7 @@ function MentorTab({ selectedMajors, handleConnect }) {
         const fetchMentors = async () => {
             try {
                 console.log(selectedMajors);
-                const response = await axios.post("http://localhost:8800/api/users/all-mentors", {
+                const response = await axios.post(BACKEND_URL + "/api/users/all-mentors", {
                     tags: selectedMajors
                 });
 

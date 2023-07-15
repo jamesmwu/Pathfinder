@@ -4,6 +4,7 @@ import "../styles/loginPage.css";
 import { AuthContext } from "../context/AuthContext";
 import { loginCall } from "../context/loginCall";
 
+
 export default function Login() {
     const email = useRef();
     const password = useRef();
