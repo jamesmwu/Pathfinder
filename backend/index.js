@@ -9,14 +9,16 @@ const path = require("path");
 const bodyParser = require('body-parser');
 const http = require('http');
 const cors = require('cors');
+const { promisify } = require('util')
 
 const authRoute = require("./routes/auth");
 const userRoute = require("./routes/users");
 const chatRoute = require("./routes/chat")
 const articleRoute = require("./routes/article")
 
-var Image = require('./models/Image.js');
-
+//var Image = require('./models/Image.js');
+const User = require("./models/User");
+const unlinkAsync = promisify(fs.unlink)
 const app = express();
 
 //Allow cross origin requests
@@ -65,10 +67,22 @@ app.use("/images", express.static(path.join(__dirname, "public/images")));
 
 var storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, 'public/images');
+        let uploadPath = '';
+        console.log(req.body.category);
+        if(req.body.category === "profile"){
+            uploadPath = 'public/images/profile';
+        }
+        else if(req.body.category === "article"){
+            uploadPath = 'public/images/article';
+        }
+        else{
+            uploadPath= 'public/images';
+        }
+        cb(null, uploadPath);
     },
     filename: (req, file, cb) => {
-        cb(null, file.fieldname + '-' + Date.now());
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+        cb(null, file.fieldname + '-' + uniqueSuffix + '.' + file.originalname.split('.').pop());
     }
 });
 
@@ -83,39 +97,44 @@ app.post("/api/upload", upload.single("file"), (req, res) => {
   }
 });
 */
-
-app.post('/api/upload-image', upload.single('image'), async (req, res, next) => {
+const profilePath = "public\\images\\profile\\";
+app.post('/api/upload-profile-pic', upload.single('image'), async (req, res, next) => {
     try {
-        var obj = {
-            name: req.body.name,
-            desc: req.body.desc,
-            img: {
-                data: fs.readFileSync(path.join(__dirname + '/public/images/' + req.file.filename)),
-                contentType: 'image/png'
-            }
-        };
-        /*
-        imgSchema.create(obj)
-        .then ((err, item) => {
-            if (err) {
-                console.log(err);
-            }
-            else {
-                item.save();
-                //res.redirect('/');
-                res.status(200).json();
-            }
-        });
-        */
-        const img = await new Image(obj);
-        const newimg = img.save();
-        res.status(200).json(newimg);
+        if (!req.file) {
+            return res.status(400).send('No file uploaded.');
+        }
+        const user = await User.findById(req.body.userId);
+        if(user.profilePicture != ""){
+          try{
+            await unlinkAsync(profilePath+user.profilePicture);
+          }
+          catch(err){
+            console.log("tried to delete old file");
+            console.log(err);
+          }
+        }
+        console.log(req.file.filename);
+        user.profilePicture = req.file.filename;
+        user.save();
+        res.status(200).json(user);
     } catch (err) {
         console.log(err);
+        res.send(err);
     }
 
 });
-//end multer image upload test
+
+app.get('/api/get-profile-pic', async function (req, res, next) {
+    const user = await User.findById(req.body.userId);
+    const filename = user.profilePicture;
+    const filePath = path.join(profilePath, filename); // Update the path to match your file storage location
+    fs.stat(filePath, function (err, stat) {
+      if (err || !stat.isFile()) {
+        return res.status(404).send('File not found.');
+      }
+      res.sendFile(__dirname +'\\'+ filePath);
+    });
+  });
 
 /* calling listen when i do socket stuff
 app.listen(8800, () => {
