@@ -10,7 +10,6 @@ import axios from 'axios';
 import '../styles/homePage.css';
 import socketIO from "socket.io-client";
 
-const BACKEND_URL = "https://pathfinder-4ntr.onrender.com";
 
 export default function HomePage() {
     const connectionTemplate = { mentor: { _id: "" }, chat: {} };
@@ -36,7 +35,7 @@ export default function HomePage() {
 
     const socketRef = useRef();
     useEffect(() => {
-        socketRef.current = socketIO.connect(`${BACKEND_URL}?userId=${user._id}`);
+        socketRef.current = socketIO.connect(`${process.env.REACT_APP_BACKEND_URL}?userId=${user._id}`);
         return () => socketRef.current.disconnect();
     }, []);
 
@@ -54,7 +53,7 @@ export default function HomePage() {
 
         try {
             const userId = user._id;
-            let response = await axios.put(`${BACKEND_URL}/api/users/update-tags/${userId}`, {
+            let response = await axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/users/update-tags/${userId}`, {
                 userId: userId,
                 tags: majors
             });
@@ -69,7 +68,7 @@ export default function HomePage() {
         try {
             const userId = user._id;
             await axios.put(
-                `${BACKEND_URL}/api/users/${userId}/add-connection`,
+                `${process.env.REACT_APP_BACKEND_URL}/api/users/${userId}/add-connection`,
                 { userId: mentorId }
             ).then((response) => {
                 socketRef.current.emit("initialize rooms", { id: user._id });
@@ -78,14 +77,14 @@ export default function HomePage() {
 
             const fetchConnections = async () => {
                 try {
-                    const response = await axios.get(`${BACKEND_URL}/api/users/?userId=${user._id}`);
+                    const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/users/?userId=${user._id}`);
                     setSelectedMajors(response.data.tags);
                     const connections = response.data.connections;
                     const arr = [];
 
                     for (const connection of connections) {
-                        const mentorResponse = await axios.get(`${BACKEND_URL}/api/users/?userId=${connection.userId}`);
-                        const chatResponse = await axios.get(`${BACKEND_URL}/api/chats/single/?chatId=${connection.chatId}`);
+                        const mentorResponse = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/users/?userId=${connection.userId}`);
+                        const chatResponse = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/chats/single/?chatId=${connection.chatId}`);
                         arr.push({ mentor: mentorResponse.data, chat: chatResponse.data, newMessage: connection.newMessage });
                     }
 
@@ -122,7 +121,7 @@ export default function HomePage() {
 
         const fetchTags = async () => {
             try {
-                const response = await axios.get(BACKEND_URL + '/api/users/all-tags');
+                const response = await axios.get(process.env.REACT_APP_BACKEND_URL + '/api/users/all-tags');
                 setTags(response.data);
             } catch (error) {
                 console.log(error);
@@ -131,14 +130,14 @@ export default function HomePage() {
 
         const fetchConnections = async () => {
             try {
-                const response = await axios.get(`${BACKEND_URL}/api/users/?userId=${user._id}`);
+                const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/users/?userId=${user._id}`);
                 setSelectedMajors(response.data.tags);
                 const connections = response.data.connections;
                 const arr = [];
 
                 for (const connection of connections) {
-                    const mentorResponse = await axios.get(`${BACKEND_URL}/api/users/?userId=${connection.userId}`);
-                    const chatResponse = await axios.get(`${BACKEND_URL}/api/chats/single/?chatId=${connection.chatId}`);
+                    const mentorResponse = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/users/?userId=${connection.userId}`);
+                    const chatResponse = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/chats/single/?chatId=${connection.chatId}`);
                     arr.push({ mentor: mentorResponse.data, chat: chatResponse.data, newMessage: connection.newMessage });
                 }
 

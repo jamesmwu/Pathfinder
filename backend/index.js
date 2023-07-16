@@ -20,7 +20,6 @@ const articleRoute = require("./routes/article");
 const User = require("./models/User");
 const unlinkAsync = promisify(fs.unlink);
 const app = express();
-const FRONTEND_URL = "https://pathfinder-frontend.onrender.com";
 
 //Allow cross origin requests
 app.use(cors());
@@ -32,7 +31,6 @@ mongoose.connect(
 )
   .then(() => console.log('connected to Mongoose'))
   .catch(e => console.log(e));
-
 
 app.use(express.json());
 app.use(helmet());
@@ -50,7 +48,7 @@ const server = http.createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(server, {
   cors: {
-    origin: FRONTEND_URL,
+    origin: process.env.FRONTEND_URL,
     methods: ["GET", "POST"]
 
   }
