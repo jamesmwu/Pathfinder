@@ -1,4 +1,4 @@
-import { useContext, useRef, useCallback } from "react";
+import { useContext, useRef, useCallback, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import "../styles/loginPage.css";
 import { AuthContext } from "../context/AuthContext";
@@ -13,6 +13,8 @@ export default function Login() {
 
     const { isFetching, dispatch } = useContext(AuthContext);
 
+    const [error, setError] = useState(false);
+
     const handleClick = async (e) => {
         e.preventDefault();
         loginCall(
@@ -23,8 +25,12 @@ export default function Login() {
                 if (loginStatus === "LOGIN_SUCCESS") {
                     navigate("/");
                 }
+                else {
+                    setError(true);
+                }
             })
             .catch((error) => {
+                setError(true);
                 console.log(error);
             });
     };
@@ -58,6 +64,7 @@ export default function Login() {
                         </div>
 
                         <div className="loginButtonWrapper">
+                            {error && <span className="loginError">Invalid credentials</span>}
                             <button className="loginButton">
                                 {isFetching ? "Loading..." : "Log In"}
                             </button>

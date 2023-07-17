@@ -37,7 +37,7 @@ export default function HomePage() {
     useEffect(() => {
         socketRef.current = socketIO.connect(`${process.env.REACT_APP_BACKEND_URL}?userId=${user._id}`);
         return () => socketRef.current.disconnect();
-    }, []);
+    }, [user._id]);
 
     const openModal = () => {
         setIsOpen(true);
@@ -204,7 +204,7 @@ export default function HomePage() {
         return () => {
             socketRef.current.off('private message', addMessage);
         };
-    }, [connections]);
+    }, [connections, tab, currentSelectedConnection]);
 
     return (
         <div className="home-page">

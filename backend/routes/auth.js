@@ -26,8 +26,10 @@ router.post("/register", async (req, res) => {
     // SAVE NEW USER INTO MONGODB
   } catch (err) {
     console.log(err);
+    res.status(500).json({ error: "Registration failed" });
   }
 });
+
 
 // LOGIN
 router.post("/login", async (req, res) => {
@@ -43,14 +45,15 @@ router.post("/login", async (req, res) => {
     );
 
     // VALIDATE PASSWORD
-    if(!attemptPassword){
+    if (!attemptPassword) {
       res.status(400).json(user);
     }
-    else{
+    else {
       res.status(200).json(user);
     }
   } catch (err) {
     console.log(err);
+    res.status(500).json({ error: "Login failed" });
   }
 });
 

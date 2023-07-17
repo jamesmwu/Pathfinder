@@ -1,4 +1,4 @@
-import { useRef, useContext } from "react";
+import { useRef, useContext, useState } from "react";
 import "../styles/registerPage.css";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
@@ -15,6 +15,8 @@ export default function Register() {
 
     const { isFetching, dispatch } = useContext(AuthContext);
 
+    const [error, setError] = useState(false);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (passwordAgain.current.value !== password.current.value) {
@@ -26,7 +28,9 @@ export default function Register() {
                 password: password.current.value,
             };
             try {
+                console.log("ASDABSDJHASD");
                 await axios.post(process.env.REACT_APP_BACKEND_URL + "/api/auth/register", user);
+                console.log("CHICKEN");
                 loginCall(
                     { email: email.current.value, password: password.current.value },
                     dispatch
@@ -34,16 +38,22 @@ export default function Register() {
                     .then((loginStatus) => {
                         if (loginStatus === "LOGIN_SUCCESS") {
                             navigate("/");
+                        } else {
+                            setError(true);
+                            console.log("HERE");
                         }
                     })
                     .catch((error) => {
+                        setError(true);
                         console.log(error);
                     });
             } catch (error) {
+                setError(true);
                 console.log(error);
             }
         }
     };
+
 
     return (
         <div className="login">
@@ -85,6 +95,7 @@ export default function Register() {
                             />
                         </div>
                         <div className="registerButtonWrapper">
+                            {error && <span className="registerError">Invalid credentials</span>}
                             <button className="loginButton" type="submit">
                                 {isFetching ? "Loading..." : "Sign Up"}
                             </button>
