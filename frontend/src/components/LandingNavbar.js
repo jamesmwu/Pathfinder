@@ -11,6 +11,9 @@ export default function LandingNavbar() {
             <NavLink to="/about" className="landingNavButton">
                 About
             </NavLink>
+            <NavLink to="/login" className="landingNavButton">
+                Login
+            </NavLink>
         </div>
     );
 }

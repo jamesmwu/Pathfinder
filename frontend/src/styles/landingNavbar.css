@@ -1,7 +1,7 @@
 .landingNav {
 	display: flex;
 	justify-content: flex-end;
-	padding: 40px 60px 0px;
+	padding: 40px 60px 20px;
 	background-color: var(--color-blue);
 }
 

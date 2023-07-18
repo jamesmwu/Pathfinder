@@ -1,0 +1,73 @@
+/* landingPage.css */
+.landing-page {
+	height: 100vh;
+	overflow-y: scroll;
+	scroll-snap-type: y mandatory;
+}
+
+section {
+	height: 100vh;
+	scroll-snap-align: start;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: white;
+}
+
+.hero-section {
+	background-color: var(--color-blue);
+}
+
+.about-section {
+	background-color: #49a078;
+}
+
+.statistics-section {
+	background-color: #c69261;
+}
+
+.contact-section {
+	background-color: #ff477e;
+}
+
+.hero-content,
+.about-content,
+.statistics-content,
+.contact-content {
+	text-align: center;
+}
+
+.hero-content h1,
+.about-content h2,
+.statistics-content h2,
+.contact-content h2 {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.hero-content p,
+.about-content p,
+.statistics-content p,
+.contact-content p {
+	font-size: 1.5rem;
+	margin-bottom: 1rem;
+}
+
+.statistics-grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 2rem;
+}
+
+.statistic-item {
+	text-align: center;
+}
+
+.statistic-item h3 {
+	font-size: 2rem;
+	margin-bottom: 0.5rem;
+}
+
+.statistic-item p {
+	font-size: 1.2rem;
+}
