@@ -153,7 +153,6 @@ export default function HomePage() {
 
         fetchConnections();
         fetchTags();
-        //socketRef.current.emit("initialize rooms", { id: user._id });
 
     }, [user._id]);
 
@@ -260,7 +259,7 @@ export default function HomePage() {
                 </div>
 
                 <NavLink to="/" onClick={handleLogout} className="logoutHome">
-                    Log Out {user.username}
+                    Log Out
                 </NavLink>
             </div>
         </div>
