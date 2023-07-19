@@ -1,0 +1,79 @@
+.landing {
+	color: white;
+}
+
+.full {
+	width: 100%;
+	height: 100%;
+}
+
+.landing h1 {
+	font-size: 50px;
+	font-weight: 800;
+	margin-bottom: 10px;
+}
+
+.hero {
+	color: var(--color-yellow);
+	font-size: 110px !important;
+}
+
+.subHero {
+	font-size: 30px !important;
+}
+
+.landingContent {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.whatWeDo {
+	/* display: flex;
+	justify-content: space-between;
+	align-items: center;
+	text-align: left;
+	width: 800px; */
+	margin-right: 500px;
+}
+
+.whatWeDoDescContainer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.whatWeDoDesc {
+	width: 400px;
+	margin-left: 400px;
+	background-color: rgb(235, 235, 235);
+	color: var(--color-blue-muted);
+	padding: 40px;
+	border-radius: 10px;
+}
+
+.contactUs {
+	margin-bottom: 400px;
+}
+
+.contactUsDescContainer {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.contactUsDescHeader {
+	width: 800px;
+	margin: 60px;
+}
+
+.contactUsDesc {
+	width: 500px;
+	background-color: rgb(235, 235, 235);
+	color: var(--color-blue-muted);
+	padding: 40px;
+	border-radius: 10px;
+	text-align: center;
+}

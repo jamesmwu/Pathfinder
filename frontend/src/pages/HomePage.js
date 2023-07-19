@@ -37,7 +37,7 @@ export default function HomePage() {
     useEffect(() => {
         socketRef.current = socketIO.connect(`${process.env.REACT_APP_BACKEND_URL}?userId=${user._id}`);
         return () => socketRef.current.disconnect();
-    }, []);
+    }, [user._id]);
 
     const openModal = () => {
         setIsOpen(true);
@@ -70,7 +70,7 @@ export default function HomePage() {
             console.log("fetching connections");
             const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/users/?userId=${user._id}`);
             setSelectedMajors(response.data.tags);
-            
+
             const connections = response.data.connections;
             const arr = [];
 
@@ -123,11 +123,12 @@ export default function HomePage() {
     useEffect(() => {
         fetchConnections();
         fetchTags();
+
     }, [user._id]);
-    
+
     //message event listener
     useEffect(() => {
-        
+
         function addMessage(data, to) {
             let arr = [];
             for (let i = 0; i < connections.length; i++) {
@@ -155,12 +156,12 @@ export default function HomePage() {
         return () => {
             socketRef.current.off('private message', addMessage);
         };
-        
+
     }, [connections, currentSelectedConnection, tab]);
 
     //refresh new connection when added
     useEffect(() => {
-        socketRef.current.on("process_new_connection", ()=>{
+        socketRef.current.on("process_new_connection", () => {
             console.log("in process new connection");
             fetchConnections();
         });
@@ -171,7 +172,7 @@ export default function HomePage() {
 
     let tabMap = {
         "Articles": <ArticleTab />,
-        "Mentors": <MentorTab selectedMajors={selectedMajors} socketRef={socketRef} userId = {user._id} />,
+        "Mentors": <MentorTab selectedMajors={selectedMajors} socketRef={socketRef} userId={user._id} />,
         "Chats": <ChatTab
             connection={currentSelectedConnection}
             connectionsArray={connections}
@@ -238,7 +239,7 @@ export default function HomePage() {
                 </div>
 
                 <NavLink to="/" onClick={handleLogout} className="logoutHome">
-                    Log Out {user.username}
+                    Log Out
                 </NavLink>
             </div>
         </div>

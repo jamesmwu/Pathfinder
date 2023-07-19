@@ -15,7 +15,7 @@ const ChatBody = ({ messages, user, chatContentRef, scrollToBottom }) => {
 
     if (messages === undefined || messages === null || messages.length === 0) {
         return (
-            <div className="chat-content" ref={chatContentRef}>
+            <div className="chat-content boiler" ref={chatContentRef}>
                 <h2>Send a message to get the conversation going!</h2>
                 <div className='prompts'>
                     <h3>Potential ideas to get you started:</h3>

@@ -39,7 +39,7 @@ export default function ChatTab({ connection, connectionsArray, setConnection, u
 
     if (connection === undefined || connection === null || connection.mentor._id === "") {
         return (
-            <div>
+            <div className="empty">
                 <h2>Connect with a mentor to chat with them!</h2>
             </div>
         );

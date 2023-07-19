@@ -1,11 +1,10 @@
 .registerBox {
-	height: 430px;
+	height: 500px;
 	padding: 40px 20px;
 	background-color: white;
 	border-radius: 10px;
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
 }
 
 .registerInputWrapper {
@@ -17,8 +16,16 @@
 }
 
 .registerButtonWrapper {
-	margin-top: 30px;
 	display: flex;
 	flex-direction: column;
+	margin-top: 20px;
 	justify-content: flex-start;
+	justify-items: flex-start;
+}
+
+.registerError {
+	color: var(--color-red-accent);
+	font-size: 16px;
+	text-align: center;
+	margin-bottom: 20px;
 }

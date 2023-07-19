@@ -14,7 +14,6 @@
 	--color-cream: #f9f5f1;
 	--color-cream-muted: #cfc9c3;
 	--color-blue-light: #a9ddfa;
-	/* --color-blue: #357bd6; */
 	--color-blue-muted: #b2cae9;
 	--color-green-light: rgb(194, 243, 194);
 	--color-green: rgb(129, 201, 129);
@@ -26,6 +25,7 @@
 	--color-red: rgb(121, 49, 34);
 	--color-cream-dark: rgb(181, 169, 145);
 	--color-blue: rgb(57, 89, 100);
+	--color-blue-muted: rgb(33, 52, 58);
 	--color-yellow: rgb(253, 241, 148);
 	--color-red-accent: rgb(225, 123, 98);
 	--color-blue-green: rgb(78, 145, 109);
@@ -45,10 +45,10 @@ body {
 		sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	/* height: 100%; */
 	margin: 0;
 	padding: 0;
 	overflow: hidden;
+	background-color: var(--color-blue);
 }
 
 code {
@@ -63,11 +63,14 @@ code {
 	width: 100%;
 }
 
-h1 {
-	margin: 0; /* Remove the default top margin */
+h1,
+h2,
+h3,
+h4,
+p {
+	margin: 0;
 }
 
-/* Baseline styling for links and buttons */
 a {
 	text-decoration: none;
 }
@@ -83,4 +86,22 @@ button {
 	padding: 8px 12px;
 	font-size: 1rem;
 	cursor: pointer;
+}
+
+html,
+body,
+#root {
+	height: 100%;
+	width: 100%;
+}
+
+body {
+	font-family: system-ui;
+	margin: 0;
+}
+
+*,
+*:after,
+*:before {
+	box-sizing: border-box;
 }
