@@ -76,7 +76,7 @@ export default function LandingPage() {
 
                 <ParallaxLayer
                     offset={2}
-                    speed={0.4}
+                    speed={0.1}
                     className='contactUsDescContainer'
                 >
                     <div className='contactUsDescHeader'>

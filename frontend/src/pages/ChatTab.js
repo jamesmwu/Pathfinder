@@ -9,10 +9,12 @@ export default function ChatTab({ connection, connectionsArray, setConnection, u
     const isScrolledToBottomRef = useRef(true);
 
     const handleUpdate = () => {
+        console.log(connectionsArray);
+        console.log(connection);
         let arr = [];
         for (let i = 0; i < connectionsArray.length; i++) {
             //Push connection if the chat is the one that equals the current
-            if (connectionsArray[i].chat._id === connection.chat._id) {
+            if (connectionsArray[i]?.chat?._id === connection?.chat?._id) {
                 let updated = { ...connectionsArray[i] };
                 updated.newMessage = false;
                 arr.push(updated);

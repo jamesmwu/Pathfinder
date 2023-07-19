@@ -229,6 +229,7 @@ export default function HomePage() {
                                             : "mentorList"
                                 }
                                 onClick={() => {
+                                    console.log(connection);
                                     handleChatSelect(connection);
                                 }}
                             >
