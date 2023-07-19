@@ -87,6 +87,7 @@
 	background-color: var(--color-blue-green);
 	color: white;
 	border-radius: 10px;
+	transition: background-color 0.3s;
 }
 
 .interests:hover {
@@ -114,6 +115,7 @@
 	margin-top: 40px;
 	text-decoration: none !important;
 	width: 60px;
+	transition: background-color 0.3s;
 }
 
 .logoutHome:hover {

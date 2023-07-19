@@ -47,10 +47,15 @@
 	color: white;
 	border: none;
 	cursor: pointer;
+	transition: background-color 0.3s;
 }
 
 .modal-content button[type='submit']:hover {
 	background-color: var(--color-blue-green-shaded);
+}
+
+.modalClose {
+	transition: background-color 0.3s;
 }
 
 .modalClose:hover {

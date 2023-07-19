@@ -47,7 +47,7 @@
 .whatWeDoDesc {
 	width: 400px;
 	margin-left: 400px;
-	background-color: rgb(235, 235, 235);
+	background-color: var(--color-gentle-cream);
 	color: var(--color-blue-muted);
 	padding: 40px;
 	border-radius: 10px;
@@ -71,7 +71,7 @@
 
 .contactUsDesc {
 	width: 500px;
-	background-color: rgb(235, 235, 235);
+	background-color: var(--color-gentle-cream);
 	color: var(--color-blue-muted);
 	padding: 40px;
 	border-radius: 10px;

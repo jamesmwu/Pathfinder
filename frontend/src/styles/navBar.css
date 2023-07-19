@@ -23,14 +23,16 @@
 	background-color: var(--color-blue);
 	color: white;
 	border: solid 1px black;
-	border-radius: 20px;
+	border-radius: 15px;
+	transition: background-color 0.3s;
 }
 
 .inactive {
 	background-color: transparent;
 	color: black;
 	border: solid 1px black;
-	border-radius: 20px;
+	border-radius: 15px;
+	transition: background-color 0.3s;
 }
 
 .inactive:hover {
