@@ -4,6 +4,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { loginCall } from "../context/loginCall";
+import LandingNavbar from "../components/LandingNavbar";
 
 
 export default function Register() {
@@ -28,9 +29,7 @@ export default function Register() {
                 password: password.current.value,
             };
             try {
-                console.log("ASDABSDJHASD");
                 await axios.post(process.env.REACT_APP_BACKEND_URL + "/api/auth/register", user);
-                console.log("CHICKEN");
                 loginCall(
                     { email: email.current.value, password: password.current.value },
                     dispatch
@@ -40,7 +39,6 @@ export default function Register() {
                             navigate("/");
                         } else {
                             setError(true);
-                            console.log("HERE");
                         }
                     })
                     .catch((error) => {
@@ -56,55 +54,56 @@ export default function Register() {
 
 
     return (
-        <div className="login">
-            <div className="loginWrapper">
-                <div className="loginLeft">
-                    <h3 className="loginLogo">Pathfinder</h3>
-                    <span className="loginDesc">Your career questions, answered.</span>
-                </div>
-                <div className="loginRight">
-                    <form className="registerBox" onSubmit={handleSubmit}>
-                        <div className="registerInputWrapper">
-                            <input
-                                placeholder="Name"
-                                required
-                                ref={username}
-                                className="loginInput"
-                            />
-                            <input
-                                placeholder="Email"
-                                required
-                                ref={email}
-                                type="email"
-                                className="loginInput"
-                            />
-                            <input
-                                placeholder="Password"
-                                required
-                                ref={password}
-                                type="password"
-                                className="loginInput"
-                                minLength="6"
-                            />
-                            <input
-                                placeholder="Confirm Password"
-                                required
-                                ref={passwordAgain}
-                                type="password"
-                                className="loginInput"
-                            />
-                        </div>
-                        <div className="registerButtonWrapper">
-                            {error && <span className="registerError">Invalid credentials</span>}
-                            <button className="loginButton" type="submit">
-                                {isFetching ? "Loading..." : "Sign Up"}
-                            </button>
-                            <Link to="/login" style={{ textDecoration: "none", marginTop: "15px" }}>
-                                <button className="loginRegisterButton">Log in with an Existing Account</button>
-                            </Link>
-                        </div>
+        <div>
+            <LandingNavbar />
+            <div className="login">
+                <div className="loginWrapper">
+                    <h3 className="loginLogo">Register</h3>
 
-                    </form>
+                    <div className="loginRight">
+                        <form className="registerBox" onSubmit={handleSubmit}>
+                            <div className="registerInputWrapper">
+                                <input
+                                    placeholder="Name"
+                                    required
+                                    ref={username}
+                                    className="loginInput"
+                                />
+                                <input
+                                    placeholder="Email"
+                                    required
+                                    ref={email}
+                                    type="email"
+                                    className="loginInput"
+                                />
+                                <input
+                                    placeholder="Password"
+                                    required
+                                    ref={password}
+                                    type="password"
+                                    className="loginInput"
+                                    minLength="6"
+                                />
+                                <input
+                                    placeholder="Confirm Password"
+                                    required
+                                    ref={passwordAgain}
+                                    type="password"
+                                    className="loginInput"
+                                />
+                            </div>
+                            <div className="registerButtonWrapper">
+                                {error && <span className="registerError">Invalid credentials</span>}
+                                <button className="loginButton" type="submit">
+                                    {isFetching ? "Loading..." : "Sign Up"}
+                                </button>
+                                <Link to="/login" style={{ textDecoration: "none", marginTop: "15px" }}>
+                                    <button className="loginRegisterButton">Log in with an Existing Account</button>
+                                </Link>
+                            </div>
+
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

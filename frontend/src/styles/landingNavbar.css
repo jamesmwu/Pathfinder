@@ -1,15 +1,17 @@
 .landingNav {
+	position: absolute;
 	display: flex;
-	justify-content: flex-end;
-	padding: 40px 60px 20px;
-	background-color: var(--color-blue);
+	justify-content: space-between;
+	align-items: center;
+	padding: 25px 70px;
+	width: 100%;
+	z-index: 1;
 }
 
 .landingNavButton {
 	background-color: transparent;
 	font-size: x-large;
 	font-weight: bold;
-	margin-left: 50px;
 	cursor: pointer;
 	position: relative;
 	color: white;
@@ -49,4 +51,11 @@
 
 .landingNavButton:active {
 	text-decoration: none;
+}
+
+.landingNavContainer {
+	width: 180px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
 }
