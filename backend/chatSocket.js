@@ -1,6 +1,7 @@
 const emailModule = require("./email.js");
 const User = require("./models/User");
 const Chat = require("./models/Chat");
+const { callbackPromise } = require("nodemailer/lib/shared/index.js");
 
 module.exports = function (io) {
     io.on('connection', function (socket) {
@@ -16,6 +17,7 @@ module.exports = function (io) {
                 user = await User.findById(id);
                 for (let i = 0; i < user.connections.length; i++) {
                     socket.join(user.connections[i].chatId);
+                    console.log(user.connections[i].chatId);
                 }
 
             } catch (err) {
@@ -24,8 +26,9 @@ module.exports = function (io) {
             }
         }
 
-        socket.on("initialize rooms", async ({ id }) => {
-            initializeRooms(id);
+        socket.on("initialize rooms", async (id, callback) => {
+            await initializeRooms(id);
+            callback();
         });
 
         socket.on("private message", async ({ content, roomId, recipientId }) => {
@@ -65,6 +68,11 @@ module.exports = function (io) {
                 console.log("read message Error");
                 console.log(err);
             }
+        });
+
+        socket.on('process_new_connection', async ({ chatId }) => {
+            console.log(`processing new connection ${chatId}`);
+            io.sockets.in(chatId).emit('process_new_connection');
         });
 
 

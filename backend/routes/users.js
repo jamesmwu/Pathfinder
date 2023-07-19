@@ -7,7 +7,7 @@ const router = express.Router();
 const MENTEE = 1;
 const MENTOR = 2;
 const MENTOR_AND_MENTEE = 3;
-const TAGS = ["Computer Science", "Pre-Med", "Engineering", "Chemistry", "Psychology", "UC Berkeley", "UCLA", "Caltech"];
+const TAGS = ["Computer Science", "Pre-Med", "Engineering", "Chemistry", "UC Berkeley", "UCLA", "Caltech", "Research", "Graduate School"];
 
 // UPDATE USER
 router.put("/update-user/:id", async (req, res) => {
@@ -106,17 +106,17 @@ router.get("/connections/", async (req, res) => {
 // add connection between people, creates a chat
 router.put("/:id/add-connection", async (req, res) => {
   if (req.body.userId !== req.params.id) {
-
     try {
       const user = await User.findById(req.params.id);
       const currentUser = await User.findById(req.body.userId);
       // If not already connected
       if (!user.connections.some(e => e.userId == req.body.userId)) {
         const chat = await new Chat();
-        await user.updateOne({ $push: { connections: { userId: req.body.userId, chatId: chat._id } } }); // Update both users involved using $push syntax
-        await currentUser.updateOne({ $push: { connections: { userId: req.params.id, chatId: chat._id } } }); // Update both users involved
+        const chatId = chat._id;
+        await user.updateOne({ $push: { connections: { userId: req.body.userId, chatId: chatId} } }); // Update both users involved using $push syntax
+        await currentUser.updateOne({ $push: { connections: { userId: req.params.id, chatId: chatId} } }); // Update both users involved
         await chat.save();
-        res.status(200).json("connected user");
+        res.status(200).json({chatId: chatId});
       } else {
         res.status(403).json("Already connected");
       }
@@ -135,8 +135,8 @@ router.put("/:id/remove-connection", async (req, res) => {
       const user = await User.findById(req.params.id);
       const currentUser = await User.findById(req.body.userId);
       // If not already connected
-      if (user.connections.includes(req.body.userId)) {
-        const chatId = user.connections.findOne({ userId: req.body.userId }).chatId;
+      if (user.connections.some(obj => obj.userId==req.body.userId)) {
+        const chatId = user.connections.find(obj => obj.userId==req.body.userId).chatId;
         Chat.findByIdAndDelete(chatId);
         await user.updateOne({ $pull: { connections: { userId: req.body.userId } } }); // Update both users involved using $push syntax
         await currentUser.updateOne({ $pull: { connections: { userId: req.params.id } } }); // Update both users involved

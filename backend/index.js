@@ -23,10 +23,10 @@ const app = express();
 
 //Allow cross origin requests
 app.use(cors());
-
 dotenv.config();
+
 mongoose.connect(
-  process.env.MONGO_URL,
+  process.env.MONGO_URL + process.env.DATABASE,
   { useNewUrlParser: true, useUnifiedTopology: true },
 )
   .then(() => console.log('connected to Mongoose'))

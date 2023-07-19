@@ -2,8 +2,8 @@ import React from "react";
 import '../styles/articleTab.css';
 import Collapsible from 'react-collapsible'; //Documentation: https://www.npmjs.com/package/react-collapsible
 
-export default function ArticleTab() {
-
+function ArticleTab() {
+    console.log("article tab reload");
     return (
         <div className="article">
             <h1>Major/Class Planning as a Pre-Med at UCLA</h1>
@@ -104,3 +104,5 @@ export default function ArticleTab() {
         </div>
     );
 }
+
+export default React.memo(ArticleTab);

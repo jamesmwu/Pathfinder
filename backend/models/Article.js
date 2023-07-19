@@ -14,9 +14,9 @@ const articleSchema = new mongoose.Schema(
         default: "Pathfinder Staff"
       },
       bodyText:{
-        type: String,
+        type: Array,
         required: true,
-        default: "no text"
+        default: []
       },
       subArticles:{
         type: Array,

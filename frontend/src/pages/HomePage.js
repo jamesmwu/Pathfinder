@@ -48,6 +48,7 @@ export default function HomePage() {
     };
 
     const handleModalSubmit = async (majors) => {
+        console.log("set selected majors");
         setSelectedMajors(majors);
         closeModal();
 
@@ -64,47 +65,49 @@ export default function HomePage() {
         }
     };
 
-    const handleConnect = async (mentorId) => {
+    const fetchConnections = async () => {
         try {
-            const userId = user._id;
-            await axios.put(
-                `${process.env.REACT_APP_BACKEND_URL}/api/users/${userId}/add-connection`,
-                { userId: mentorId }
-            ).then((response) => {
-                socketRef.current.emit("initialize rooms", { id: user._id });
-                console.log(response.data);
-            });
+            console.log("fetching connections");
+            const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/users/?userId=${user._id}`);
+            setSelectedMajors(response.data.tags);
+            
+            const connections = response.data.connections;
+            const arr = [];
 
-            const fetchConnections = async () => {
-                try {
-                    const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/users/?userId=${user._id}`);
-                    setSelectedMajors(response.data.tags);
-                    const connections = response.data.connections;
-                    const arr = [];
+            for (const connection of connections) {
+                const mentorResponse = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/users/?userId=${connection.userId}`);
+                const chatResponse = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/chats/single/?chatId=${connection.chatId}`);
+                arr.push({ mentor: mentorResponse.data, chat: chatResponse.data, newMessage: connection.newMessage });
+            }
 
-                    for (const connection of connections) {
-                        const mentorResponse = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/users/?userId=${connection.userId}`);
-                        const chatResponse = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/chats/single/?chatId=${connection.chatId}`);
-                        arr.push({ mentor: mentorResponse.data, chat: chatResponse.data, newMessage: connection.newMessage });
-                    }
-
-                    setConnections(arr);
-                    if (arr.length > 0) {
-                        setCurrentSelectedConnection(arr[0]);
-                    }
-                } catch (error) {
-                    console.log(error);
-                }
-            };
-
-
-            fetchConnections();
-
-
+            setConnections(arr);
+            if (arr.length > 0) {
+                setCurrentSelectedConnection(arr[0]);
+            }
         } catch (error) {
             console.log(error);
         }
     };
+
+    const fetchTags = async () => {
+        try {
+            const response = await axios.get(process.env.REACT_APP_BACKEND_URL + '/api/users/all-tags');
+            setTags(response.data);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    // function asyncEmit(eventName, data) {
+    //     return new Promise(function (resolve, reject) {
+    //       socketRef.current.emit(eventName, data);
+    //       socketRef.current.on(eventName, result => {
+    //         socketRef.current.off(eventName);
+    //         resolve(result);
+    //       });
+    //       setTimeout(reject, 1000);
+    //     });
+    //   }
 
 
     const handleLogout = () => {
@@ -118,62 +121,13 @@ export default function HomePage() {
     };
 
     useEffect(() => {
-
-        const fetchTags = async () => {
-            try {
-                const response = await axios.get(process.env.REACT_APP_BACKEND_URL + '/api/users/all-tags');
-                setTags(response.data);
-            } catch (error) {
-                console.log(error);
-            }
-        };
-
-        const fetchConnections = async () => {
-            try {
-                const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/users/?userId=${user._id}`);
-                setSelectedMajors(response.data.tags);
-                const connections = response.data.connections;
-                const arr = [];
-
-                for (const connection of connections) {
-                    const mentorResponse = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/users/?userId=${connection.userId}`);
-                    const chatResponse = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/chats/single/?chatId=${connection.chatId}`);
-                    arr.push({ mentor: mentorResponse.data, chat: chatResponse.data, newMessage: connection.newMessage });
-                }
-
-                setConnections(arr);
-                if (arr.length > 0) {
-                    setCurrentSelectedConnection(arr[0]);
-                }
-            } catch (error) {
-                console.log(error);
-            }
-        };
-
-
         fetchConnections();
         fetchTags();
-        //socketRef.current.emit("initialize rooms", { id: user._id });
-
     }, [user._id]);
-
-
-    let tabMap = {
-        "Articles": <ArticleTab />,
-        "Mentors": <MentorTab selectedMajors={selectedMajors} handleConnect={handleConnect} />,
-        "Chats": <ChatTab
-            connection={currentSelectedConnection}
-            connectionsArray={connections}
-            setConnection={setConnections}
-            user={user}
-            socket={socketRef.current}
-            currentSelectedConnection={currentSelectedConnection}
-            chatContentRef={chatContentRef}
-            scrollToBottom={scrollToBottom}
-        />
-    };
-
+    
+    //message event listener
     useEffect(() => {
+        
         function addMessage(data, to) {
             let arr = [];
             for (let i = 0; i < connections.length; i++) {
@@ -181,7 +135,6 @@ export default function HomePage() {
                 if (connections[i].chat._id === to) {
                     let updated = { ...connections[i] };
                     updated.chat.messages.push(data);
-
                     if (tab === "Chats" && currentSelectedConnection.chat._id === to) {
                         socketRef.current.emit("read message", { roomId: to });
                         updated.newMessage = false;
@@ -198,13 +151,38 @@ export default function HomePage() {
             }
             setConnections(arr);
         }
-
         socketRef.current.on("private message", addMessage);
-
         return () => {
             socketRef.current.off('private message', addMessage);
         };
+        
+    }, [connections, currentSelectedConnection, tab]);
+
+    //refresh new connection when added
+    useEffect(() => {
+        socketRef.current.on("process_new_connection", ()=>{
+            console.log("in process new connection");
+            fetchConnections();
+        });
+        return () => {
+            socketRef.current.off('process_new_connection', fetchConnections);
+        };
     }, [connections]);
+
+    let tabMap = {
+        "Articles": <ArticleTab />,
+        "Mentors": <MentorTab selectedMajors={selectedMajors} socketRef={socketRef} userId = {user._id} />,
+        "Chats": <ChatTab
+            connection={currentSelectedConnection}
+            connectionsArray={connections}
+            setConnection={setConnections}
+            user={user}
+            socket={socketRef.current}
+            currentSelectedConnection={currentSelectedConnection}
+            chatContentRef={chatContentRef}
+            scrollToBottom={scrollToBottom}
+        />
+    };
 
     return (
         <div className="home-page">
