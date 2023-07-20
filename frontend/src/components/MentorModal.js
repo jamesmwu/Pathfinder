@@ -8,8 +8,8 @@ export default function MentorModal({ name, img, description, isOpen, onClose, o
     }
 
     return (
-        <div className="modal">
-            <div className="modal-content">
+        <div className="mentorModal">
+            <div className="mentor-modal-content">
                 <h1>{name}</h1>
                 <img src={mentorImage} alt="Mentor" className="mentor-image" />
                 <p>{description}</p>

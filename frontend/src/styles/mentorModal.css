@@ -1,4 +1,4 @@
-.modal {
+.mentorModal {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -10,11 +10,11 @@
 	backdrop-filter: blur(4px);
 }
 
-.modal-content h1 {
+.mentor-modal-content h1 {
 	margin: 0 !important;
 }
 
-.modal-content {
+.mentor-modal-content {
 	padding: 30px;
 	border-radius: 10px;
 	border-width: 1px;
@@ -29,6 +29,15 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+}
+
+.mentor-modal-content button {
+	display: block;
+	margin-top: 10px;
+	width: 100%;
+	padding: 10px;
+	border-radius: 4px;
+	color: var(--color-cream);
 }
 
 .modal-connect {
