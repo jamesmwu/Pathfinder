@@ -40,7 +40,7 @@ module.exports = function (io) {
                 console.log(recipientId);
                 const newMessage = { body: content, date: Date.now(), sender: user._id.toString() };
                 const connectionIndex = recipient.connections.findIndex(connection => connection.chatId === roomId);
-                if(io.sockets.adapter.rooms.get(roomId).size<=1 && !recipient.connections[connectionIndex].newMessage){//recipient is not in the app and new message
+                if (io.sockets.adapter.rooms.get(roomId).size <= 1 && !recipient.connections[connectionIndex].newMessage) {//recipient is not in the app and new message
                     emailModule.sendNewMessageAlert(recipient.email, content, user.username);
                 }
                 io.sockets.in(roomId).emit('private message', newMessage, roomId);
@@ -61,9 +61,9 @@ module.exports = function (io) {
                 const curUser = await User.findById(userId);
                 const connectionIndex = curUser.connections.findIndex(connection => connection.chatId === roomId);
                 curUser.connections[connectionIndex].newMessage = false;
-                user = curUser
+                user = curUser;
                 curUser.save();
-                
+
             } catch (err) {
                 console.log("read message Error");
                 console.log(err);
@@ -74,6 +74,11 @@ module.exports = function (io) {
             console.log(`processing new connection ${chatId}`);
             io.sockets.in(chatId).emit('process_new_connection');
         });
+
+        // socket.on('process_remove_connection', async ({ chatId }) => {
+        //     console.log(`processing disconnection ${chatId}`);
+        //     io.sockets.in(chatId).emit('process_remove_connection');
+        // });
 
 
         socket.on('msg_from_client', function (from, msg) {

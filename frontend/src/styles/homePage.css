@@ -155,7 +155,7 @@
 	cursor: pointer;
 	background-color: var(--color-blue);
 	color: white;
-	border: solid 1px black;
+	/* border: solid 1px black; */
 	padding: 10px;
 	border-radius: 20px;
 	margin-bottom: 10px;

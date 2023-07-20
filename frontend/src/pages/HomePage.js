@@ -163,12 +163,13 @@ export default function HomePage() {
     useEffect(() => {
         socketRef.current.on("process_new_connection", () => {
             console.log("in process new connection");
-            fetchConnections();
+            fetchConnections(); //When removing a connection, we need to call this again to update the list on the side
         });
         return () => {
             socketRef.current.off('process_new_connection', fetchConnections);
         };
     }, [connections]);
+
 
     let tabMap = {
         "Articles": <ArticleTab />,
@@ -200,7 +201,12 @@ export default function HomePage() {
                 <button className="interests" type="button" onClick={openModal}>Select Interests</button>
             </div>
             <div className="main-content">
-                <Navbar tabs={Object.keys(tabMap)} setTab={setTab} activeTab={tab} currentSelectedConnection={currentSelectedConnection} />
+                <Navbar
+                    tabs={Object.keys(tabMap)}
+                    setTab={setTab} activeTab={tab}
+                    currentSelectedConnection={currentSelectedConnection}
+                    socketRef={socketRef} userId={user._id}
+                />
                 <div className="tab-content">
                     {tabMap[tab]}
                 </div>
