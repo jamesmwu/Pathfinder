@@ -140,7 +140,7 @@ router.put("/:id/remove-connection", async (req, res) => {
         Chat.findByIdAndDelete(chatId);
         await user.updateOne({ $pull: { connections: { userId: req.body.userId } } }); // Update both users involved using $push syntax
         await currentUser.updateOne({ $pull: { connections: { userId: req.params.id } } }); // Update both users involved
-        res.status(200).json("removed user");
+        res.status(200).json({chatId: chatId});
       } else {
         res.status(403).json("Already removed");
       }

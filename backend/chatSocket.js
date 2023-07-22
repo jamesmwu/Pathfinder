@@ -26,7 +26,8 @@ module.exports = function (io) {
             }
         }
 
-        socket.on("initialize rooms", async (id, callback) => {
+        socket.on("initialize rooms", async (id, callback = ()=>null) => {
+            console.log("yo");
             await initializeRooms(id);
             callback();
         });
@@ -70,9 +71,10 @@ module.exports = function (io) {
             }
         });
 
-        socket.on('process_new_connection', async ({ chatId }) => {
+        socket.on('process_new_connection', async (chatId, callback = ()=>null) => {
             console.log(`processing new connection ${chatId}`);
             io.sockets.in(chatId).emit('process_new_connection');
+            callback();
         });
 
         // socket.on('process_remove_connection', async ({ chatId }) => {

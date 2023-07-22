@@ -26,10 +26,9 @@ function MentorTab({ selectedMajors, socketRef, userId }) {
                 `${process.env.REACT_APP_BACKEND_URL}/api/users/${userId}/add-connection`,
                 { userId: mentorId }
             ).then(async (response) => {
-                // socketRef.current.emit("initialize rooms", { id: user._id });
-                // socketRef.current.emit("process_new_connection", response.data.chatId);
+                
                 socketRef.current.emit("initialize rooms", userId, () => {
-                    socketRef.current.emit("process_new_connection", { chatId: response.data.chatId });
+                    socketRef.current.emit("process_new_connection",response.data.chatId);
                 });
                 console.log(response.data);
             });
