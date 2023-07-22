@@ -116,7 +116,7 @@ router.put("/:id/add-connection", async (req, res) => {
         await user.updateOne({ $push: { connections: { userId: req.body.userId, chatId: chatId} } }); // Update both users involved using $push syntax
         await currentUser.updateOne({ $push: { connections: { userId: req.params.id, chatId: chatId} } }); // Update both users involved
         await chat.save();
-        res.status(200).json({chatId: chatId});
+        res.status(200).json("success");
       } else {
         res.status(403).json("Already connected");
       }
@@ -137,7 +137,7 @@ router.put("/:id/remove-connection", async (req, res) => {
       // If not already connected
       if (user.connections.some(obj => obj.userId==req.body.userId)) {
         const chatId = user.connections.find(obj => obj.userId==req.body.userId).chatId;
-        Chat.findByIdAndDelete(chatId);
+        await Chat.findByIdAndDelete(chatId);
         await user.updateOne({ $pull: { connections: { userId: req.body.userId } } }); // Update both users involved using $push syntax
         await currentUser.updateOne({ $pull: { connections: { userId: req.params.id } } }); // Update both users involved
         res.status(200).json({chatId: chatId});
@@ -154,14 +154,12 @@ router.put("/:id/remove-connection", async (req, res) => {
 
 
 router.post("/all-mentors", async (req, res) => {
-  console.log(req.body.tags);
   try {
     var mentors = await User.find({ $or: [{ userType: MENTOR }, { userType: MENTOR_AND_MENTEE }] });
     if (req.body.tags == null || req.body.tags.length == 0) {
       mentors = await User.find({ $or: [{ userType: MENTOR }, { userType: MENTOR_AND_MENTEE }] });
     }
     else {
-      console.log("finding by tag");
       mentors = await User.find({
         $and: [
           { $or: [{ userType: MENTOR }, { userType: MENTOR_AND_MENTEE }] },

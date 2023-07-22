@@ -13,12 +13,13 @@ module.exports = function (io) {
         async function initializeRooms(id) {
             try {
                 userId = id;
-                console.log(`initialize rooms for: ${id}`);
+                //console.log(`initialize rooms for: ${id}`);
                 user = await User.findById(id);
                 for (let i = 0; i < user.connections.length; i++) {
                     socket.join(user.connections[i].chatId);
                     console.log(user.connections[i].chatId);
                 }
+                socket.join(id);
 
             } catch (err) {
                 console.log("Initialize Room error");
@@ -26,10 +27,8 @@ module.exports = function (io) {
             }
         }
 
-        socket.on("initialize rooms", async (id, callback = ()=>null) => {
-            console.log("yo");
+        socket.on("initialize rooms", async (id) => {
             await initializeRooms(id);
-            callback();
         });
 
         socket.on("private message", async ({ content, roomId, recipientId }) => {
@@ -71,10 +70,10 @@ module.exports = function (io) {
             }
         });
 
-        socket.on('process_new_connection', async (chatId, callback = ()=>null) => {
-            console.log(`processing new connection ${chatId}`);
-            io.sockets.in(chatId).emit('process_new_connection');
-            callback();
+        socket.on('process_new_connection', async (fromId, toId) => {
+            console.log(`processing new connection from  ${fromId} to ${toId}`);
+            io.sockets.in(fromId).emit('process_new_connection');
+            io.sockets.in(toId).emit('process_new_connection');
         });
 
         // socket.on('process_remove_connection', async ({ chatId }) => {
