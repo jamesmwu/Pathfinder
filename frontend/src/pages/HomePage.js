@@ -84,6 +84,9 @@ export default function HomePage() {
             if (arr.length > 0) {
                 setCurrentSelectedConnection(arr[0]);
             }
+            else {
+                setCurrentSelectedConnection(connectionTemplate);
+            }
         } catch (error) {
             console.log(error);
         }

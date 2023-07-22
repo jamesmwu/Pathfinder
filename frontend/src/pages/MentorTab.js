@@ -26,11 +26,11 @@ function MentorTab({ selectedMajors, socketRef, userId }) {
                 `${process.env.REACT_APP_BACKEND_URL}/api/users/${userId}/add-connection`,
                 { userId: mentorId }
             ).then(async (response) => {
-                
+
                 socketRef.current.emit("initialize rooms", userId, () => {
-                    socketRef.current.emit("process_new_connection",response.data.chatId);
+                    socketRef.current.emit("process_new_connection", response.data.chatId);
                 });
-                console.log(response.data);
+                // console.log(response.data);
             });
         } catch (error) {
             console.log(error);
@@ -40,13 +40,11 @@ function MentorTab({ selectedMajors, socketRef, userId }) {
     useEffect(() => {
         const fetchMentors = async () => {
             try {
-                console.log(selectedMajors);
                 const response = await axios.post(process.env.REACT_APP_BACKEND_URL + "/api/users/all-mentors", {
                     tags: selectedMajors
                 });
 
                 setMentors(response.data);
-                console.log(response.data);
                 setIsOpen(true);
             } catch (error) {
                 console.log(error);
