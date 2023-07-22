@@ -36,13 +36,11 @@ function MentorTab({ selectedMajors, socketRef, userId }) {
     useEffect(() => {
         const fetchMentors = async () => {
             try {
-                console.log(selectedMajors);
                 const response = await axios.post(process.env.REACT_APP_BACKEND_URL + "/api/users/all-mentors", {
                     tags: selectedMajors
                 });
 
                 setMentors(response.data);
-                console.log(response.data);
                 setIsOpen(true);
             } catch (error) {
                 console.log(error);
