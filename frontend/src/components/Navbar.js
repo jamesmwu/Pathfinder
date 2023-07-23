@@ -9,16 +9,13 @@ import "../styles/navBar.css";
  * Actual rendering of page content should be done in Homepage.js 
  */
 export default function Navbar({ tabs, setTab, activeTab, currentSelectedConnection, socketRef, userId }) {
-
     const handleDisconnect = async () => {
         try {
             await axios.put(
                 `${process.env.REACT_APP_BACKEND_URL}/api/users/${userId}/remove-connection`,
                 { userId: currentSelectedConnection?.mentor?._id }
             ).then(async (response) => {
-                socketRef.current.emit("initialize rooms", userId, () => {
-                    socketRef.current.emit("process_new_connection", { chatId: response.data.chatId });
-                });
+                socketRef.current.emit("process_new_connection", userId, currentSelectedConnection?.mentor?._id);
                 console.log(response.data);
             });
         } catch (error) {

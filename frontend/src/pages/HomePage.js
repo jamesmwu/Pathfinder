@@ -84,6 +84,9 @@ export default function HomePage() {
             if (arr.length > 0) {
                 setCurrentSelectedConnection(arr[0]);
             }
+            else {
+                setCurrentSelectedConnection(connectionTemplate);
+            }
         } catch (error) {
             console.log(error);
         }
@@ -161,12 +164,14 @@ export default function HomePage() {
 
     //refresh new connection when added
     useEffect(() => {
-        socketRef.current.on("process_new_connection", () => {
+        function fetchAndInitRooms(){
             console.log("in process new connection");
             fetchConnections(); //When removing a connection, we need to call this again to update the list on the side
-        });
+            socketRef.current.emit('initialize rooms', user._id);
+        }
+        socketRef.current.on("process_new_connection", fetchAndInitRooms);
         return () => {
-            socketRef.current.off('process_new_connection', fetchConnections);
+            socketRef.current.off('process_new_connection', fetchAndInitRooms);
         };
     }, [connections]);
 
