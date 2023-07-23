@@ -96,7 +96,7 @@ app.post("/api/upload", upload.single("file"), (req, res) => {
   }
 });
 */
-const profilePath = "public\\images\\profile\\";
+const profilePath = "public/images/profile";
 app.post('/api/upload-profile-pic', upload.single('image'), async (req, res, next) => {
   try {
     if (!req.file) {
@@ -123,15 +123,16 @@ app.post('/api/upload-profile-pic', upload.single('image'), async (req, res, nex
 
 });
 
-app.get('/api/get-profile-pic', async function (req, res, next) {
+app.post('/api/get-profile-pic', async function (req, res, next) {
   const user = await User.findById(req.body.userId);
   const filename = user.profilePicture;
   const filePath = path.join(profilePath, filename); // Update the path to match your file storage location
+
   fs.stat(filePath, function (err, stat) {
     if (err || !stat.isFile()) {
       return res.status(404).send('File not found.');
     }
-    res.sendFile(__dirname + '\\' + filePath);
+    res.sendFile(__dirname + '/' + filePath);
   });
 });
 

@@ -5,6 +5,7 @@ import Masonry from "react-masonry-css";
 import '../styles/mentorTab.css';
 import Mentor from "../components/Mentor";
 import MentorModal from "../components/MentorModal";
+import { Buffer } from "buffer";
 
 function MentorTab({ selectedMajors, socketRef, userId }) {
     console.log("mentor tab rerender");
@@ -57,6 +58,30 @@ function MentorTab({ selectedMajors, socketRef, userId }) {
     };
 
     function MentorItem({ mentorId, name, about }) {
+        const [imageSrc, setImageSrc] = useState(null);
+
+        const fetchMentorImgs = async () => {
+            try {
+                const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/get-profile-pic`, { userId: mentorId }, {
+                    responseType: 'arraybuffer'
+                });
+
+                // Handle the arraybuffer response here
+                const arrayBuffer = response.data;
+                let base64ImageString = Buffer.from(arrayBuffer, 'binary').toString('base64');
+                let srcValue = "data:image/png;base64," + base64ImageString;
+                setImageSrc(srcValue);
+                // console.log(srcValue);
+            } catch (error) {
+                // Handle errors here
+                console.error('Error fetching profile pic:', error);
+            }
+        };
+
+        useEffect(() => {
+            fetchMentorImgs();
+        }, [mentorId]);
+
         let random = Math.floor(Math.random() * (2 - 1 + 1) + 1);
         if (random === 1) {
             random = 0.25;
@@ -81,7 +106,7 @@ function MentorTab({ selectedMajors, socketRef, userId }) {
                         className="card"
                     >
                         <div>
-                            <Mentor mentorId={mentorId} name={name} about={about} onConnect={handleConnect} setModalOpen={setModalOpen} setName={setName} setDescription={setDescription} />
+                            <Mentor mentorId={mentorId} name={name} about={about} onConnect={handleConnect} setModalOpen={setModalOpen} setName={setName} setDescription={setDescription} imgSrc={imageSrc} />
                         </div>
                     </motion.div>
                 </div>
