@@ -129,6 +129,18 @@ function MentorTab({ selectedMajors, socketRef, userId }) {
         }
     }
 
+    if (allMentors.length === 0) {
+        return (
+            <div className="mentorEmpty">
+                <h2>No mentors available yet for your combination of tags. Try deselecting some filters!</h2>
+                <br></br>
+                <br></br>
+                <br></br>
+                <h2>Sorry for the inconvenience, we are working to recruit more mentors soon!</h2>
+            </div>
+        );
+    }
+
     return (
         <div>
             <Masonry

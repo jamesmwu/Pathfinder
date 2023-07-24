@@ -1,3 +1,8 @@
+.mentorEmpty {
+	text-align: left;
+	margin-top: 50px;
+}
+
 .my-masonry-grid {
 	display: -webkit-box;
 	display: -ms-flexbox;
