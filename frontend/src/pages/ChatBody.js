@@ -2,7 +2,6 @@ import React, { useEffect, useRef } from 'react';
 import '../styles/chatBody.css';
 
 const ChatBody = ({ messages, user, chatContentRef, scrollToBottom }) => {
-    console.log('chatbody rerender');
     const lastMessageRef = useRef(null);
 
     useEffect(() => {

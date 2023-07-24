@@ -16,7 +16,7 @@ export default function Navbar({ tabs, setTab, activeTab, currentSelectedConnect
                 { userId: currentSelectedConnection?.mentor?._id }
             ).then(async (response) => {
                 socketRef.current.emit("process_new_connection", userId, currentSelectedConnection?.mentor?._id);
-                console.log(response.data);
+                // console.log(response.data);
             });
         } catch (error) {
             console.log(error);

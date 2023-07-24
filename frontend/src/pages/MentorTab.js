@@ -8,7 +8,6 @@ import MentorModal from "../components/MentorModal";
 import { Buffer } from "buffer";
 
 function MentorTab({ selectedMajors, socketRef, userId }) {
-    console.log("mentor tab rerender");
     const [isOpen, setIsOpen] = useState(false);
     const [allMentors, setMentors] = useState([]);
     const [modalOpen, setModalOpen] = useState(false);
@@ -73,7 +72,6 @@ function MentorTab({ selectedMajors, socketRef, userId }) {
                 let base64ImageString = Buffer.from(arrayBuffer, 'binary').toString('base64');
                 let srcValue = "data:image/png;base64," + base64ImageString;
                 setImageSrc(srcValue);
-                // console.log(srcValue);
             } catch (error) {
                 // Handle errors here
                 console.error('Error fetching profile pic:', error);

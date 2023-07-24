@@ -3,7 +3,6 @@ import '../styles/articleTab.css';
 import Collapsible from 'react-collapsible'; //Documentation: https://www.npmjs.com/package/react-collapsible
 
 function ArticleTab() {
-    console.log("article tab reload");
     return (
         <div className="article">
             <h1>Major/Class Planning as a Pre-Med at UCLA</h1>

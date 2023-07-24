@@ -48,7 +48,6 @@ export default function HomePage() {
     };
 
     const handleModalSubmit = async (majors) => {
-        console.log("set selected majors");
         setSelectedMajors(majors);
         closeModal();
 
@@ -59,7 +58,7 @@ export default function HomePage() {
                 tags: majors
             });
 
-            console.log(response);
+            // console.log(response);
         } catch (error) {
             console.log(error);
         }
@@ -67,7 +66,6 @@ export default function HomePage() {
 
     const fetchConnections = async () => {
         try {
-            console.log("fetching connections");
             const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/users/?userId=${user._id}`);
             setSelectedMajors(response.data.tags);
 
@@ -164,8 +162,7 @@ export default function HomePage() {
 
     //refresh new connection when added
     useEffect(() => {
-        function fetchAndInitRooms(){
-            console.log("in process new connection");
+        function fetchAndInitRooms() {
             fetchConnections(); //When removing a connection, we need to call this again to update the list on the side
             socketRef.current.emit('initialize rooms', user._id);
         }
@@ -240,7 +237,6 @@ export default function HomePage() {
                                             : "mentorList"
                                 }
                                 onClick={() => {
-                                    console.log(connection);
                                     handleChatSelect(connection);
                                 }}
                             >
