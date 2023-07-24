@@ -2,7 +2,12 @@ import React from 'react';
 import '../styles/mentorModal.css';
 import mentorImage from '../img/cursedCat.png'; // Replace with the actual image path
 
-export default function MentorModal({ name, imgSrc, description, isOpen, onClose, onConnect }) {
+export default function MentorModal({ mentorId, name, imgSrc, description, isOpen, onClose, onConnect, setModalOpen }) {
+    const handleConnect = () => {
+        onConnect(mentorId);
+        setModalOpen(false);
+    };
+
     if (!isOpen) {
         return null;
     }
@@ -14,7 +19,7 @@ export default function MentorModal({ name, imgSrc, description, isOpen, onClose
                 <img src={imgSrc} alt="Mentor" className="mentor-image" />
                 <p>{description}</p>
 
-                <button className="modal-connect" onClick={onConnect}>
+                <button className="modal-connect" onClick={handleConnect}>
                     Connect
                 </button>
                 <button className="modalClose" onClick={onClose}>

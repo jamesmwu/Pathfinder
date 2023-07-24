@@ -15,6 +15,7 @@ function MentorTab({ selectedMajors, socketRef, userId }) {
     const [name, setName] = useState("Mentor Name");
     const [description, setDescription] = useState("Description");
     const [modalImg, setModalImg] = useState("");
+    const [modalMentorId, setMentorId] = useState("");
 
     const breakpointColumnsObj = {
         default: 3,
@@ -107,7 +108,17 @@ function MentorTab({ selectedMajors, socketRef, userId }) {
                         className="card"
                     >
                         <div>
-                            <Mentor mentorId={mentorId} name={name} about={about} onConnect={handleConnect} setModalOpen={setModalOpen} setName={setName} setDescription={setDescription} imgSrc={imageSrc} setModalImg={setModalImg} />
+                            <Mentor
+                                mentorId={mentorId}
+                                name={name} about={about}
+                                onConnect={handleConnect}
+                                setModalOpen={setModalOpen}
+                                setName={setName}
+                                setDescription={setDescription}
+                                imgSrc={imageSrc}
+                                setModalImg={setModalImg}
+                                setMentorId={setMentorId}
+                            />
                         </div>
                     </motion.div>
                 </div>
@@ -131,7 +142,16 @@ function MentorTab({ selectedMajors, socketRef, userId }) {
                     </div>
                 ))}
             </Masonry>
-            <MentorModal name={name} description={description} isOpen={modalOpen} onClose={() => setModalOpen(false)} imgSrc={modalImg} />
+            <MentorModal
+                name={name}
+                description={description}
+                isOpen={modalOpen}
+                onClose={() => setModalOpen(false)}
+                imgSrc={modalImg}
+                onConnect={handleConnect}
+                mentorId={modalMentorId}
+                setModalOpen={setModalOpen}
+            />
         </div>
     );
 }

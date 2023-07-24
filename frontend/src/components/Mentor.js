@@ -2,7 +2,7 @@ import React from "react";
 import "../styles/mentor.css";
 import mentorImage from '../img/cursedCat.png'; // Replace with the actual image path
 
-export default function Mentor({ mentorId, name, about, onConnect, setModalOpen, setName, setDescription, imgSrc, setModalImg }) {
+export default function Mentor({ mentorId, name, about, onConnect, setModalOpen, setName, setDescription, imgSrc, setModalImg, setMentorId }) {
 
     const handleConnect = () => {
         onConnect(mentorId);
@@ -12,6 +12,7 @@ export default function Mentor({ mentorId, name, about, onConnect, setModalOpen,
         setName(name);
         setDescription(about);
         setModalImg(imgSrc);
+        setMentorId(mentorId);
         setModalOpen(true);
     };
 
