@@ -14,6 +14,7 @@ function MentorTab({ selectedMajors, socketRef, userId }) {
     const [modalOpen, setModalOpen] = useState(false);
     const [name, setName] = useState("Mentor Name");
     const [description, setDescription] = useState("Description");
+    const [modalImg, setModalImg] = useState("");
 
     const breakpointColumnsObj = {
         default: 3,
@@ -106,7 +107,7 @@ function MentorTab({ selectedMajors, socketRef, userId }) {
                         className="card"
                     >
                         <div>
-                            <Mentor mentorId={mentorId} name={name} about={about} onConnect={handleConnect} setModalOpen={setModalOpen} setName={setName} setDescription={setDescription} imgSrc={imageSrc} />
+                            <Mentor mentorId={mentorId} name={name} about={about} onConnect={handleConnect} setModalOpen={setModalOpen} setName={setName} setDescription={setDescription} imgSrc={imageSrc} setModalImg={setModalImg} />
                         </div>
                     </motion.div>
                 </div>
@@ -130,7 +131,7 @@ function MentorTab({ selectedMajors, socketRef, userId }) {
                     </div>
                 ))}
             </Masonry>
-            <MentorModal name={name} description={description} isOpen={modalOpen} onClose={() => setModalOpen(false)} />
+            <MentorModal name={name} description={description} isOpen={modalOpen} onClose={() => setModalOpen(false)} imgSrc={modalImg} />
         </div>
     );
 }
