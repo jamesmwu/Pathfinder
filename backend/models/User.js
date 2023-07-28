@@ -34,12 +34,7 @@ const UserSchema = new mongoose.Schema(
       max: 200,
       default: ""
     },
-    short_desc:{
-      type: String,
-      max: 50,
-      default: ""
-    },
-    short_desc:{
+    description:{
       type: String,
       max: 50,
       default: ""
