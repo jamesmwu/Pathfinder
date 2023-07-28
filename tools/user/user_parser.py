@@ -19,6 +19,7 @@ def read_csv_with_line_breaks(file_path):
 imageIndex = [1]
 def postMentor(utimestamp, firstname, lastname, grad_class, major, email, phone, password, short_desc, long_desc, npic, fpic, tags, logo_rate):
     #timestamp, firstname, lastname, grad_class, major, email, phone, password, short_desc, long_desc, npic, fpic, tags, logo_rate
+    tags = [x.strip() for x in tags.split(',')]
     register = {
     "username": firstname + " " + lastname,
     "email": email,
