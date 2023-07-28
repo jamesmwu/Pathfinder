@@ -8,7 +8,7 @@ router.post("/add", async (req, res) => {
       const newArticle = await new Article({
         title: req.body.title,
         author: req.body.author,
-        bodyText: req.body.bodyText,
+        bodyText: req.body.body,
         subArticles: req.body.subArticles,
         tags: req.body.tags,
       });
