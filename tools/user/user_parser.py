@@ -3,7 +3,8 @@ import os
 import re
 import requests
 
-serverURL = 'https://pathfinder-4ntr.onrender.com'
+#serverURL = 'https://pathfinder-4ntr.onrender.com'
+serverURL = 'http://localhost:8800'
 
 __location__ = os.path.realpath(
     os.path.join(os.getcwd(), os.path.dirname(__file__)))
