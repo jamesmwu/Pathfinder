@@ -29,7 +29,22 @@ const UserSchema = new mongoose.Schema(
       default: "",
     },
     connections:[{ userId: String, chatId:String, newMessage: Boolean}],
-    description: {
+    long_desc: {
+      type: String,
+      max: 200,
+      default: ""
+    },
+    description:{
+      type: String,
+      max: 50,
+      default: ""
+    },
+    major:{
+      type: String,
+      max: 50,
+      default: ""
+    },
+    grad_class:{
       type: String,
       max: 50,
       default: ""

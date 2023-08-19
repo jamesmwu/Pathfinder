@@ -7,7 +7,20 @@ const router = express.Router();
 const MENTEE = 1;
 const MENTOR = 2;
 const MENTOR_AND_MENTEE = 3;
-const TAGS = ["Computer Science", "Pre-Med", "Engineering", "Chemistry", "UC Berkeley", "UCLA", "Caltech", "Research", "Graduate School"];
+const TAGS = [
+  "Computer Science", 
+  "Pre-Med", 
+  "Engineering", 
+  "Chemistry", 
+  "UC Berkeley", 
+  "UCLA", 
+  "Caltech", 
+  "Research", 
+  "Graduate School", 
+  "Math", 
+  "Actuarial Science",
+  "Pre-Law"
+];
 
 // UPDATE USER
 router.put("/update-user/:id", async (req, res) => {
