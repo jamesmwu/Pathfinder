@@ -26,8 +26,33 @@ function ArticleTab() {
                     <br />
                     {article.bodyText.map((body, index) => (
                         <div key={index}>
-                            <p>{body.text}</p>
-                            <br />
+                            {body.type === 'subheading' ?
+                                (<div>
+                                    <h3>{body.text}</h3>
+                                    <br />
+                                </div>)
+                                : body.type === 'bodytext' ?
+                                    (<div>
+                                        <p>{body.text}</p>
+                                        <br />
+                                    </div>)
+                                    : body.type === 'ulist' ?
+                                        (
+                                            <ul>
+                                                {body.list.map((item, itemIndex) => (
+                                                    <li key={itemIndex}>{item}</li>
+                                                ))}
+                                            </ul>
+                                        )
+                                        : body.type === 'olist' ?
+                                            (
+                                                <ol>
+                                                    {body.list.map((item, itemIndex) => (
+                                                        <li key={itemIndex}>{item}</li>
+                                                    ))}
+                                                </ol>
+                                            ) : null
+                            }
                         </div>
                     ))}
                     <div className="subArticles" >
