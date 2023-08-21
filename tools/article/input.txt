@@ -1,98 +1,77 @@
-<h3>Major and Class Planning as a Pre-Med at UCLA
-<p>Getting started as a pre-med at UCLA can be very daunting, especially without any guidance. There are multiple facets to consider when being pre-med, including what to major in, what classes to take, when to take the MCAT, what extracurricular experience to have, and more. 
+<h3>Getting Your First Software Engineer Internship
 
-<p>As a 3rd year Physiological Science Major, I’d love to give you the advice I wish I had as a new pre-med. There’s a surprising amount of tips that are important to know when it comes to planning classes and choosing a major which I only found out about from upperclassmen. After you read this guide, I am confident that you will have a better idea of how to plan your 4 years. Without further ado, let's first get into choosing a major.
+<p>Getting a SWE internship during your college years is seen as one of the most important parts of a CS education. Besides the pay, internships show to future employers that you have relevant work experience, greatly boosting your resume and chances of future employment. In fact, getting an internship is so important that many regard it as more important than GPA. In this article, we will discuss the process of getting internships, as well as some tips to help you along your journey. 
 
-<h3>Deciding a Major 
-<p>Choosing the right major determines what upper-division classes you decide to take in the future (lower-division classes are introductory classes while upper-division classes are specific to your major). It may seem like a super pressing issue that you need to decide immediately so you can start making your 4-year plan and graduate on time. 
+<h4>When Should I Be Looking For an Internship?
+<p>With regards to summer internships, companies like to look for rising seniors, because typically the purpose of internship programs (at least in mid to large businesses) is to look for future employees who can potentially join the company the following year after graduation. Recruiting season typically takes place the previous fall, with many companies also having a summer recruiting season. Typically, this means you will want to prepare for the interview process as early on as possible. A sample timeline would look like this:
+<ul>Sophomore Fall/Spring: preparing for interviews
+<ul>Junior Summer/Fall: going through the interview process
+<ul>Senior Summer: internship time!
+<ul>After graduation: return offer?
+<p>Even if you are not a rising senior, feel free to apply! Though it is true that rising seniors are favored, plenty of rising juniors (myself included), have gotten internship opportunities. If you expect to graduate early, then this timeline is unfortunately moved up one year for you. This is one of the disadvantages of graduating early: you will not have as much time.
 
-<p>But honestly, it’s not as big of a deal as you think (at least for your first 2 years). 
+<p>Naturally, as the field grows more and more competitive, people are always looking for an edge against their peers. This means that many CS students end up looking for internships earlier. There are certain programs that are targeted towards underclassmen, like Amazon Propel or FaceBook University. These programs are quite difficult to get in, simply because of the vast amount of applications that these companies receive. Another option for people wishing to get in on the action earlier are startups. Startups are typically less picky, at least about the year requirement. Another option to get involved earlier on is summer research. 
 
-<p>The truth is that you can choose whatever major you like. However, I will say that the majority of pre-med students end up choosing a major in the life sciences for multiple reasons. First, medical schools have a requirement for the classes you need to take, including 1 year of biology with lab, 1 year of general chemistry with lab, 1 year of organic chemistry with lab, 1 course of biochemistry, 1 year of mathematics, 1 year of physics with lab, and 1 year of college-level english/writing. These requirements happen to overlap highly with the life science major, and I’ll detail the classes you need later for medical school as a life science major. So make sure you choose a major you’re interested in, but also one that overlaps with the requirements of medical school (the more overlap you have, the easier of a time you will have). 
 
-<p>Another note about life science majors specifically is that it’s really easy to switch within the life science department because a lot of the lower-division classes are overlapping. For example, I was originally a psychobiology major but ended up switching to physiological science during my fall quarter of sophomore year. Because so many of the lower-division classes overlapped, the only extra class I took was Psych 10. So, it’s not pressing that you have to decide what major you intend on graduating with. As long as you are within the same department, the switch should be very easy. Majors only really impact you when you begin to take upper-division classes (junior and senior year) in which you’ll be taking classes that only count towards that major for graduation. So, take this opportunity to try the lower-division classes and see what interests you before you decide on your major! Here are my general *biased* notes on the life science majors I considered. 
 
-<p>Psychobiology- Learn about psychology, known for being the “easy” pre-med major. One con is that the upper-division classes don’t count as STEM classes and that means you can’t ask those professors for a letter of recommendations for the science recommendation (you need 2). 
 
-<p>Molecular, Cell, and Developmental Biology- Good for people who like research. A lot about DNA and experimental techniques. For upper-division elective classes your research lab can count for units. The major doesn’t seem too hard either. 
+<h3>The Interview Process
+<p>Typically, the process of getting an internship follows a formulaic pattern:
+<ol>Submit application
+<ol>Resume screen
+<ol>Multiple rounds of interview
+<ol>Acceptance.
 
-<p>Microbiology, Immunology, and Molecular Genetics-Revolves around designing experiments and interpreting them, a lot of time spent in research. However, it is also known to be a GPA killer. You can apply for Path 2, which allows you to do research with a faculty mentor. 
+<h4>Submitting an Application
+<p>There are many ways of applying for internships. Sites like LinkedIn, Indeed, and Handshake offer platforms for people to search for suitable companies. One of the best resources for finding internships is https://github.com/pittcsc, Run by the Pitt CS club from the University of Pittsburgh, this is one of the largest internship repositories available. It contains repositories for each season, so check frequently for new updates on application openings. Many of the links on this repository link to applications on the company website.
+<h4>Resume Screen
+<p>A resume is the most important part of your application. It is a summary of your ability, and it determines whether or not they even give you a chance of moving on to the interview process. Many large companies use AI/ML algorithms to parse your resume, so there is no need to make it look aesthetically pleasing. The most important thing is to illustrate your abilities and experience in a clear and concise way; make it easier to parse so the algorithms don’t miss anything. 
 
-<p>Physiological Science- Known to be a difficult major because of the amount of content in each class, but also people who are in this major love it. There is a cadaver lab which is super cool, a lot of the classes are memorization. You will learn a lot about the human body and systems. I was convinced to switch into this major because I took Life Science 7C (Physiology and Human Biology) and loved it. 
+<h4>Interviews
+<p>All interviews roughly fall into two different categories: technical and soft skills. Companies will typically have both. There may be multiple of each. They may also be in the same interview session.They may be live, or asynchronous. It all depends on the company in question. 
 
-<p>Human Biology and Society- You have to apply into the major Spring of your sophomore year (as long as you do any community service work you will probably get it). Many people go into this major because they are interested in public health and exploring different aspects of healthcare. One great thing about the major is that you can take a broad range of upper-division electives depending on the concentration you choose. You can take a lot of humanity classes through this major. 
+<h4>Accepting an Offer
+<p>After you go through with the process, hopefully you should end up with an offer. At this point, you have to make a decision: Do I continue looking for something better, or do I settle? Most companies will give you a deadline for accepting their offer. It is typically not a good idea to accept an offer, then renege on that offer for another company. Doing so will most likely put you in a bad light with the company that you turned down. If that is not a concern, then go ahead and renege all you like. 
+<h3>Resumes
+<p>Oftentimes, people who are looking for their first internship wonder what they can put on their resumes, given their lack of professional experience. There are a variety of things that people can put, including:
+<ul>Personal projects
+<ul>Club projects
+<ul>Academic research
+<p>If you have good planning, you should pick out projects that include the relevant skills that internships want. For example, if you are planning to go for a Full-Stack SWE internship, perhaps have a MERN app or two on your resume. If you want to deal with ML/AI, make sure you have something that illustrates your experience in those fields.
 
-<p>In general, to get a feel for the major you want, look at the core upper-division classes for each major and see if you are interested in the classes (also find out how difficult the classes are). 
-<h3>Planning Classes
-<p>Planning your classes in advance is really important and you should begin to make a generalized plan within your first quarter at UCLA. This is because there are so many random General Education requirements in addition to major-related classes that you need to take in order to graduate. Moreso, a couple of the classes are really difficult to get, which means you need to plan early so that you can get the classes you need. Below I will detail the courses needed for medical school as a life science major (if you’re not a life science major you can still look at these courses, just substitute the math and chemistry courses depending on what you need). 
+<p>When writing about projects, be sure to include concrete examples of contribution or impact. If you’ve built an app that has active users, write how many there are. If you improved the speed of a certain algorithm in a research lab, include a percent speed-up. Numbers and figures quantify your impact, showing that you actually did something. 
 
-<ul>One Year of Biology with Lab: Life Sci 7A, Life Sci 7B, Life Sci 7C, Life Sci 23L 
-<ul>One Year of General Chemistry with Lab: Chem 14A, Chem 14B, Chem 14BL 
-<ul>One Year of Organic Chemistry with Lab: Chem 14C, Chem 14D, Chem 14CL 
-<ul>One Course of Biochemistry: Chem 153A 
-<ul>One Year of Math: LS 30A, LS 30B, Stats 13 (can also take other math series, but those are harder) 
-<ul>One Year of Physics with Lab: Physics 5A, Physics 5B, Physics 5C 
-<ul>One Year of College-Level English/Writing: 3 Writing II classes or English or Comp Lit 
+<p>Unpaid internships at startups are also an option to gain experience and resume material. Though it is always good to be paid, sometimes for a first work experience you have no real choice but to bite the bullet.
 
-<p>These are the classes you need for medical school. Of course your major will have many more classes you need to take, but make sure to fit these classes in at one point before/while applying to medical school. 
+<p>The resume itself should be one page, single sided. It should be in a format that is easily parsed. There are some resume parsers online you can try out. Another thing you can do is to try saving your resume as plain text, then checking if it is legible. 
 
-<p>Now I am going to speak about individual classes in terms of their difficulty so you can space the difficult classes into separate quarters. 
+<p>Here is a sample resume structure:
+<ul>Header: include your name, email, phone number, and other links (website, github, linkedin, etc.)
+<ul>Education: School, graduation date, GPA (if your GPA is bad feel free to omit it), relevant coursework
+<ul>Experience: This should be the meat of your resume. Include jobs, past internships, research, volunteer
+<ul>Personal Projects: A great way to buff up your resume if you don’t have past experience. Include technical descriptions of each project
+<ul>Skills: What tech stacks/ programming languages are you fluent in?
 
-<p>Easy Classes (I studied very minimally) 
+<p>Some general tips:
+<ul>Show your impact! What exactly did you do? How did you impact the team/project?
+<ul>Quantify your work with numbers whenever possible.
+<ul>Keep formatting simple. Stick with one font. 
+<h3>Interviews
+<h4>Technical Interviews
+<p>Typically, SWE technical interviews will be algorithmic in nature. Some take the form of an asynchronous, online exam that you have to take, or a virtual call where you have to solve various programming problems, usually under the supervision of an employee or recruiter. Focus on taking classes at your university that include topics like Data Structures and Algorithms. Things like graphs, trees, linked lists, and dynamic programming are all common topics seen in interviews. To prepare for these questions, the most commonly used tool is leetcode.com. This site provides a large repository of questions to practice on. Anyone can solve questions on leetcode for free, but some services like solution documents require a premium subscription. Generally, the consensus is that Leetcode Premium is worth it, but it is also possible to study without it.
 
-<p>LS 30A, LS 30B 
-<ul>They teach you how to take a derivative and my professors also provided a lot of extra credit. If you took AP Calc AB in high school you should be set for this class. 
-<p>Stats 13
-<ul>I took AP stats in high school and it was literally the same thing. 
+<p>Other technical interview formats may be non-programming. This may include conceptual questions about CS concepts. Be sure to do research on companies and their interview process, so you know what to expect and what to study for.
 
-<p>Medium Classes (I studied quite a bit, but the content wasn’t too bad) 
+<h4>Soft-Skills Interview
+<p>Typically, part of the interview process will include behavioral questions. These may include questions about past experience/ interests/ why you want to join the company. Be sure to have certain answers memorized. Why are you a good fit for this company? What experience do you have, and why will that help you succeed in this role? Companies in general look for team players who can cooperate with others, what past experience do you have working with others? This is an example of how internships have a snowball effect: the more internships you have, the more you can talk about, meaning more opportunities in the future. If you do not have previous internship experience, try to talk about things like personal projects and club activities. 
 
-<p>Chem 14A and Chem 14B 
-<ul>Keep in mind I took AP Chemistry in high school. These classes were very similar to AP Chemistry and I definitely spent a lot of time studying for these classes. Make sure to do the additional practice problems!! And look for old exams. 
+<h3>Frequently Asked Questions
+<ul>Q: Does GPA matter when you apply to companies?
+<ul>A: Typically it does not make a large impact. While it is always good to have a high GPA, not all companies care. There are exceptions to this, including, but not limited to: Banks, Quant firms, etc.
+<ul>Q: How much can I expect to earn from a SWE internship?
+<ul>A: It depends. Salary is quite variable, but the average salary is between 30-40 dollars an hour, 50-70 for big tech companies like Amazon, Google, Apple, etc., and 70+ for quant firms.
+<ul>Q: How many internships should I apply to?
+<ul>A: As many as it takes to get one. Most people apply to at least 30 companies. I have people apply to hundreds of companies in one season. Do not be discouraged by companies ghosting you or rejecting you in droves. This is normal. It is a numbers game. Keep applying.
+<ul>Q: I couldn’t find an internship. Am I doomed?
+<ul>A: No. Internships are a way to make yourself more marketable to employers in the future. That being said, even if you don't have internship experience, you can still find job opportunities. You might be slightly more limited in the companies that accept you initially, but it is still possible to build a career. 
 
-<p>Chem 14C 
-<ul>This is the first organic chemistry class so there may be a learning curve in terms of understanding the content. For the life science department, UCLA splits chemistry into Chem 14C and Chem 14D. Chem 14D is a really difficult class with a lot of memorization and application while Chem 14C is more about understanding the basics. 
-<p>LS 7A, LS 7B 
-<ul>These biology courses are very similar to AP Biology. LS 7B was easier than LS 7A as 7B was on evolution while 7A was on cell and molecular biology. You didn’t really have to memorize anything for these classes and it was more about application. For example, for cycles that you would normally have to memorize (like citric acid cycle), they give you the diagram on the exam. 
-
-<p>Difficult Classes (you will need to dedicate a lot of time, split them into separate quarters): 
-
-<p>Life Sci 7C
-<ul>This is a difficult class that covers many human systems. A lot of it is applying what you’ve learned rather than just memorizing, which makes the class even harder. 
-<p>Chem 14D
-<ul>The second class for Organic Chemistry. There are a lot of reactions and mechanisms you have to learn for this class. At one point I had to remember 20 unique reactions for a lecture. The class really speeds up during the second half so make sure to constantly study. Also looking for old practice exams is the way to go. 
-<p>Chem 153A
-<ul>Biochemistry! This class only says 4 units but don’t be fooled. This is a full ass investment. Lectures run M,T,W,F and are 50 minutes each. I remember studying an additional 1.5-2 hours for each lecture. This class really should’ve been split into 2 classes. There is a lot of memorization, so be prepared to study a lot. Ideally take this right before you start studying for the MCAT so that you don’t have to do too much re-learning for the MCAT. 
-
-<p>Note: Even though these are hard classes these were also my favorite because I feel like I learned the most in these classes. GET PUMPED! 
-
-<p>Miscellaneous 
-
-<p>Physics 5A, 5B, and 5C 
-<ul>The physics series will be easy or difficult depending on your background in physics. I took AP Physics 1 and AP Physics C: Mechanics in high school so Physics 5A, which basically covers Physics 1, was very manageable for me. However, if I was learning physics for the first time, I would’ve had to devote a lot more time to the class. These classes are very formula heavy and conceptual rather than math heavy. You basically don’t need to know calculus for this series. 
-
-<p>So when should you take these classes? I recommend you plan to finish the biology, chemistry, physics, and math series before the end of your sophomore summer (excluding lab classes) because these are the classes you need for the MCAT. If you don’t want to take a gap year as a pre-med, that means you are going to apply for medical school in the spring of your junior year. You have to have taken your MCAT before then. Many of my friends who do not take gap years study for the MCAT during the summer between their 2nd and 3rd year and then take the exam sometime before May (which is when you start applying to medical schools through the AMCAS). This means they finish these classes by the end of their sophomore year. These are the classes you should aim to complete before the end of your second year: 
-<ul>Chem 14A, Chem 14B, Chem 14C, Chem 14D 
-<ul>LS 7A, LS 7B, LS 7C 
-<ul>Physics 5A, Physics 5B, Physics 5C 
-<ul>LS 30A, LS 30B 
-<ul>Psych 10 (optional) 
-
-<p>Even if you plan to take a gap year, it’s always nice to get these lower-division classes out of the way so you have more options available to you (whether you want to suddenly take the MCAT sooner or if you decide to switch to another healthcare path, it’ll be easier). Additionally, since you’ll need to remember the information in these classes, taking them all together will make MCAT studying easier. Many people take the MCAT sophomore summer and still end up taking multiple gap years.
-
-<p>Also remember that many of these classes have prerequisites (for example, in order to take Chem 14B you need to take Chem 14A), meaning that you need to space out your classes correctly and start on different subject classes sooner. For example if you want to finish Chem 14A, 14B, 14C, and 14D within your first 2 years, you have to take Chemistry in 4 out of your first 6 quarters at UCLA (assuming you don’t take summer classes). 
-
-<p>Here is a link to my class-planning spreadsheet. Feel free to make a copy of it and add your own classes. Note that I started my Chem and Bio series quite early. This was important so that I could get started on those series. 
-
-<p>https://docs.google.com/spreadsheets/d/1gV4iaRFJmfOkEy6pyqrQ_QpSdPBJDkvSatM0HKMMmDk/edit#gid=552138629
-
-<p>When enrolling in classes each quarter, I always end up editing my schedule because it’s really hard to get the classes you want. I’ll note that the physics series is really hard to get in particular. I only got Physics 5A so early because I took it during the summer. Otherwise, the classes will be really hard to get. But if you don’t get it, it’s ok, nothing you can do about it. That’s just a con of going to such a large school. 
-
-<p>Some classes you can get away with not taking before studying for the MCAT because you can just self-study it. I’ve heard that for the Physics series it’s manageable to self-study. Meanwhile, topics like biochemistry are really hard to self-study. 
-
-<p>One strategy a lot of students do is they have their upperclassmen friends, who have better enrollment times, hold classes for them. As long as the class doesn’t have a waitlist and they haven’t taken the class yet, you can get the class held. 
-
-<p>A note about GEs: Load up your Degree Audit Report and see which ones you need to do! Honestly the most important thing about GEs is the bruinwalk professor rating. If the professor is good, you’ll probably have a good time. 
-
-<h3>So What Happens now? 
-<p>Now that you have a better idea of how to plan your 4 years, I want to remind you that nothing is set in stone. You may think you want to be pre-med now and decide you want to explore other things. For example, during my sophomore winter, I decided to take CS 31 (Introduction to Computer Science I) because I wanted to learn how to code (it didn’t even go towards my major rip). I also meticulously planned all my classes these past 2 years thinking I needed to take the MCAT this summer, just to not take it because I want time to explore other careers. So, take all this class planning stuff seriously, but don’t stress about it. That’s the whole point of this website, which is to help you explore career paths and connect meaningfully with upperclassmen. Anyway, go forth, I hope I helped you today! 

@@ -4,6 +4,8 @@ const dotenv = require("dotenv");
 const helmet = require("helmet");
 const morgan = require("morgan");
 const multer = require("multer");
+const multerS3 = require('multer-s3');
+const aws = require('aws-sdk')
 const fs = require('fs');
 const path = require("path");
 const bodyParser = require('body-parser');
@@ -19,11 +21,17 @@ const articleRoute = require("./routes/article");
 //var Image = require('./models/Image.js');
 const User = require("./models/User");
 const unlinkAsync = promisify(fs.unlink);
-const app = express();
+var app = express(),
+    s3 = new aws.S3();
 
 //Allow cross origin requests
 app.use(cors());
 dotenv.config();
+
+//CHANGE THIS TO SOMETHING MORE SECURE!
+aws.config.update({
+  region: 'us-east-2'
+});
 
 mongoose.connect(
   process.env.MONGO_URL + process.env.DATABASE,
@@ -60,43 +68,19 @@ server.listen(8800, () => console.log(`socket listening on port 8800`));
 
 
 
-//multer image upload tests 
-//https://www.geeksforgeeks.org/upload-and-retrieve-image-on-mongodb-using-mongoose/#
 app.use("/images", express.static(path.join(__dirname, "public/images")));
 
-var storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    let uploadPath = '';
-    console.log(req.body.category);
-    if (req.body.category === "profile") {
-      uploadPath = 'public/images/profile';
-    }
-    else if (req.body.category === "article") {
-      uploadPath = 'public/images/article';
-    }
-    else {
-      uploadPath = 'public/images';
-    }
-    cb(null, uploadPath);
-  },
-  filename: (req, file, cb) => {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-    cb(null, file.fieldname + '-' + uniqueSuffix + '.' + file.originalname.split('.').pop());
-  }
+
+var upload = multer({
+  storage: multerS3({
+      s3: s3,
+      bucket: 'awspathfinderbucket',
+      key: function (req, file, cb) {
+          const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+          cb(null, file.fieldname + '-' + uniqueSuffix + '.' + file.originalname.split('.').pop())
+      }
+  })
 });
-
-const upload = multer({ storage });
-
-// Create a schema for storing image data
-const imageSchema = new mongoose.Schema({
-  name: String,
-  data: Buffer,
-  contentType: String,
-});
-
-// Create a model based on the schema
-const Image = mongoose.model('Image', imageSchema);
-
 
 const profilePath = "public/images/profile";
 app.post('/api/upload-profile-pic', upload.single('image'), async (req, res, next) => {
@@ -105,27 +89,12 @@ app.post('/api/upload-profile-pic', upload.single('image'), async (req, res, nex
       return res.status(400).send('No file uploaded.');
     }
     const user = await User.findById(req.body.userId);
-    if (user.profilePicture != "") {
-      try {
-        await Image.findByIdAndDelete(user.profilePicture);
-      }
-      catch (err) {
-        console.log("tried to delete old file");
-        console.log(err);
-      }
-    }
-    const { originalname, buffer, mimetype } = req.file;
-    const newImage = new Image({
-      name: originalname,
-      data: buffer,
-      contentType: mimetype,
-    });
-    user.profilePicture = newImage._id;
-    await newImage.save();
-    console.log(req.file.filename);
-    user.profilePicture = req.file.filename;
+    user.profilePicture = req.file.location;
+    console.log(req.file);
     user.save();
-    res.status(200).json(user);
+    res.send({
+      message: "Uploaded!",
+    });
   } catch (err) {
     console.log(err);
     res.send(err);
@@ -133,22 +102,22 @@ app.post('/api/upload-profile-pic', upload.single('image'), async (req, res, nex
 
 });
 
-app.post('/api/get-profile-pic', async function (req, res, next) {
-  try{
-    const user = await User.findById(req.body.userId);
-    const fileId = user.profilePicture;
-    const image = await Image.findById(fileId);
-    if (!image) {
-      return res.status(404).json({ error: 'Image not found.' });
-    }
-    res.set('Content-Type', image.contentType);
-    res.send(image.data);
-  }
-  catch (err){
-    console.log(err)
-    res.status(500).json({ err: 'Failed to retrieve the image.' });
-  } 
-});
+// app.post('/api/get-profile-pic', async function (req, res, next) {
+//   try{
+//     const user = await User.findById(req.body.userId);
+//     const fileId = user.profilePicture;
+//     const image = await Image.findById(fileId);
+//     if (!image) {
+//       return res.status(404).json({ error: 'Image not found.' });
+//     }
+//     res.set('Content-Type', image.contentType);
+//     res.send(image.data);
+//   }
+//   catch (err){
+//     console.log(err)
+//     res.status(500).json({ err: 'Failed to retrieve the image.' });
+//   } 
+// });
 
 /* calling listen when i do socket stuff
 app.listen(8800, () => {
