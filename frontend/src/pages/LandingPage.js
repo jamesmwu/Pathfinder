@@ -103,10 +103,15 @@ export default function LandingPage() {
                     offset={0}
                     speed={0.1}
                     onClick={() => parallax.current.scrollTo(1)}
-                    className='landingContent'
+                    className='titleLandingContent'
                 >
-                    <h1 className='hero'>Pathfinder</h1>
-                    <h2 className='subHero'>Your career questions, answered.</h2>
+                    {/* Topmost empty div necessary for space-even property */}
+                    <div></div>
+                    <div>
+                        <h1 className='hero'>Pathfinder</h1>
+                        <h2 className='subHero'>Your career questions, answered.</h2>
+                    </div>
+                    <h1 className='downArrow subHero'>↓</h1>
                 </ParallaxLayer>
 
                 <ParallaxLayer
@@ -115,9 +120,11 @@ export default function LandingPage() {
                     onClick={() => parallax.current.scrollTo(2)}
                     className='landingContent'
                 >
+                    <div></div>
                     <div className='whatWeDo'>
                         <h1>What we do</h1>
                     </div>
+                    <h1 className='downArrow subHero'>↓</h1>
                 </ParallaxLayer>
 
                 <ParallaxLayer
@@ -126,9 +133,11 @@ export default function LandingPage() {
                     onClick={() => parallax.current.scrollTo(0)}
                     className='landingContent'
                 >
+                    <div></div>
                     <div className='contactUs'>
                         <h1>Contact Us</h1>
                     </div>
+                    <h1 className='downArrow subHero'>↑</h1>
                 </ParallaxLayer>
             </Parallax>
         </div >

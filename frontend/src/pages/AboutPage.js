@@ -16,7 +16,7 @@ export default function AboutPage() {
                     <br />
                     <p>Pathfinder aims to make understanding career paths simpler by directly connecting you with individuals experienced in their fields, so you can learn what the job entails or how you can get there yourself.</p>
                     <br />
-                    <p>Sign up now talk to a mentor and gain some career insight, today! :)</p>
+                    <p>Sign up now to talk to a mentor and gain some career insight, today! :)</p>
                 </div>
             </div>
         </div>
