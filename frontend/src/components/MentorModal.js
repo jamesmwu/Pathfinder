@@ -1,6 +1,5 @@
 import React from 'react';
 import '../styles/mentorModal.css';
-import mentorImage from '../img/cursedCat.png'; // Replace with the actual image path
 
 export default function MentorModal({ mentorId, name, imgSrc, description, isOpen, onClose, onConnect, setModalOpen }) {
     const handleConnect = () => {

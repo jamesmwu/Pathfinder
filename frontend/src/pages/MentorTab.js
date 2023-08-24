@@ -5,7 +5,6 @@ import Masonry from "react-masonry-css";
 import '../styles/mentorTab.css';
 import Mentor from "../components/Mentor";
 import MentorModal from "../components/MentorModal";
-import { Buffer } from "buffer";
 
 function MentorTab({ selectedMajors, socketRef, userId }) {
     const [isOpen, setIsOpen] = useState(false);
@@ -58,29 +57,7 @@ function MentorTab({ selectedMajors, socketRef, userId }) {
         closed: { rotateY: 90 }
     };
 
-    function MentorItem({ mentorId, name, about, mentorImage }) {
-        // const [imageSrc, setImageSrc] = useState(null);
-
-        // const fetchMentorImgs = async () => {
-        //     try {
-        //         const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/get-profile-pic`, { userId: mentorId }, {
-        //             responseType: 'arraybuffer'
-        //         });
-
-        //         // Handle the arraybuffer response here
-        //         const arrayBuffer = response.data;
-        //         let base64ImageString = Buffer.from(arrayBuffer, 'binary').toString('base64');
-        //         let srcValue = "data:image/png;base64," + base64ImageString;
-        //         setImageSrc(srcValue);
-        //     } catch (error) {
-        //         // Handle errors here
-        //         console.error('Error fetching profile pic:', error);
-        //     }
-        // };
-
-        // useEffect(() => {
-        //     fetchMentorImgs();
-        // }, [mentorId]);
+    function MentorItem({ mentorId, name, about, mentorImage, longDesc }) {
 
         let random = Math.floor(Math.random() * (2 - 1 + 1) + 1);
         if (random === 1) {
@@ -116,6 +93,7 @@ function MentorTab({ selectedMajors, socketRef, userId }) {
                                 imgSrc={mentorImage}
                                 setModalImg={setModalImg}
                                 setMentorId={setMentorId}
+                                longDesc={longDesc}
                             />
                         </div>
                     </motion.div>
@@ -148,7 +126,7 @@ function MentorTab({ selectedMajors, socketRef, userId }) {
             >
                 {allMentors.map((mentor) => (
                     <div key={mentor._id}>
-                        <MentorItem mentorId={mentor._id} name={mentor.username} about={mentor.description} mentorImage = {mentor.profilePicture}/>
+                        <MentorItem mentorId={mentor._id} name={mentor.username} about={mentor.description} mentorImage={mentor.profilePicture} longDesc={mentor.long_desc} />
                     </div>
                 ))}
             </Masonry>
